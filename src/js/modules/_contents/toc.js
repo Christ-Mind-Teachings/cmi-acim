@@ -1,0 +1,425 @@
+import scroll from "scroll-into-view";
+import {getConfig} from "../_config/config";
+
+const uiTocModal = ".toc.ui.modal";
+const uiOpenTocModal = ".toc-modal-open";
+const uiModalOpacity = 0.5;
+
+//generate html for questions
+function renderQuestions(questions) {
+  return `
+    <div class="list">
+      ${questions.map(q => `<a class="item" href="${q.url}">${q.title}</a>`).join("")}
+    </div>
+  `;
+}
+
+/*
+  generate html for acim text sections
+  data-secid used to simplify calculating next and previous sections
+*/
+function renderSections(base, sections, cidx) {
+  return `
+    <div id="chapter${cidx + 1}" data-sections="${sections.length - 1}" class="list">
+      ${sections.map((q, qidx) => `<a data-secid="${(cidx + 1) * 100 + qidx}" class="item" href="${base}${q.url}">${q.ref?q.ref+" ":""}${q.title}</a>`).join("")}
+    </div>
+  `;
+}
+
+//generate html for Contents
+function makeContents(contents) {
+  return (`
+    <div class="ui ordered relaxed list">
+      ${contents.map(unit => `
+        <div class="item"> 
+          <a href="${unit.url}">${unit.title}</a>
+          ${unit.questions ? renderQuestions(unit.questions) : "" }
+        </div>
+      `).join("")}
+    </div>
+  `);
+}
+
+//generate html for Contents
+function makeTextContents(contents) {
+  return (`
+    <div class="ui relaxed list">
+      ${contents.map((unit, cidx) => `
+        <div class="item"> 
+          <div class="header">Chapter ${unit.id}: ${unit.title}</div>
+          ${unit.sections ? renderSections(unit.base, unit.sections, cidx) : "" } 
+        </div>
+      `).join("")}
+    </div>
+  `);
+}
+
+/*
+  generate html for acim workbook pages
+  data-secid used to simplify calculating next and previous sections
+*/
+function renderWorkbookPage(base, pages, pidx, sidx, lesson) {
+  return `
+    <div id="${pidx + 1}.${sidx + 1}" data-sections="${pages.length}" class="list">
+      ${pages.map((p) => `<a data-lid="${++lesson.count}" class="item" href="${base}${p.url}">${p.lesson?p.lesson+". ":""}${p.title}</a>`).join("")}
+    </div>
+  `;
+}
+
+/*
+  generate html for acim workbook sections
+*/
+function renderWorkbookSection(sections, pidx, lesson) {
+  return (`
+    <div class="list">
+      ${sections.map((section, sidx) => `
+        <div class="item"> 
+          <div class="header">${section.title}</div>
+          ${section.page ? renderWorkbookPage(section.base, section.page, pidx, sidx, lesson) : "" } 
+        </div>
+      `).join("")}
+    </div>
+  `);
+}
+
+/*
+  generate toc html for Workbook
+  Workbook is organized in part > section > pages
+*/
+function makeWorkbookContents(parts) {
+  var lesson = {count: 0};
+  return (`
+    <div class="ui relaxed list">
+      ${parts.map((part, pidx) => `
+        <div class="item"> 
+          <div class="content">
+            ${part.section ? renderWorkbookSection(part.section, pidx, lesson) : "" } 
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `);
+}
+
+/*
+  generate toc html for Manual
+  Manual is organized in pages
+*/
+function makeManualContents(base, pages) {
+  return (`
+    <div class="ui relaxed ordered list">
+      ${pages.map((page, pidx) => `
+        <a data-lid="${pidx+1}" class="item" href="${base}${page.url}">${page.title}</a>`).join("")}
+    </div>
+  `);
+}
+
+/*
+  set Prev/Next menu controls
+*/
+function textNexPrev($el) {
+  //determind next and previous sections
+  //setup
+  let secid = parseInt($el.attr("data-secid"), 10);
+  let chapter = Math.trunc(secid/100);
+  let section = secid%100;
+  let id = `#chapter${chapter}`;
+  let lastSection = parseInt($(id).attr("data-sections"), 10);
+  let nextChapter = chapter;
+  let nextSection;
+
+  //next, set chapter = -1 if new value is invalid
+  if (section === lastSection) {
+    nextChapter = chapter < 31 ? chapter + 1: -1;
+    nextSection = 0;
+  }
+  else {
+    nextSection = section + 1;
+  }
+
+  //prev
+  let prevChapter = chapter;
+  let prevSection;
+
+  if (section === 0) {
+    if (chapter > 1) {
+      prevChapter = chapter - 1;
+      prevSection = parseInt($(`#chapter${prevChapter}`).attr("data-sections"), 10);
+    }
+    else {
+      prevChapter = -1;
+      prevSection = -1;
+    }
+  }
+  else {
+    prevSection = section - 1;
+  }
+
+  if (nextChapter === -1) {
+    //disable 'next-page'
+    $(".next-page").addClass("disabled");
+  }
+  else {
+    //incase the control has been disabled
+    $(".next-page").removeClass("disabled");
+    let nextSecid = nextChapter * 100 + nextSection;
+
+    let nexthref = $(`a[data-secid="${nextSecid}"]`).attr("href");
+    let nextText = $(`a[data-secid="${nextSecid}"]`).text();
+
+    //set next tooltip and href
+    $("a.next-page > span").attr("data-tooltip", `${nextText}`);
+    $("a.next-page").attr("href", `${nexthref}`);
+  }
+
+  if (prevChapter === -1) {
+    //disable 'prev-page'
+    $(".previous-page").addClass("disabled");
+  }
+  else {
+    //incase the control has been disabled
+    $(".previous-page").removeClass("disabled");
+    let prevSecid = prevChapter * 100 + prevSection;
+
+    let prevhref = $(`a[data-secid="${prevSecid}"]`).attr("href");
+    let prevText = $(`a[data-secid="${prevSecid}"]`).text();
+
+    //set prev tooltip and href
+    $("a.previous-page > span").attr("data-tooltip", `${prevText}`);
+    $("a.previous-page").attr("href", `${prevhref}`);
+  }
+}
+
+/*
+  set next/prev controls on menu for workbook transcripts
+*/
+function workbookNextPrev($el) {
+  const LAST_ID = 390;
+  let prevId = -1, nextId = -1, href, text;
+  let lid = $el.attr("data-lid");
+  let lessonId = parseInt(lid, 10);
+
+  //disable prev control
+  if (lessonId === 1) {
+    $(".previous-page").addClass("disabled");
+  }
+  else {
+    $(".previous-page").removeClass("disabled");
+    prevId = lessonId - 1;
+  }
+
+  //disable next control
+  if (lessonId === LAST_ID) {
+    $(".next-page").addClass("disabled");
+  }
+  else {
+    $(".next-page").removeClass("disabled");
+    nextId = lessonId + 1;
+  }
+
+  if (prevId > -1) {
+    href = $(`a[data-lid="${prevId}"]`).attr("href");
+    text = $(`a[data-lid="${prevId}"]`).text();
+
+    //set prev tooltip and href
+    $("a.previous-page > span").attr("data-tooltip", `${text}`);
+    $("a.previous-page").attr("href", `${href}`);
+  }
+
+  if (nextId > -1) {
+    href = $(`a[data-lid="${nextId}"]`).attr("href");
+    text = $(`a[data-lid="${nextId}"]`).text();
+
+    //set prev tooltip and href
+    $("a.next-page > span").attr("data-tooltip", `${text}`);
+    $("a.next-page").attr("href", `${href}`);
+  }
+}
+
+/*
+  set next/prev controls on menu for workbook transcripts
+*/
+function manualNextPrev($el) {
+  const LAST_ID = 31;
+  let prevId = -1, nextId = -1, href, text;
+  let lid = $el.attr("data-lid");
+  let lessonId = parseInt(lid, 10);
+
+  //disable prev control
+  if (lessonId === 1) {
+    $(".previous-page").addClass("disabled");
+  }
+  else {
+    $(".previous-page").removeClass("disabled");
+    prevId = lessonId - 1;
+  }
+
+  //disable next control
+  if (lessonId === LAST_ID) {
+    $(".next-page").addClass("disabled");
+  }
+  else {
+    $(".next-page").removeClass("disabled");
+    nextId = lessonId + 1;
+  }
+
+  if (prevId > -1) {
+    href = $(`a[data-lid="${prevId}"]`).attr("href");
+    text = $(`a[data-lid="${prevId}"]`).text();
+
+    //set prev tooltip and href
+    $("a.previous-page > span").attr("data-tooltip", `${text}`);
+    $("a.previous-page").attr("href", `${href}`);
+  }
+
+  if (nextId > -1) {
+    href = $(`a[data-lid="${nextId}"]`).attr("href");
+    text = $(`a[data-lid="${nextId}"]`).text();
+
+    //set prev tooltip and href
+    $("a.next-page > span").attr("data-tooltip", `${text}`);
+    $("a.next-page").attr("href", `${href}`);
+  }
+}
+
+/*
+  If we're on a transcript page, highlight the 
+  current transcript in the list and calc prev and next
+  links
+
+  Args:
+    bid: bookId, 'text', 'workbook', 'manual'
+*/
+function highlightCurrentTranscript(bid) {
+  if ($(".transcript").length > 0) {
+    let page = location.pathname;
+    let $el = $(`.toc-list a[href='${page}']`);
+
+    //remove href to deactivate link for current page and
+    //scroll into middle of viewport
+    $el.addClass("current-unit").removeAttr("href");
+    scroll($el.get(0));
+
+    switch(bid) {
+      case "text":
+        textNexPrev($el);
+        break;
+      case "workbook":
+        workbookNextPrev($el);
+        break;
+      case "manual":
+        manualNextPrev($el);
+        break;
+    }
+  }
+}
+
+//called for transcript pages
+function loadTOC() {
+  console.log("transcript page: loading toc");
+  let book = $("#contents-modal-open").attr("data-book").toLowerCase();
+
+  getConfig(book)
+    .then((contents) => {
+      $(".toc-image").attr("src", `${contents.image}`);
+      $(".toc-title").html(`Table of Contents: <em>${contents.title}</em>`);
+
+      switch(contents.bid) {
+        case "text":
+          $(".toc-list").html(makeTextContents(contents.contents));
+          break;
+        case "workbook":
+          $(".toc-list").html(makeWorkbookContents(contents.part));
+          break;
+        case "manual":
+          $(".toc-list").html(makeManualContents(contents.base, contents.page));
+          break;
+        default:
+          $(".toc-list").html(makeContents(contents.contents));
+          break;
+      }
+      highlightCurrentTranscript(contents.bid);
+    })
+    .catch((error) => {
+      console.error(error);
+      $(".toc-image").attr("src", "/public/img/cmi/toc_modal.png");
+      $(".toc-title").html("Table of Contents: <em>Error</em>");
+      $(".toc-list").html(`<p>Error: ${error.message}</p>`);
+      $(uiTocModal).modal("show");
+    });
+}
+
+/*
+  Calls to this function are valid for transcript pages.
+*/
+export function getBookId() {
+  return $(uiOpenTocModal).attr("data-book");
+}
+
+export default {
+
+  /*
+   * Init the modal dialog with data from JSON file 
+   * or local storage
+   */
+  initialize: function(env) {
+    //dialog settings
+    $(uiTocModal).modal({
+      dimmerSettings: {opacity: uiModalOpacity},
+      observeChanges: true
+    });
+
+    //load toc once for transcript pages
+    if (env === "transcript") {
+      loadTOC();
+    }
+
+    /*
+     * TOC populated by JSON file from AJAX call if not found
+     * in local storage.
+     * 
+     * Read value of data-book attribute to identify name of file
+     * with contents.
+     */
+    $(uiOpenTocModal).on("click", (e) => {
+      e.preventDefault();
+      let book = $(e.currentTarget).attr("data-book").toLowerCase();
+
+      //load the TOC if we're not on a transcript page
+      if (env !== "transcript") {
+        getConfig(book)
+          .then((contents) => {
+            $(".toc-image").attr("src", `${contents.image}`);
+            $(".toc-title").html(`Table of Contents: <em>${contents.title}</em>`);
+
+            switch(contents.bid) {
+              case "text":
+                $(".toc-list").html(makeTextContents(contents.contents));
+                break;
+              case "workbook":
+                $(".toc-list").html(makeWorkbookContents(contents.part));
+                break;
+              case "manual":
+                $(".toc-list").html(makeManualContents(contents.base, contents.page));
+                break;
+              default:
+                $(".toc-list").html(makeContents(contents.contents));
+                break;
+            }
+
+            $(uiTocModal).modal("show");
+          })
+          .catch((error) => {
+            console.error(error);
+            $(".toc-image").attr("src", "/public/img/cmi/toc_modal.png");
+            $(".toc-title").html("Table of Contents: <em>Error</em>");
+            $(".toc-list").html(`<p>Error: ${error.message}</p>`);
+            $(uiTocModal).modal("show");
+          });
+      }
+      else {
+        $(uiTocModal).modal("show");
+      }
+    });
+  }
+};

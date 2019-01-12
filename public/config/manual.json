@@ -1,0 +1,138 @@
+{
+  "bid": "manual",
+  "base": "/manual",
+  "image": "/public/img/acim/manual-toc.jpg",
+  "title": "Manual for Teachers",
+  "page": [
+    {
+      "title": "Introduction",
+      "url": "/chap01/"
+    },
+    {
+      "title": "Who Are God's Teachers?",
+      "url": "/chap02/"
+    },
+    {
+      "title": "Who are their Pupils?",
+      "url": "/chap03/"
+    },
+    {
+      "title": "What are the Levels of Teaching?",
+      "url": "/chap04/"
+    },
+    {
+      "title": "What are the Characteristics of God's Teachers?",
+      "url": "/chap05/"
+    },
+    {
+      "title": "How is Healing Accomplished?",
+      "url": "/chap06/"
+    },
+    {
+      "title": "Is Healing Certain?",
+      "url": "/chap07/"
+    },
+    {
+      "title": "Should Healing be Repeated?",
+      "url": "/chap08/"
+    },
+    {
+      "title": "How Can the Perception of Order of Difficulties be Avoided?",
+      "url": "/chap09/"
+    },
+    {
+      "title": "Are Changes Required in the Life Situation of God's Teachers?",
+      "url": "/chap10/"
+    },
+    {
+      "title": "How is Judgement Relinquished?",
+      "url": "/chap11/"
+    },
+    {
+      "title": "How is Peace Possible in this World?",
+      "url": "/chap12/"
+    },
+    {
+      "title": "How Many Teachers of God are Needed to Save the World?",
+      "url": "/chap13/"
+    },
+    {
+      "title": "What is the Real Meaning of Sacrifice?",
+      "url": "/chap14/"
+    },
+    {
+      "title": "How Will the World End?",
+      "url": "/chap15/"
+    },
+    {
+      "title": "Is Each One to be Judged in the End?",
+      "url": "/chap16/"
+    },
+    {
+      "title": "How Should the Teacher of God Spend His Day?",
+      "url": "/chap17/"
+    },
+    {
+      "title": "How do God's Teachers Deal with their Pupils' Thoughts of Magic?",
+      "url": "/chap18/"
+    },
+    {
+      "title": "How is Correction Made?",
+      "url": "/chap19/"
+    },
+    {
+      "title": "What is Justice?",
+      "url": "/chap20/"
+    },
+    {
+      "title": "What is the Peace of God?",
+      "url": "/chap21/"
+    },
+    {
+      "title": "What is the Role of Words in Healing?",
+      "url": "/chap22/"
+    },
+    {
+      "title": "How are Healing and Atonement Related?",
+      "url": "/chap23/"
+    },
+    {
+      "title": "Does Jesus Have a Special Place in Healing?",
+      "url": "/chap24/"
+    },
+    {
+      "title": "Is Reincarnation True?",
+      "url": "/chap25/"
+    },
+    {
+      "title": "Are 'Phychic' Powers Desirable?",
+      "url": "/chap26/"
+    },
+    {
+      "title": "Can God be Reached Directly?",
+      "url": "/chap27/"
+    },
+    {
+      "title": "What is Death?",
+      "url": "/chap28/"
+    },
+    {
+      "title": "What is the Resurrection?",
+      "url": "/chap29/"
+    },
+    {
+      "title": "As for the Rest&hellip;",
+      "url": "/chap30/",
+      "nwffacim": [
+        {
+          "title": "Apr 30, 2017",
+          "url": "/nwff2017/043017/"
+        }
+      ]
+    },
+    {
+      "title": "Forget Not&hellip;",
+      "url": "/chap31/"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+# CMI
+sourceId: 1
+cmiTitle: "Teachings of Christ Mind"
+
+# Setup
+title:        'A Course in Miracles'
+tagline:      'Sparkly Edition'
+description:  ''
+url:          'https://acim.christmind.info'
+baseurl:      ''
+keywords:     "Christ Mind Teachings, A Course in Miracles, Sparkly Edition "
+port:         1111
+
+# About/contact
+author:
+  name:              Rick Mercer
+  url:               https://twitter.com/rmercer33
+  email:             rmercer33@gmail.com
+
+fb-appId:     448658485318107
+src-url:      'https://acim.christmind.info'
+
+# Permalinks
+permalink: pretty
+permalink: /:title/
+
+# Set encoding to UTF-8
+encoding: utf-8
+
+# Build settings
+markdown: kramdown
+#plugins:
+#  - jekyll-feed
+#  - jekyll-sitemap
+
+# Collections for transcripts
+collections:
+  text:
+    output: true
+    title: "A Course in Miracles: Text"
+  workbook:
+    output: true
+    title: "A Course in Miracles: Workbook"
+  manual:
+    output: true
+    title: "A Course in Miracles: Manual"
+
+defaults:
+  - scope:
+      path: ""
+      type: text
+    values:
+      layout: transcript
+      book: "Text"
+      image: "/public/img/acim/text.jpg"
+      image-width: 612
+      image-height: 792
+      bid: "text"
+  - scope:
+      path: ""
+      type: workbook
+    values:
+      layout: transcript
+      book: "Workbook for Students"
+      image: "/public/img/acim/workbook.jpg"
+      image-width: 612
+      image-height: 792
+      bid: "workbook"
+  - scope:
+      path: ""
+      type: manual
+    values:
+      layout: transcript
+      book: "Manual"
+      image: "/public/img/acim/manual.jpg"
+      image-width: 612
+      image-height: 792
+      bid: "manual"
+
+exclude: [
+  Gemfile, Gemfile.lock, package.json, package-lock.json, node_modules, webpack.config.js, src, project
+]
+

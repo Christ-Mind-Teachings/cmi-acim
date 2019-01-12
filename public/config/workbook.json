@@ -1,0 +1,2166 @@
+{
+  "bid": "workbook",
+  "title": "ACIM Workbook",
+  "image": "/public/img/acim/workbook-toc.jpg",
+  "part": [
+    {
+      "pid": "intro",
+      "title": "Workbook Introduction",
+      "section": [
+        {
+          "title": "Workbook Introduction",
+          "base": "/workbook/",
+          "ref": "intro",
+          "page": [
+            {
+              "title": "Introduction",
+              "url": "introp1/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pid": "one",
+      "title": "Part One",
+      "section": [
+        {
+          "title": "Lessons 1 - 50",
+          "base": "/workbook/",
+          "ref": "l1-50",
+          "page": [
+            {
+              "url": "l001/",
+              "lesson": 1,
+              "title": "Nothing I see means anything."
+            },
+            {
+              "url": "l002/",
+              "lesson": 2,
+              "title": "I have given everything I see all the meaning that it has for me."
+            },
+            {
+              "url": "l003/",
+              "lesson": 3,
+              "title": "I do not understand anything I see."
+            },
+            {
+              "url": "l004/",
+              "lesson": 4,
+              "title": "These thoughts do not mean anything."
+            },
+            {
+              "url": "l005/",
+              "lesson": 5,
+              "title": "I am never upset for the reason I think."
+            },
+            {
+              "url": "l006/",
+              "lesson": 6,
+              "title": "I am upset because I see something that is not there."
+            },
+            {
+              "url": "l007/",
+              "lesson": 7,
+              "title": "I see only the past."
+            },
+            {
+              "url": "l008/",
+              "lesson": 8,
+              "title": "My mind is preoccupied with past thoughts."
+            },
+            {
+              "url": "l009/",
+              "lesson": 9,
+              "title": "I see nothing as it is now."
+            },
+            {
+              "url": "l010/",
+              "lesson": 10,
+              "title": "My thoughts do not mean anything."
+            },
+            {
+              "url": "l011/",
+              "lesson": 11,
+              "title": "My meaningless thoughts are showing me a meaningless world."
+            },
+            {
+              "url": "l012/",
+              "lesson": 12,
+              "title": "I am upset because I see a meaningless world."
+            },
+            {
+              "url": "l013/",
+              "lesson": 13,
+              "title": "A meaningless world engenders fear."
+            },
+            {
+              "url": "l014/",
+              "lesson": 14,
+              "title": "God did not create a meaningless world"
+            },
+            {
+              "url": "l015/",
+              "lesson": 15,
+              "title": "My thoughts are images which I have made."
+            },
+            {
+              "url": "l016/",
+              "lesson": 16,
+              "title": "I have no neutral thoughts."
+            },
+            {
+              "url": "l017/",
+              "lesson": 17,
+              "title": "I see no neutral things."
+            },
+            {
+              "url": "l018/",
+              "lesson": 18,
+              "title": "I am not alone in experiencing the effects of my seeing."
+            },
+            {
+              "url": "l019/",
+              "lesson": 19,
+              "title": "I am not alone in experiencing the effects of my thoughts."
+            },
+            {
+              "url": "l020/",
+              "lesson": 20,
+              "title": "I am determined to see."
+            },
+            {
+              "url": "l021/",
+              "lesson": 21,
+              "title": "I am determined to see things differently."
+            },
+            {
+              "url": "l022/",
+              "lesson": 22,
+              "title": "What I see is a form of vengeance."
+            },
+            {
+              "url": "l023/",
+              "lesson": 23,
+              "title": "I can escape from the world I see by giving up attack thoughts."
+            },
+            {
+              "url": "l024/",
+              "lesson": 24,
+              "title": "I do not perceive my own best interests."
+            },
+            {
+              "url": "l025/",
+              "lesson": 25,
+              "title": "I do not know what anything is for."
+            },
+            {
+              "url": "l026/",
+              "lesson": 26,
+              "title": "My attack thoughts are attacking my invulnerability."
+            },
+            {
+              "url": "l027/",
+              "lesson": 27,
+              "title": "Above all else I want to see."
+            },
+            {
+              "url": "l028/",
+              "lesson": 28,
+              "title": "Above all else I want to see things differently."
+            },
+            {
+              "url": "l029/",
+              "lesson": 29,
+              "title": "God is in everything I see."
+            },
+            {
+              "url": "l030/",
+              "lesson": 30,
+              "title": "God is in everything I see because God is in my mind."
+            },
+            {
+              "url": "l031/",
+              "lesson": 31,
+              "title": "I am not the victim of the world I see."
+            },
+            {
+              "url": "l032/",
+              "lesson": 32,
+              "title": "I have invented the world I see."
+            },
+            {
+              "url": "l033/",
+              "lesson": 33,
+              "title": "There is another way of looking at the world."
+            },
+            {
+              "url": "l034/",
+              "lesson": 34,
+              "title": "I could see peace instead of this."
+            },
+            {
+              "url": "l035/",
+              "lesson": 35,
+              "title": "My mind is part of God’s. I am very holy."
+            },
+            {
+              "url": "l036/",
+              "lesson": 36,
+              "title": "My holiness envelops everything I see."
+            },
+            {
+              "url": "l037/",
+              "lesson": 37,
+              "title": "My holiness blesses the world."
+            },
+            {
+              "url": "l038/",
+              "lesson": 38,
+              "title": "There is nothing my holiness cannot do."
+            },
+            {
+              "url": "l039/",
+              "lesson": 39,
+              "title": "My holiness is my salvation."
+            },
+            {
+              "url": "l040/",
+              "lesson": 40,
+              "title": "I am blessed as a Son of God."
+            },
+            {
+              "url": "l041/",
+              "lesson": 41,
+              "title": "God goes with me wherever I go."
+            },
+            {
+              "url": "l042/",
+              "lesson": 42,
+              "title": "God is my strength. Vision is His gift."
+            },
+            {
+              "url": "l043/",
+              "lesson": 43,
+              "title": "God is my Source. I cannot see apart from Him."
+            },
+            {
+              "url": "l044/",
+              "lesson": 44,
+              "title": "God is the Light in which I see."
+            },
+            {
+              "url": "l045/",
+              "lesson": 45,
+              "title": "God is the Mind with which I think."
+            },
+            {
+              "url": "l046/",
+              "lesson": 46,
+              "title": "God is the Love in which I forgive."
+            },
+            {
+              "url": "l047/",
+              "lesson": 47,
+              "title": "God is the Strength in which I trust."
+            },
+            {
+              "url": "l048/",
+              "lesson": 48,
+              "title": "There is nothing to fear."
+            },
+            {
+              "url": "l049/",
+              "lesson": 49,
+              "title": "God’s Voice speaks to me all through the day."
+            },
+            {
+              "url": "l050/",
+              "lesson": 50,
+              "title": "I am sustained by the Love of God."
+            }
+          ]
+        },
+        {
+          "title": "Review I",
+          "base": "/workbook/",
+          "ref": "r1",
+          "page": [
+            {
+              "url": "review1/",
+              "title": "Introduction"
+            },
+            {
+              "url": "l051/",
+              "lesson": 51,
+              "title": "Review 1 - 5"
+            },
+            {
+              "url": "l052/",
+              "lesson": 52,
+              "title": "Review 6 - 10"
+            },
+            {
+              "url": "l053/",
+              "lesson": 53,
+              "title": "Review 11 - 15"
+            },
+            {
+              "url": "l054/",
+              "lesson": 54,
+              "title": "Review 16 - 20"
+            },
+            {
+              "url": "l055/",
+              "lesson": 55,
+              "title": "Review 21 - 25"
+            },
+            {
+              "url": "l056/",
+              "lesson": 56,
+              "title": "Review 26 - 30"
+            },
+            {
+              "url": "l057/",
+              "lesson": 57,
+              "title": "Review 31 - 35"
+            },
+            {
+              "url": "l058/",
+              "lesson": 58,
+              "title": "Review 36 - 40"
+            },
+            {
+              "url": "l059/",
+              "lesson": 59,
+              "title": "Review 41 - 45"
+            },
+            {
+              "url": "l060/",
+              "lesson": 60,
+              "title": "Review 46 - 50"
+            }
+          ]
+        },
+        {
+          "title": "Lessons 61 - 80",
+          "base": "/workbook/",
+          "ref": "l61-80",
+          "page": [
+            {
+              "url": "l061/",
+              "lesson": 61,
+              "title": "I am the light of the world."
+            },
+            {
+              "url": "l062/",
+              "lesson": 62,
+              "title": "Forgiveness is my function as the light of the world."
+            },
+            {
+              "url": "l063/",
+              "lesson": 63,
+              "title": "The light of the world brings peace to every mind through my forgiveness."
+            },
+            {
+              "url": "l064/",
+              "lesson": 64,
+              "title": "Let me not forget my function."
+            },
+            {
+              "url": "l065/",
+              "lesson": 65,
+              "title": "My only function is the one God gave me."
+            },
+            {
+              "url": "l066/",
+              "lesson": 66,
+              "title": "My happiness and my function are one."
+            },
+            {
+              "url": "l067/",
+              "lesson": 67,
+              "title": "Love created me like Itself."
+            },
+            {
+              "url": "l068/",
+              "lesson": 68,
+              "title": "Love holds no grievances."
+            },
+            {
+              "url": "l069/",
+              "lesson": 69,
+              "title": "My grievances hide the light of the world in me."
+            },
+            {
+              "url": "l070/",
+              "lesson": 70,
+              "title": "My salvation comes from me."
+            },
+            {
+              "url": "l071/",
+              "lesson": 71,
+              "title": "Only God’s plan for salvation will work."
+            },
+            {
+              "url": "l072/",
+              "lesson": 72,
+              "title": "Holding grievances is an attack on God’s plan for salvation."
+            },
+            {
+              "url": "l073/",
+              "lesson": 73,
+              "title": "I will there be light."
+            },
+            {
+              "url": "l074/",
+              "lesson": 74,
+              "title": "There is no will but God’s."
+            },
+            {
+              "url": "l075/",
+              "lesson": 75,
+              "title": "The light has come."
+            },
+            {
+              "url": "l076/",
+              "lesson": 76,
+              "title": "I am under no laws but God’s."
+            },
+            {
+              "url": "l077/",
+              "lesson": 77,
+              "title": "I am entitled to miracles."
+            },
+            {
+              "url": "l078/",
+              "lesson": 78,
+              "title": "Let miracles replace all grievances."
+            },
+            {
+              "url": "l079/",
+              "lesson": 79,
+              "title": "Let me recognize the problem so it can be solved."
+            },
+            {
+              "url": "l080/",
+              "lesson": 80,
+              "title": "Let me recognize my problems have been solved."
+            }
+          ]
+        },
+        {
+          "title": "Review II",
+          "base": "/workbook/",
+          "ref": "r2",
+          "page": [
+            {
+              "url": "review2/",
+              "title": "Introduction"
+            },
+            {
+              "url": "l081/",
+              "lesson": 81,
+              "title": "Review 61 - 62"
+            },
+            {
+              "url": "l082/",
+              "lesson": 82,
+              "title": "Review 63 - 64"
+            },
+            {
+              "url": "l083/",
+              "lesson": 83,
+              "title": "Review 65 - 66"
+            },
+            {
+              "url": "l084/",
+              "lesson": 84,
+              "title": "Review 67 - 68"
+            },
+            {
+              "url": "l085/",
+              "lesson": 85,
+              "title": "Review 69 - 70"
+            },
+            {
+              "url": "l086/",
+              "lesson": 86,
+              "title": "Review 71 - 72"
+            },
+            {
+              "url": "l087/",
+              "lesson": 87,
+              "title": "Review 73 - 74"
+            },
+            {
+              "url": "l088/",
+              "lesson": 88,
+              "title": "Review 75 - 76"
+            },
+            {
+              "url": "l089/",
+              "lesson": 89,
+              "title": "Review 77 - 78"
+            },
+            {
+              "url": "l090/",
+              "lesson": 90,
+              "title": "Review 79 - 80"
+            }
+          ]
+        },
+        {
+          "title": "Lessons 91 - 110",
+          "base": "/workbook/",
+          "ref": "l91-110",
+          "page": [
+            {
+              "url": "l091/",
+              "lesson": 91,
+              "title": "Miracles are seen in light."
+            },
+            {
+              "url": "l092/",
+              "lesson": 92,
+              "title": "Miracles are seen in light, and light and strength are one."
+            },
+            {
+              "url": "l093/",
+              "lesson": 93,
+              "title": "Light and joy and peace abide in me."
+            },
+            {
+              "url": "l094/",
+              "lesson": 94,
+              "title": "I am as God created me."
+            },
+            {
+              "url": "l095/",
+              "lesson": 95,
+              "title": "I am One Self, united with my Creator."
+            },
+            {
+              "url": "l096/",
+              "lesson": 96,
+              "title": "Salvation comes from my One Self."
+            },
+            {
+              "url": "l097/",
+              "lesson": 97,
+              "title": "I am Spirit."
+            },
+            {
+              "url": "l098/",
+              "lesson": 98,
+              "title": "I will accept my part in God’s plan for salvation."
+            },
+            {
+              "url": "l099/",
+              "lesson": 99,
+              "title": "Salvation is my only function here."
+            },
+            {
+              "url": "l100/",
+              "lesson": 100,
+              "title": "My part is essential to God’s plan for salvation."
+            },
+            {
+              "url": "l101/",
+              "lesson": 101,
+              "title": "God’s Will for me is perfect happiness."
+            },
+            {
+              "url": "l102/",
+              "lesson": 102,
+              "title": "I share God’s Will for happiness for me."
+            },
+            {
+              "url": "l103/",
+              "lesson": 103,
+              "title": "God, being Love, is also happiness."
+            },
+            {
+              "url": "l104/",
+              "lesson": 104,
+              "title": "I seek but what belongs to me in truth."
+            },
+            {
+              "url": "l105/",
+              "lesson": 105,
+              "title": "God’s peace and joy are mine."
+            },
+            {
+              "url": "l106/",
+              "lesson": 106,
+              "title": "Let me be still and listen to the truth."
+            },
+            {
+              "url": "l107/",
+              "lesson": 107,
+              "title": "Truth will correct all errors in my mind."
+            },
+            {
+              "url": "l108/",
+              "lesson": 108,
+              "title": "To give and to receive are one in truth."
+            },
+            {
+              "url": "l109/",
+              "lesson": 109,
+              "title": "I rest in God."
+            },
+            {
+              "url": "l110/",
+              "lesson": 110,
+              "title": "I am as God created me."
+            }
+          ]
+        },
+        {
+          "title": "Review III",
+          "base": "/workbook/",
+          "ref": "r3",
+          "page": [
+            {
+              "url": "review3/",
+              "title": "Introduction"
+            },
+            {
+              "url": "l111/",
+              "lesson": 111,
+              "title": "Review 91 - 92"
+            },
+            {
+              "url": "l112/",
+              "lesson": 112,
+              "title": "Review 93 - 94"
+            },
+            {
+              "url": "l113/",
+              "lesson": 113,
+              "title": "Review 95 - 96"
+            },
+            {
+              "url": "l114/",
+              "lesson": 114,
+              "title": "Review 97 - 98"
+            },
+            {
+              "url": "l115/",
+              "lesson": 115,
+              "title": "Review 99 - 100"
+            },
+            {
+              "url": "l116/",
+              "lesson": 116,
+              "title": "Review 101 - 102"
+            },
+            {
+              "url": "l117/",
+              "lesson": 117,
+              "title": "Review 103 - 104"
+            },
+            {
+              "url": "l118/",
+              "lesson": 118,
+              "title": "Review 105 - 106"
+            },
+            {
+              "url": "l119/",
+              "lesson": 119,
+              "title": "Review 107 - 108"
+            },
+            {
+              "url": "l120/",
+              "lesson": 120,
+              "title": "Review 109 - 110"
+            }
+          ]
+        },
+        {
+          "title": "Lessons 121 - 140",
+          "base": "/workbook/",
+          "ref": "l121-140",
+          "page": [
+            {
+              "url": "l121/",
+              "lesson": 121,
+              "title": "Forgiveness is the key to happiness."
+            },
+            {
+              "url": "l122/",
+              "lesson": 122,
+              "title": "Forgiveness offers everything I want."
+            },
+            {
+              "url": "l123/",
+              "lesson": 123,
+              "title": "I thank my Father for His gifts to me."
+            },
+            {
+              "url": "l124/",
+              "lesson": 124,
+              "title": "Let me remember I am one with God."
+            },
+            {
+              "url": "l125/",
+              "lesson": 125,
+              "title": "In quiet I receive God’s Word today."
+            },
+            {
+              "url": "l126/",
+              "lesson": 126,
+              "title": "All that I give is given to myself."
+            },
+            {
+              "url": "l127/",
+              "lesson": 127,
+              "title": "There is no love but God’s."
+            },
+            {
+              "url": "l128/",
+              "lesson": 128,
+              "title": "There is no love but God’s."
+            },
+            {
+              "url": "l129/",
+              "lesson": 129,
+              "title": "Beyond this world there is a world I want."
+            },
+            {
+              "url": "l130/",
+              "lesson": 130,
+              "title": "It is impossible to see two worlds."
+            },
+            {
+              "url": "l131/",
+              "lesson": 131,
+              "title": "No-one can fail who asks to reach the truth."
+            },
+            {
+              "url": "l132/",
+              "lesson": 132,
+              "title": "I loose the world from all I thought it was."
+            },
+            {
+              "url": "l133/",
+              "lesson": 133,
+              "title": "I will not value what is valueless."
+            },
+            {
+              "url": "l134/",
+              "lesson": 134,
+              "title": "Let me perceive forgiveness as it is."
+            },
+            {
+              "url": "l135/",
+              "lesson": 135,
+              "title": "If I defend myself I am attacked."
+            },
+            {
+              "url": "l136/",
+              "lesson": 136,
+              "title": "Sickness is a defense against the truth."
+            },
+            {
+              "url": "l137/",
+              "lesson": 137,
+              "title": "When I am healed I am not healed alone."
+            },
+            {
+              "url": "l138/",
+              "lesson": 138,
+              "title": "Heaven is the decision I must make."
+            },
+            {
+              "url": "l139/",
+              "lesson": 139,
+              "title": "I will accept Atonement for myself."
+            },
+            {
+              "url": "l140/",
+              "lesson": 140,
+              "title": "Only salvation can be said to cure."
+            }
+          ]
+        },
+        {
+          "title": "Review IV",
+          "base": "/workbook/",
+          "ref": "r4",
+          "page": [
+            {
+              "url": "review4/",
+              "title": "Introduction"
+            },
+            {
+              "url": "l141/",
+              "lesson": 141,
+              "title": "Review 121 - 122"
+            },
+            {
+              "url": "l142/",
+              "lesson": 142,
+              "title": "Review 123 - 124"
+            },
+            {
+              "url": "l143/",
+              "lesson": 143,
+              "title": "Review 125 - 126"
+            },
+            {
+              "url": "l144/",
+              "lesson": 144,
+              "title": "Review 127 - 128"
+            },
+            {
+              "url": "l145/",
+              "lesson": 145,
+              "title": "Review 129 - 130"
+            },
+            {
+              "url": "l146/",
+              "lesson": 146,
+              "title": "Review 131 - 132"
+            },
+            {
+              "url": "l147/",
+              "lesson": 147,
+              "title": "Review 133 - 134"
+            },
+            {
+              "url": "l148/",
+              "lesson": 148,
+              "title": "Review 135 - 136"
+            },
+            {
+              "url": "l149/",
+              "lesson": 149,
+              "title": "Review 137 - 138"
+            },
+            {
+              "url": "l150/",
+              "lesson": 150,
+              "title": "Review 139 - 140"
+            }
+          ]
+        },
+        {
+          "title": "Lessons 151 - 170",
+          "base": "/workbook/",
+          "ref": "l151-170",
+          "page": [
+            {
+              "url": "l151/",
+              "lesson": 151,
+              "title": "All things are echoes of the Voice of God."
+            },
+            {
+              "url": "l152/",
+              "lesson": 152,
+              "title": "The power of decision is my own."
+            },
+            {
+              "url": "l153/",
+              "lesson": 153,
+              "title": "In my defenselessness my safety lies."
+            },
+            {
+              "url": "l154/",
+              "lesson": 154,
+              "title": "I am among the ministers of God."
+            },
+            {
+              "url": "l155/",
+              "lesson": 155,
+              "title": "I will step back and let Him lead the way."
+            },
+            {
+              "url": "l156/",
+              "lesson": 156,
+              "title": "I walk with God in perfect holiness."
+            },
+            {
+              "url": "l157/",
+              "lesson": 157,
+              "title": "Into His Presence would I enter now."
+            },
+            {
+              "url": "l158/",
+              "lesson": 158,
+              "title": "Today I learn to give as I receive."
+            },
+            {
+              "url": "l159/",
+              "lesson": 159,
+              "title": "I give the miracles I have received."
+            },
+            {
+              "url": "l160/",
+              "lesson": 160,
+              "title": "I am at home. Fear is the stranger here."
+            },
+            {
+              "url": "l161/",
+              "lesson": 161,
+              "title": "Give me your blessing, holy Son of God."
+            },
+            {
+              "url": "l162/",
+              "lesson": 162,
+              "title": "I am as God created me."
+            },
+            {
+              "url": "l163/",
+              "lesson": 163,
+              "title": "There is no death. The Son of God is free."
+            },
+            {
+              "url": "l164/",
+              "lesson": 164,
+              "title": "Now are we One with Him Who is our Source."
+            },
+            {
+              "url": "l165/",
+              "lesson": 165,
+              "title": "Let not my mind deny the Thought of God."
+            },
+            {
+              "url": "l166/",
+              "lesson": 166,
+              "title": "I am entrusted with the gifts of God."
+            },
+            {
+              "url": "l167/",
+              "lesson": 167,
+              "title": "There is one life, and that I share with God."
+            },
+            {
+              "url": "l168/",
+              "lesson": 168,
+              "title": "Your grace is given me. I claim it now."
+            },
+            {
+              "url": "l169/",
+              "lesson": 169,
+              "title": "By grace I live. By grace I am released."
+            },
+            {
+              "url": "l170/",
+              "lesson": 170,
+              "title": "There is no cruelty in God and none in me."
+            }
+          ]
+        },
+        {
+          "title": "Review V",
+          "base": "/workbook/",
+          "ref": "r5",
+          "page": [
+            {
+              "url": "review5/",
+              "title": "Introduction"
+            },
+            {
+              "url": "l171/",
+              "lesson": 171,
+              "title": "Review 151 - 152"
+            },
+            {
+              "url": "l172/",
+              "lesson": 172,
+              "title": "Review 153 - 154"
+            },
+            {
+              "url": "l173/",
+              "lesson": 173,
+              "title": "Review 155 - 156"
+            },
+            {
+              "url": "l174/",
+              "lesson": 174,
+              "title": "Review 157 - 158"
+            },
+            {
+              "url": "l175/",
+              "lesson": 175,
+              "title": "Review 159 - 160"
+            },
+            {
+              "url": "l176/",
+              "lesson": 176,
+              "title": "Review 161 - 162"
+            },
+            {
+              "url": "l177/",
+              "lesson": 177,
+              "title": "Review 163 - 164"
+            },
+            {
+              "url": "l178/",
+              "lesson": 178,
+              "title": "Review 165 - 166"
+            },
+            {
+              "url": "l179/",
+              "lesson": 179,
+              "title": "Review 167 - 168"
+            },
+            {
+              "url": "l180/",
+              "lesson": 180,
+              "title": "Review 169 - 170"
+            }
+          ]
+        },
+        {
+          "title": "Lessons 181 - 200",
+          "base": "/workbook/",
+          "ref": "l181-200",
+          "page": [
+            {
+              "url": "intro181/",
+              "title": "Introduction"
+            },
+            {
+              "url": "l181/",
+              "lesson": 181,
+              "title": "I trust my brothers, who are one with me."
+            },
+            {
+              "url": "l182/",
+              "lesson": 182,
+              "title": "I will be still an instant and go home."
+            },
+            {
+              "url": "l183/",
+              "lesson": 183,
+              "title": "I call upon God’s Name and on my own."
+            },
+            {
+              "url": "l184/",
+              "lesson": 184,
+              "title": "The Name of God is my inheritance."
+            },
+            {
+              "url": "l185/",
+              "lesson": 185,
+              "title": "I want the peace of God."
+            },
+            {
+              "url": "l186/",
+              "lesson": 186,
+              "title": "Salvation of the world depends on me."
+            },
+            {
+              "url": "l187/",
+              "lesson": 187,
+              "title": "I bless the world because I bless myself."
+            },
+            {
+              "url": "l188/",
+              "lesson": 188,
+              "title": "The peace of God is shining in me now."
+            },
+            {
+              "url": "l189/",
+              "lesson": 189,
+              "title": "I feel the Love of God within me now."
+            },
+            {
+              "url": "l190/",
+              "lesson": 190,
+              "title": "I choose the joy of God instead of pain."
+            },
+            {
+              "url": "l191/",
+              "lesson": 191,
+              "title": "I am the holy Son of God Himself."
+            },
+            {
+              "url": "l192/",
+              "lesson": 192,
+              "title": "I have a function God would have me fill."
+            },
+            {
+              "url": "l193/",
+              "lesson": 193,
+              "title": "All things are lessons God would have me learn."
+            },
+            {
+              "url": "l194/",
+              "lesson": 194,
+              "title": "I place the future in the Hands of God."
+            },
+            {
+              "url": "l195/",
+              "lesson": 195,
+              "title": "Love is the way I walk in gratitude."
+            },
+            {
+              "url": "l196/",
+              "lesson": 196,
+              "title": "It can be but myself I crucify."
+            },
+            {
+              "url": "l197/",
+              "lesson": 197,
+              "title": "It can be but my gratitude I earn."
+            },
+            {
+              "url": "l198/",
+              "lesson": 198,
+              "title": "Only my condemnation injures me."
+            },
+            {
+              "url": "l199/",
+              "lesson": 199,
+              "title": "I am not a body. I am free."
+            },
+            {
+              "url": "l200/",
+              "lesson": 200,
+              "title": "There is no peace except the peace of God."
+            }
+          ]
+        },
+        {
+          "title": "Review VI",
+          "base": "/workbook/",
+          "ref": "r6",
+          "page": [
+            {
+              "url": "review6/",
+              "title": "Introduction"
+            },
+            {
+              "url": "l201/",
+              "lesson": 201,
+              "title": "Review 181"
+            },
+            {
+              "url": "l202/",
+              "lesson": 202,
+              "title": "Review 182"
+            },
+            {
+              "url": "l203/",
+              "lesson": 203,
+              "title": "Review 183"
+            },
+            {
+              "url": "l204/",
+              "lesson": 204,
+              "title": "Review 184"
+            },
+            {
+              "url": "l205/",
+              "lesson": 205,
+              "title": "Review 185"
+            },
+            {
+              "url": "l206/",
+              "lesson": 206,
+              "title": "Review 186"
+            },
+            {
+              "url": "l207/",
+              "lesson": 207,
+              "title": "Review 187"
+            },
+            {
+              "url": "l208/",
+              "lesson": 208,
+              "title": "Review 188"
+            },
+            {
+              "url": "l209/",
+              "lesson": 209,
+              "title": "Review 189"
+            },
+            {
+              "url": "l210/",
+              "lesson": 210,
+              "title": "Review 190"
+            },
+            {
+              "url": "l211/",
+              "lesson": 211,
+              "title": "Review 191"
+            },
+            {
+              "url": "l212/",
+              "lesson": 212,
+              "title": "Review 192"
+            },
+            {
+              "url": "l213/",
+              "lesson": 213,
+              "title": "Review 193"
+            },
+            {
+              "url": "l214/",
+              "lesson": 214,
+              "title": "Review 194"
+            },
+            {
+              "url": "l215/",
+              "lesson": 215,
+              "title": "Review 195"
+            },
+            {
+              "url": "l216/",
+              "lesson": 216,
+              "title": "Review 196"
+            },
+            {
+              "url": "l217/",
+              "lesson": 217,
+              "title": "Review 197"
+            },
+            {
+              "url": "l218/",
+              "lesson": 218,
+              "title": "Review 198"
+            },
+            {
+              "url": "l219/",
+              "lesson": 219,
+              "title": "Review 199"
+            },
+            {
+              "url": "l220/",
+              "lesson": 220,
+              "title": "Review 200"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pid": "two",
+      "title": "Part Two",
+      "section": [
+        {
+          "title": "Part II: Introduction",
+          "base": "/workbook/",
+          "ref": "p2intro",
+          "page": [
+            {
+              "title": "Introduction",
+              "url": "introp2/"
+            }
+          ]
+        },
+        {
+          "title": "What is Forgiveness?",
+          "base": "/workbook/",
+          "ref": "forgiveness",
+          "page": [
+            {
+              "title": "What is Forgiveness?",
+              "url": "forgiveness/"
+            },
+            {
+              "url": "l221/",
+              "lesson": 221,
+              "title": "Peace to my mind. Let all my thoughts be still."
+            },
+            {
+              "url": "l222/",
+              "lesson": 222,
+              "title": "God is with me. I live and breathe in Him."
+            },
+            {
+              "url": "l223/",
+              "lesson": 223,
+              "title": "God is my life. I have no life but His."
+            },
+            {
+              "url": "l224/",
+              "lesson": 224,
+              "title": "God is my Father, and He loves His Son."
+            },
+            {
+              "url": "l225/",
+              "lesson": 225,
+              "title": "God is my Father, and His Son loves Him."
+            },
+            {
+              "url": "l226/",
+              "lesson": 226,
+              "title": "My home awaits me. I will hasten there."
+            },
+            {
+              "url": "l227/",
+              "lesson": 227,
+              "title": "This is my holy instant of release."
+            },
+            {
+              "url": "l228/",
+              "lesson": 228,
+              "title": "God has condemned me not. No more do I."
+            },
+            {
+              "url": "l229/",
+              "lesson": 229,
+              "title": "Love, Which created me, is what I am."
+            },
+            {
+              "url": "l230/",
+              "lesson": 230,
+              "title": "Now will I seek and find the peace of God."
+            }
+          ]
+        },
+        {
+          "title": "What is Salvation?",
+          "base": "/workbook/",
+          "ref": "salvation",
+          "page": [
+            {
+              "title": "What is Salvation?",
+              "url": "salvation/"
+            },
+            {
+              "url": "l231/",
+              "lesson": 231,
+              "title": "Father, I will but to remember You."
+            },
+            {
+              "url": "l232/",
+              "lesson": 232,
+              "title": "Be in my mind, my Father, through the day."
+            },
+            {
+              "url": "l233/",
+              "lesson": 233,
+              "title": "I give my life to God to run today."
+            },
+            {
+              "url": "l234/",
+              "lesson": 234,
+              "title": "Father, today I am Your Son again."
+            },
+            {
+              "url": "l235/",
+              "lesson": 235,
+              "title": "God in His mercy wills that I be saved."
+            },
+            {
+              "url": "l236/",
+              "lesson": 236,
+              "title": "I rule my mind, which I alone must rule."
+            },
+            {
+              "url": "l237/",
+              "lesson": 237,
+              "title": "Now would I be as God created me."
+            },
+            {
+              "url": "l238/",
+              "lesson": 238,
+              "title": "On my decision all salvation rests."
+            },
+            {
+              "url": "l239/",
+              "lesson": 239,
+              "title": "The glory of my Father is my own."
+            },
+            {
+              "url": "l240/",
+              "lesson": 240,
+              "title": "Fear is not justified in any form."
+            }
+          ]
+        },
+        {
+          "title": "What is the World?",
+          "base": "/workbook/",
+          "ref": "world",
+          "page": [
+            {
+              "title": "What is the World?",
+              "url": "world/"
+            },
+            {
+              "url": "l241/",
+              "lesson": 241,
+              "title": "This holy instant is salvation come."
+            },
+            {
+              "url": "l242/",
+              "lesson": 242,
+              "title": "This day is God’s. It is my gift to Him."
+            },
+            {
+              "url": "l243/",
+              "lesson": 243,
+              "title": "Today I will judge nothing that occurs."
+            },
+            {
+              "url": "l244/",
+              "lesson": 244,
+              "title": "I am in danger nowhere in the world."
+            },
+            {
+              "url": "l245/",
+              "lesson": 245,
+              "title": "Your peace is with me, Father. I am safe."
+            },
+            {
+              "url": "l246/",
+              "lesson": 246,
+              "title": "To love my Father is to love His Son."
+            },
+            {
+              "url": "l247/",
+              "lesson": 247,
+              "title": "Without forgiveness I will still be blind."
+            },
+            {
+              "url": "l248/",
+              "lesson": 248,
+              "title": "Whatever suffers is not part of me."
+            },
+            {
+              "url": "l249/",
+              "lesson": 249,
+              "title": "Forgiveness ends all suffering and loss."
+            },
+            {
+              "url": "l250/",
+              "lesson": 250,
+              "title": "Let me not see myself as limited."
+            }
+          ]
+        },
+        {
+          "title": "What is Sin?",
+          "base": "/workbook/",
+          "ref": "sin",
+          "page": [
+            {
+              "title": "What is Sin?",
+              "url": "sin/"
+            },
+            {
+              "url": "l251/",
+              "lesson": 251,
+              "title": "I am in need of nothing but the truth."
+            },
+            {
+              "url": "l252/",
+              "lesson": 252,
+              "title": "The Son of God is my identity."
+            },
+            {
+              "url": "l253/",
+              "lesson": 253,
+              "title": "My Self is ruler of the universe."
+            },
+            {
+              "url": "l254/",
+              "lesson": 254,
+              "title": "Let every voice but God’s be still in me."
+            },
+            {
+              "url": "l255/",
+              "lesson": 255,
+              "title": "This day I choose to spend in perfect peace."
+            },
+            {
+              "url": "l256/",
+              "lesson": 256,
+              "title": "God is the only goal I have today."
+            },
+            {
+              "url": "l257/",
+              "lesson": 257,
+              "title": "Let me remember what my purpose is."
+            },
+            {
+              "url": "l258/",
+              "lesson": 258,
+              "title": "Let me remember that my goal is God."
+            },
+            {
+              "url": "l259/",
+              "lesson": 259,
+              "title": "Let me remember that there is no sin."
+            },
+            {
+              "url": "l260/",
+              "lesson": 260,
+              "title": "Let me remember God created me."
+            }
+          ]
+        },
+        {
+          "title": "What is the Body?",
+          "base": "/workbook/",
+          "ref": "body",
+          "page": [
+            {
+              "title": "What is the Body?",
+              "url": "body/"
+            },
+            {
+              "url": "l261/",
+              "lesson": 261,
+              "title": "God is my refuge and security."
+            },
+            {
+              "url": "l262/",
+              "lesson": 262,
+              "title": "Let me perceive no differences today."
+            },
+            {
+              "url": "l263/",
+              "lesson": 263,
+              "title": "My holy vision sees all things as pure."
+            },
+            {
+              "url": "l264/",
+              "lesson": 264,
+              "title": "I am surrounded by the Love of God."
+            },
+            {
+              "url": "l265/",
+              "lesson": 265,
+              "title": "Creation’s gentleness is all I see."
+            },
+            {
+              "url": "l266/",
+              "lesson": 266,
+              "title": "My holy Self abides in you, God’s Son."
+            },
+            {
+              "url": "l267/",
+              "lesson": 267,
+              "title": "My heart is beating in the peace of God."
+            },
+            {
+              "url": "l268/",
+              "lesson": 268,
+              "title": "Let all things be exactly as they are."
+            },
+            {
+              "url": "l269/",
+              "lesson": 269,
+              "title": "My sight goes forth to look upon Christ’s face."
+            },
+            {
+              "url": "l270/",
+              "lesson": 270,
+              "title": "I will not use the body’s eyes today."
+            }
+          ]
+        },
+        {
+          "title": "What is the Christ?",
+          "base": "/workbook/",
+          "ref": "christ",
+          "page": [
+            {
+              "title": "What is the Christ?",
+              "url": "christ/"
+            },
+            {
+              "url": "l271/",
+              "lesson": 271,
+              "title": "Christ’s is the vision I will use today."
+            },
+            {
+              "url": "l272/",
+              "lesson": 272,
+              "title": "How can illusions satisfy God’s Son?"
+            },
+            {
+              "url": "l273/",
+              "lesson": 273,
+              "title": "The stillness of the peace of God is mine."
+            },
+            {
+              "url": "l274/",
+              "lesson": 274,
+              "title": "Today belongs to Love. Let me not fear."
+            },
+            {
+              "url": "l275/",
+              "lesson": 275,
+              "title": "God’s healing Voice protects all things today."
+            },
+            {
+              "url": "l276/",
+              "lesson": 276,
+              "title": "The Word of God is given me to speak."
+            },
+            {
+              "url": "l277/",
+              "lesson": 277,
+              "title": "Let me not bind Your Son with laws I made."
+            },
+            {
+              "url": "l278/",
+              "lesson": 278,
+              "title": "If I am bound, my Father is not free."
+            },
+            {
+              "url": "l279/",
+              "lesson": 279,
+              "title": "Creation’s freedom promises my own."
+            },
+            {
+              "url": "l280/",
+              "lesson": 280,
+              "title": "What limits can I lay upon God’s Son?"
+            }
+          ]
+        },
+        {
+          "title": "What is the Holy Spirit?",
+          "base": "/workbook/",
+          "ref": "holyspirit",
+          "page": [
+            {
+              "title": "What is the Holy Spirit?",
+              "url": "holyspirit/"
+            },
+            {
+              "url": "l281/",
+              "lesson": 281,
+              "title": "I can be hurt by nothing but my thoughts."
+            },
+            {
+              "url": "l282/",
+              "lesson": 282,
+              "title": "I will not be afraid of love today."
+            },
+            {
+              "url": "l283/",
+              "lesson": 283,
+              "title": "My true Identity abides in You."
+            },
+            {
+              "url": "l284/",
+              "lesson": 284,
+              "title": "I can elect to change all thoughts that hurt."
+            },
+            {
+              "url": "l285/",
+              "lesson": 285,
+              "title": "My holiness shines bright and clear today."
+            },
+            {
+              "url": "l286/",
+              "lesson": 286,
+              "title": "The hush of Heaven holds my heart today."
+            },
+            {
+              "url": "l287/",
+              "lesson": 287,
+              "title": "You are my goal, my Father. Only You."
+            },
+            {
+              "url": "l288/",
+              "lesson": 288,
+              "title": "Let me forget my brother’s past today."
+            },
+            {
+              "url": "l289/",
+              "lesson": 289,
+              "title": "The past is over. It can touch me not."
+            },
+            {
+              "url": "l290/",
+              "lesson": 290,
+              "title": "My present happiness is all I see."
+            }
+          ]
+        },
+        {
+          "title": "What is the Real World?",
+          "base": "/workbook/",
+          "ref": "realworld",
+          "page": [
+            {
+              "title": "What is the Real World?",
+              "url": "realworld/"
+            },
+            {
+              "url": "l291/",
+              "lesson": 291,
+              "title": "This is a day of stillness and of peace."
+            },
+            {
+              "url": "l292/",
+              "lesson": 292,
+              "title": "A happy outcome to all things is sure."
+            },
+            {
+              "url": "l293/",
+              "lesson": 293,
+              "title": "All fear is past, and only love is here."
+            },
+            {
+              "url": "l294/",
+              "lesson": 294,
+              "title": "My body is a wholly neutral thing."
+            },
+            {
+              "url": "l295/",
+              "lesson": 295,
+              "title": "The Holy Spirit looks through me today."
+            },
+            {
+              "url": "l296/",
+              "lesson": 296,
+              "title": "The Holy Spirit speaks through me today."
+            },
+            {
+              "url": "l297/",
+              "lesson": 297,
+              "title": "Forgiveness is the only gift I give."
+            },
+            {
+              "url": "l298/",
+              "lesson": 298,
+              "title": "I love You, Father, and I love Your Son."
+            },
+            {
+              "url": "l299/",
+              "lesson": 299,
+              "title": "Eternal holiness abides in me."
+            },
+            {
+              "url": "l300/",
+              "lesson": 300,
+              "title": "Only an instant does this world endure."
+            }
+          ]
+        },
+        {
+          "title": "What is the Second Coming?",
+          "base": "/workbook/",
+          "ref": "secondcoming",
+          "page": [
+            {
+              "title": "What is the Second Coming?",
+              "url": "secondcoming/"
+            },
+            {
+              "url": "l301/",
+              "lesson": 301,
+              "title": "And God Himself shall wipe away all tears."
+            },
+            {
+              "url": "l302/",
+              "lesson": 302,
+              "title": "Where darkness was I look upon the light."
+            },
+            {
+              "url": "l303/",
+              "lesson": 303,
+              "title": "The holy Christ is born in me today."
+            },
+            {
+              "url": "l304/",
+              "lesson": 304,
+              "title": "Let not my world obscure the sight of Christ."
+            },
+            {
+              "url": "l305/",
+              "lesson": 305,
+              "title": "There is a peace that Christ bestows on us."
+            },
+            {
+              "url": "l306/",
+              "lesson": 306,
+              "title": "The gift of Christ is all I seek today."
+            },
+            {
+              "url": "l307/",
+              "lesson": 307,
+              "title": "Conflicting wishes cannot be my will."
+            },
+            {
+              "url": "l308/",
+              "lesson": 308,
+              "title": "This instant is the only time there is."
+            },
+            {
+              "url": "l309/",
+              "lesson": 309,
+              "title": "I will not fear to look within today."
+            },
+            {
+              "url": "l310/",
+              "lesson": 310,
+              "title": "In fearlessness and love I spend today."
+            }
+          ]
+        },
+        {
+          "title": "What is the Last Judgement?",
+          "base": "/workbook/",
+          "ref": "lastjudgement",
+          "page": [
+            {
+              "title": "What is the Last Judgement?",
+              "url": "lastjudgement/"
+            },
+            {
+              "url": "l311/",
+              "lesson": 311,
+              "title": "I judge all things as I would have them be."
+            },
+            {
+              "url": "l312/",
+              "lesson": 312,
+              "title": "I see all things as I would have them be."
+            },
+            {
+              "url": "l313/",
+              "lesson": 313,
+              "title": "Now let a new perception come to me."
+            },
+            {
+              "url": "l314/",
+              "lesson": 314,
+              "title": "I seek a future different from the past."
+            },
+            {
+              "url": "l315/",
+              "lesson": 315,
+              "title": "All gifts my brothers give belong to me."
+            },
+            {
+              "url": "l316/",
+              "lesson": 316,
+              "title": "All gifts I give my brothers are my own."
+            },
+            {
+              "url": "l317/",
+              "lesson": 317,
+              "title": "I follow in the way appointed me."
+            },
+            {
+              "url": "l318/",
+              "lesson": 318,
+              "title": "In me salvation’s means and end are one."
+            },
+            {
+              "url": "l319/",
+              "lesson": 319,
+              "title": "I came for the salvation of the world."
+            },
+            {
+              "url": "l320/",
+              "lesson": 320,
+              "title": "My Father gives all power unto me."
+            }
+          ]
+        },
+        {
+          "title": "What is Creation?",
+          "base": "/workbook/",
+          "ref": "creation",
+          "page": [
+            {
+              "title": "What is Creation?",
+              "url": "creation/"
+            },
+            {
+              "url": "l321/",
+              "lesson": 321,
+              "title": "Father, my freedom is in You alone."
+            },
+            {
+              "url": "l322/",
+              "lesson": 322,
+              "title": "I can give up but what was never real."
+            },
+            {
+              "url": "l323/",
+              "lesson": 323,
+              "title": "I gladly make the ‘sacrifice’ of fear."
+            },
+            {
+              "url": "l324/",
+              "lesson": 324,
+              "title": "I merely follow, for I would not lead."
+            },
+            {
+              "url": "l325/",
+              "lesson": 325,
+              "title": "All things I think I see reflect ideas."
+            },
+            {
+              "url": "l326/",
+              "lesson": 326,
+              "title": "I am forever an Effect of God."
+            },
+            {
+              "url": "l327/",
+              "lesson": 327,
+              "title": "I need but call and You will answer me."
+            },
+            {
+              "url": "l328/",
+              "lesson": 328,
+              "title": "I choose the second place to gain the first."
+            },
+            {
+              "url": "l329/",
+              "lesson": 329,
+              "title": "I have already chosen what You will."
+            },
+            {
+              "url": "l330/",
+              "lesson": 330,
+              "title": "I will not hurt myself again today."
+            }
+          ]
+        },
+        {
+          "title": "What is the Ego?",
+          "base": "/workbook/",
+          "ref": "ego",
+          "page": [
+            {
+              "title": "What is the Ego?",
+              "url": "ego/"
+            },
+            {
+              "url": "l331/",
+              "lesson": 331,
+              "title": "There is no conflict, for my will is Yours."
+            },
+            {
+              "url": "l332/",
+              "lesson": 332,
+              "title": "Fear binds the world. Forgiveness sets it free."
+            },
+            {
+              "url": "l333/",
+              "lesson": 333,
+              "title": "Forgiveness ends the dream of conflict here."
+            },
+            {
+              "url": "l334/",
+              "lesson": 334,
+              "title": "Today I claim the gifts forgiveness gives."
+            },
+            {
+              "url": "l335/",
+              "lesson": 335,
+              "title": "I choose to see my brother’s sinlessness."
+            },
+            {
+              "url": "l336/",
+              "lesson": 336,
+              "title": "Forgiveness lets me know that minds are joined."
+            },
+            {
+              "url": "l337/",
+              "lesson": 337,
+              "title": "My sinlessness protects me from all harm."
+            },
+            {
+              "url": "l338/",
+              "lesson": 338,
+              "title": "I am affected only by my thoughts."
+            },
+            {
+              "url": "l339/",
+              "lesson": 339,
+              "title": "I will receive whatever I request."
+            },
+            {
+              "url": "l340/",
+              "lesson": 340,
+              "title": "I can be free of suffering today."
+            }
+          ]
+        },
+        {
+          "title": "What is a Miracle?",
+          "base": "/workbook/",
+          "ref": "miracle",
+          "page": [
+            {
+              "title": "What is a Miracle?",
+              "url": "miracle/"
+            },
+            {
+              "url": "l341/",
+              "lesson": 341,
+              "title": "I can attack but my own sinlessness,<br/>And it is only that which keeps me safe."
+            },
+            {
+              "url": "l342/",
+              "lesson": 342,
+              "title": "I let forgiveness rest upon all things,<br/>For thus forgiveness will be given me."
+            },
+            {
+              "url": "l343/",
+              "lesson": 343,
+              "title": "I am not asked to make a sacrifice<br/>To find the mercy and the peace of God."
+            },
+            {
+              "url": "l344/",
+              "lesson": 344,
+              "title": "Today I learn the law of love; that what<br/>I give my brother is my gift to me."
+            },
+            {
+              "url": "l345/",
+              "lesson": 345,
+              "title": "I offer only miracles today,<br/>For I would have them be returned to me."
+            },
+            {
+              "url": "l346/",
+              "lesson": 346,
+              "title": "Today the peace of God envelops me,<br/>And I forget all things except His Love."
+            },
+            {
+              "url": "l347/",
+              "lesson": 347,
+              "title": "Anger must come from judgement. Judgement is<br/>The weapon I would use against myself<br/>To keep all miracles away from me."
+            },
+            {
+              "url": "l348/",
+              "lesson": 348,
+              "title": "I have no cause for anger or for fear,<br/>For You surround me. And in every need<br/>That I perceive Your grace suffices me."
+            },
+            {
+              "url": "l349/",
+              "lesson": 349,
+              "title": "Today I let Christ’s vision look upon<br/>All things for me and judge them not, but give<br/>Each one a miracle of love instead."
+            },
+            {
+              "url": "l350/",
+              "lesson": 350,
+              "title": "Miracles mirror God’s eternal Love.<br/>To offer them is to remember Him,<br/>And through His memory to save the world."
+            }
+          ]
+        },
+        {
+          "title": "What am I?",
+          "base": "/workbook/",
+          "ref": "whatami",
+          "page": [
+            {
+              "title": "What am I?",
+              "url": "whatami/"
+            },
+            {
+              "url": "l351/",
+              "lesson": 351,
+              "title": "Miracles mirror God’s eternal Love.<br/>To offer them is to remember Him,<br/>And through His memory to save the world."
+            },
+            {
+              "url": "l352/",
+              "lesson": 352,
+              "title": "Judgement and love are opposites. From one<br/>Come all the sorrows of the world. But from<br/>The Other comes the peace of God Himself."
+            },
+            {
+              "url": "l353/",
+              "lesson": 353,
+              "title": "My eyes, my tongue, my hands, my feet today<br/>Have but one purpose; to be given Christ<br/>To use to bless the world with miracles."
+            },
+            {
+              "url": "l354/",
+              "lesson": 354,
+              "title": "We stand together, Christ and I, in peace<br/>And certainty of purpose. And in Him<br/>Is His Creator, as He is in me."
+            },
+            {
+              "url": "l355/",
+              "lesson": 355,
+              "title": "There is no end to all the peace and joy<br/>And all the miracles that I will give<br/>When I accept God’s Word. Why not today?"
+            },
+            {
+              "url": "l356/",
+              "lesson": 356,
+              "title": "Sickness is but another name for sin.<br/>Healing is but another Name for God.<br/>The miracle is thus a call to Him."
+            },
+            {
+              "url": "l357/",
+              "lesson": 357,
+              "title": "Truth answers every call we make to God,<br/>Responding first with miracles, and then<br/>Returning unto us to be Itself."
+            },
+            {
+              "url": "l358/",
+              "lesson": 358,
+              "title": "No call to God can be unheard nor left<br/>Unanswered. And of this I can be sure;<br/>His answer is the one I really want."
+            },
+            {
+              "url": "l359/",
+              "lesson": 359,
+              "title": "God’s answer is some form of peace.<br/>All pain Is healed; all misery replaced with joy.<br/> All prison doors are opened. And all sin<br/>Is understood as merely a mistake."
+            },
+            {
+              "url": "l360/",
+              "lesson": 360,
+              "title": "Peace be to me, the holy Son of God.<br/>Peace to my brother, who is one with me.<br/>Let all the world be blessed with peace through us."
+            }
+          ]
+        },
+        {
+          "title": "Final Lessons",
+          "base": "/workbook/",
+          "ref": "finallessons",
+          "page": [
+            {
+              "title": "Final Lessons",
+              "url": "final/"
+            },
+            {
+              "url": "l361/",
+              "lesson": 361,
+              "title": "This holy instant would I give to You.<br/>Be You in charge. For I would follow You,<br/>Certain that Your direction gives me peace."
+            },
+            {
+              "url": "l361/",
+              "lesson": 362,
+              "title": "This holy instant would I give to You.<br/>Be You in charge. For I would follow You,<br/>Certain that Your direction gives me peace."
+            },
+            {
+              "url": "l361/",
+              "lesson": 363,
+              "title": "This holy instant would I give to You.<br/>Be You in charge. For I would follow You,<br/>Certain that Your direction gives me peace."
+            },
+            {
+              "url": "l361/",
+              "lesson": 364,
+              "title": "This holy instant would I give to You.<br/>Be You in charge. For I would follow You,<br/>Certain that Your direction gives me peace."
+            },
+            {
+              "url": "l361/",
+              "lesson": 365,
+              "title": "This holy instant would I give to You.<br/>Be You in charge. For I would follow You,<br/>Certain that Your direction gives me peace."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pid": "epi",
+      "title": "Epilog",
+      "section": [
+        {
+          "title": "Workbook Epilog",
+          "base": "/workbook/",
+          "ref": "epilog",
+          "page": [
+            {
+              "title": "Epilog",
+              "url": "epilog/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
