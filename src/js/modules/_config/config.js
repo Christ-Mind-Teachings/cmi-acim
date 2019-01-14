@@ -72,6 +72,7 @@ export function getConfig(book, assign = true) {
         config = cfg;
       }
       resolve(cfg);
+      return;
     }
 
     //get config from server
@@ -99,16 +100,27 @@ export function getConfig(book, assign = true) {
 
   This is the same as getConfig() except it doesn't resolve passing the data
   but a message indicating source of the configuration file
+
+  loadConfig resolves with:
+    0: no ${book}.json file found
+    1: config loaded from local store
+    2: config loaded from server
+
 */
 export function loadConfig(book) {
   return new Promise((resolve, reject) => {
+    if (typeof book === "undefined") {
+      resolve(0);
+      return;
+    }
     let cfg = store.get(`config-${book}`);
     let url;
 
     //if config in local storage check if we need to get a freash copy
     if (cfg && !refreshNeeded(cfg.bid)) {
       config = cfg;
-      resolve("config read from cache");
+      resolve(1);
+      return;
     }
 
     //get config from server
@@ -119,7 +131,7 @@ export function loadConfig(book) {
         response.data.lastFetchDate = Date.now();
         store.set(`config-${book}`, response.data);
         config = response.data;
-        resolve("config fetched from server");
+        resolve(2);
       })
       .catch((error) => {
         config = null;

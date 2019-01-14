@@ -1,10 +1,10 @@
 ---
 layout: about
-title: "Name of Source"
+title: "A Course In Miracles - Sparkly Edition"
 footer:
   display: true
 ---
 
-## *Source Title*
+## *A Course In Miracles*
 
 

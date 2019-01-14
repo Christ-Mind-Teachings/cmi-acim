@@ -4,17 +4,15 @@ restricted-menu: true
 ---
 
 <div markdown="1" class="center">
-
 ---
-
-***“It is the Word of God, to be kept holy forever&hellip;”***
-
-*“This time there will be no failure, no loss of truth, no
-misunderstanding and no misrepresentation I will direct its growth as it
-reaches from the paper on which it was written into the hearts for which
-it was intended.”*
-
-**(Special Message 12/31/75)**
+> ***“It is the Word of God, to be kept holy forever&hellip;”***
+> 
+> *“This time there will be no failure, no loss of truth, no
+> misunderstanding and no misrepresentation I will direct its growth as it
+> reaches from the paper on which it was written into the hearts for which
+> it was intended.”*
+> 
+> **(Special Message 12/31/75)**
 
 ---
 
@@ -44,10 +42,11 @@ associated with authorship, but with the willingness to hear his voice
 and take notes.
 
 <div markdown="1" class="center">
-*“Do not attempt to break God’s copyright, because His Authorship
-alone can copy right.”*
-
-**(UR Text, 12/11/65)**
+> *“Do not attempt to break God’s copyright, because His Authorship
+> alone can copy right.”*
+> 
+> **(UR Text, 12/11/65)**
+---
 </div>
 
 May this be to you, as it is NOW for us, the opening of your mind and
@@ -60,7 +59,7 @@ yours, abiding in you now, and in this realization may you recognize the
 Kingdom of Heaven wherein you have always been at home.
 
 <div markdown="1" class="center">
-**God bless us everyone!**
+> **God bless us everyone!**
 </div>
 
 ## Publisher's Note

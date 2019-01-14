@@ -4304,7 +4304,7 @@ const transcript = __webpack_require__(19);
 
 //change these values to reflect transcript info
 const AWS_BUCKET = "assets.christmind.info";
-const SOURCE_ID = "12";
+const SOURCE_ID = "ACIM";
 
 //mp3 and audio timing base directories
 const audioBase = `https://s3.amazonaws.com/${AWS_BUCKET}/${SOURCE_ID}/audio`;
@@ -4367,6 +4367,7 @@ function getConfig(book, assign = true) {
         config = cfg;
       }
       resolve(cfg);
+      return;
     }
 
     //get config from server
@@ -4392,16 +4393,27 @@ function getConfig(book, assign = true) {
 
   This is the same as getConfig() except it doesn't resolve passing the data
   but a message indicating source of the configuration file
+
+  loadConfig resolves with:
+    0: no ${book}.json file found
+    1: config loaded from local store
+    2: config loaded from server
+
 */
 function loadConfig(book) {
   return new Promise((resolve, reject) => {
+    if (typeof book === "undefined") {
+      resolve(0);
+      return;
+    }
     let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`config-${book}`);
     let url;
 
     //if config in local storage check if we need to get a freash copy
     if (cfg && !refreshNeeded(cfg.bid)) {
       config = cfg;
-      resolve("config read from cache");
+      resolve(1);
+      return;
     }
 
     //get config from server
@@ -4411,7 +4423,7 @@ function loadConfig(book) {
       response.data.lastFetchDate = Date.now();
       __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`config-${book}`, response.data);
       config = response.data;
-      resolve("config fetched from server");
+      resolve(2);
     }).catch(error => {
       config = null;
       reject(`Config file: ${url} is not valid JSON`);
@@ -36238,30 +36250,238 @@ function createClickHandlers() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_driver_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_driver_js__);
 
 
+const cmiPageTitle = {
+  element: "#source-homepage",
+  popover: {
+    title: "Title",
+    description: "This is the homepage for the Sparkly Edition of <em>A Course In Miracles</em> in the Christ Mind Library.<br><br>Click on an image below to see the table of contents. A Course In Miracles include&hellip;",
+    position: "bottom"
+  }
+};
+
+const cmiPageBanner = {
+  element: "#masthead-title",
+  popover: {
+    title: "Navigation and Features",
+    description: "ACIM is part of the Library of Christ Mind Teachings. On every page you can click on this banner to navigate to the Library's main page and see all available teachings.",
+    position: "bottom"
+  }
+};
+
+const acimPreface = {
+  element: "[data-book='preface']",
+  popover: {
+    title: "Preface",
+    description: "The Preface to the ACIM Sparkly Edition",
+    position: "top"
+  }
+};
+
+const acimText = {
+  element: "[data-book='text']",
+  popover: {
+    title: "Text",
+    description: "The Text of ACIM containing thirty one chapters",
+    position: "top"
+  }
+};
+
+const acimWorkbook = {
+  element: "[data-book='workbook']",
+  popover: {
+    title: "Workbook for Students",
+    description: "The Workbook for Students containing one lesson for each day of the year.",
+    position: "top"
+  }
+};
+
+const acimManual = {
+  element: "[data-book='manual']",
+  popover: {
+    title: "Manual for Teachers",
+    description: "Answers common questions and clarifies terms used in ACIM.",
+    position: "top"
+  }
+};
+
+const pageMenu = {
+  element: "#page-menu",
+  popover: {
+    title: "The Menu",
+    description: "This is the page menu, it will stick to the top when the page is scrolled (when the tour is over) so it is always available. The menu on other pages is similar but may contain additional features.<br/><br/>A brief description of each menu option follows.",
+    position: "bottom"
+  }
+};
+
+const pageMenuBookmarkItem = {
+  element: ".bookmark-modal-open",
+  popover: {
+    title: "List Bookmarks",
+    description: "Display a list of bookmarks you have created and optionally filter by topic. You can quickly jump to any bookmark. Learn more about bookmarks in the documentation.",
+    position: "bottom"
+  }
+};
+
+const pageMenuSearchItem = {
+  element: ".search-modal-open",
+  popover: {
+    title: "Search Through All Books",
+    description: "Find topics of interest by searching through all ACIM books.",
+    position: "bottom"
+  }
+};
+
+const pageMenuHelpItem = {
+  element: "#help-menu",
+  popover: {
+    title: "Get Help and Learn About",
+    description: "Learn about the Library and using the features of the site.",
+    position: "bottom"
+  }
+};
+
+const pageMenuLoginItem = {
+  element: ".login-menu-option",
+  popover: {
+    title: "Sign In/Sign Out",
+    description: "Create an account and sign in to the site. It's free and allows you to create bookmarks that you can share via Facebook and keep synchronized between devices.",
+    position: "left"
+  }
+};
+
+const pageMenuTextContents = {
+  element: "[data-book='text']",
+  popover: {
+    title: "Display Table of Contents",
+    description: "Click on any image to display and navigate to the volume contents.<br/><br/>Note: The Preface does not have a table of contents.",
+    position: "left"
+  }
+};
+
+const cmiTranscriptBanner = {
+  element: "#masthead-title",
+  popover: {
+    title: "Library of Christ Mind Teachings",
+    description: "This page is part of the Teachings of Christ Mind Library. Click this link to navigate to the Library's Home page.",
+    position: "bottom"
+  }
+};
+
+const cmiTranscriptSourceTitle = {
+  element: "#src-title",
+  popover: {
+    title: "A Course In Miracles",
+    description: "This page is part of A Course In Miracles. Click this link to navigate to the ACIM Home page.",
+    position: "bottom"
+  }
+};
+
+const cmiTranscriptBookTitle = {
+  element: "#book-title",
+  popover: {
+    title: "Page Title",
+    description: "This identifies the book and section or lesson of the content on this page.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuBookmarkItem = {
+  element: "#bookmark-dropdown-menu",
+  popover: {
+    title: "Bookmarks",
+    description: "You can create a bookmark from highlighted text and associate the bookmark with one or more categories. Learn more about bookmarks by reading the documentation.",
+    position: "right"
+  }
+};
+
+const transcriptMenuSearchItem = {
+  element: ".search-modal-open",
+  popover: {
+    title: "Search Through All Books",
+    description: "Find topics of interest by searching through all ACIM books.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuAudioItem = {
+  element: ".audio-player-toggle",
+  popover: {
+    title: "Listen to the Audio",
+    description: "Click the speaker icon to display the audio player and listen along as you read.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuParagraphMarkerItem = {
+  element: ".toggle-paragraph-markers",
+  popover: {
+    title: "Show/Hide Paragraph Markers",
+    description: "Show or hide the markers that preceed each paragraph.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuPageTopItem = {
+  element: ".top-of-page",
+  popover: {
+    title: "Go To Top of Page",
+    description: "Quickly jump to the top of the page.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuContentsItem = {
+  element: "#contents-modal-open",
+  popover: {
+    title: "Table of Contents",
+    description: "View the table of contents.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuPreviousPageItem = {
+  element: ".previous-page",
+  popover: {
+    title: "Previous Page",
+    description: "Go to the previous page. This will be disabled when the first page is displayed.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuNextPageItem = {
+  element: ".next-page",
+  popover: {
+    title: "Next Page",
+    description: "Go to the next page. This will be disabled when the last page is displayed.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuHelpItem = {
+  element: "#about-dropdown-menu",
+  popover: {
+    title: "Get Help",
+    description: "Learn how to use features of the Library.",
+    position: "bottom"
+  }
+};
+
+const transcriptMenuLoginItem = {
+  element: ".login-menu-option",
+  popover: {
+    title: "Sign In/Sign Out",
+    description: "Create an account and sign in or sign out. When you sign in, bookmarks you create will be available on all devices you use to access the library.",
+    position: "bottom"
+  }
+};
+
 function pageDriver() {
   const driver = new __WEBPACK_IMPORTED_MODULE_0_driver_js___default.a({
     allowClose: false,
-    opacity: 0.5,
-    onHighlightStarted: el => {
-      console.log("highlighting %o", el);
-    }
+    opacity: 0.5
   });
 
-  driver.defineSteps([{
-    element: "#source-homepage",
-    popover: {
-      title: "Source title",
-      description: "This is the homepage for all of <em>Source</em> teachings in the Library. Each of the volumes below contain chapters and some included questions too. And most contain the original audio so you can read along as you listen.<br><br>Click on the image to see the table of contents. The Way of Mastery teachings include&hellip;",
-      position: "bottom"
-    }
-  }, {
-    element: "[data-book='vol']",
-    popover: {
-      title: "Book Title",
-      description: "Book description",
-      position: "top"
-    }
-  }]);
+  driver.defineSteps([cmiPageTitle, acimPreface, acimText, acimWorkbook, acimManual]);
 
   driver.start();
 }
@@ -36269,61 +36489,10 @@ function pageDriver() {
 function pageNavigationDriver() {
   const driver = new __WEBPACK_IMPORTED_MODULE_0_driver_js___default.a({
     allowClose: false,
-    opacity: 0.5,
-    onReset: () => {
-      $("#bookmark-dropdown-menu").dropdown("hide");
-    }
+    opacity: 0.5
   });
-  driver.defineSteps([{
-    element: "#masthead-title",
-    popover: {
-      title: "Navigation and Features",
-      description: "Source is part of the Library of Christ Mind Teachings. On every page you can click here to display the Library's main page to see all available teachings.",
-      position: "bottom"
-    }
-  }, {
-    element: "#page-menu",
-    popover: {
-      title: "The Menu",
-      description: "This is the page menu, it will stick to the top when the page is scrolled (when the tour is over) so it is always available. The menu on other pages is similar but may contain additional features.",
-      position: "bottom"
-    }
-  }, {
-    element: ".bookmark-modal-open",
-    popover: {
-      title: "List Bookmarks",
-      description: "Display a list of bookmarks you have created and optionally filter by topic. You can quickly jump to any bookmark. Learn more about bookmarks in the documentation.",
-      position: "bottom"
-    }
-  }, {
-    element: ".search-modal-open",
-    popover: {
-      title: "Search Through All Books",
-      description: "Find topics of interest by searching through all Source books.",
-      position: "bottom"
-    }
-  }, {
-    element: "#help-menu",
-    popover: {
-      title: "Get Help and Learn About",
-      description: "Learn about the teaching and using the features of the site.",
-      position: "bottom"
-    }
-  }, {
-    element: ".login-menu-option",
-    popover: {
-      title: "Sign In/Sign Out",
-      description: "Create an account and sign in to the site. It's free and allows you to create bookmarks that you can share via Facebook and keep synchronized between devices.",
-      position: "left"
-    }
-  }, {
-    element: "[data-book='wot']",
-    popover: {
-      title: "Display Table of Contents",
-      description: "Click on any image to display and navigate to the volume contents.",
-      position: "left"
-    }
-  }]);
+
+  driver.defineSteps([cmiPageBanner, pageMenu, pageMenuBookmarkItem, pageMenuSearchItem, pageMenuHelpItem, pageMenuLoginItem, pageMenuTextContents]);
 
   driver.start();
 }
@@ -36332,94 +36501,33 @@ function transcriptDriver() {
   const driver = new __WEBPACK_IMPORTED_MODULE_0_driver_js___default.a({
     allowClose: false,
     opacity: 0.5
-    /*
-    onReset: () => {
-      $("#bookmark-dropdown-menu").dropdown("hide");
-    }
-    */
   });
 
-  driver.defineSteps([{
-    element: "#masthead-title",
-    popover: {
-      title: "Library of Christ Mind Teachings",
-      description: "This page is part of the Teachings of Christ Mind Library. Click this link to navigate to the Library's Home page.",
-      position: "bottom"
-    }
-  }, {
-    element: "#src-title",
-    popover: {
-      title: "Way of Mastery",
-      description: "This page comes from the Way of Mastery. Click this link to navigate to the Home page of the Way of Mastery.",
-      position: "bottom"
-    }
-  }, {
-    element: "#book-title",
-    popover: {
-      title: "Book Title",
-      description: "This identifies the book and chapter of the content on this page.",
-      position: "bottom"
-    }
-  }, {
-    element: "#bookmark-dropdown-menu",
-    popover: {
-      title: "Bookmarks",
-      description: "You can create a bookmark from highlighted text and associate the bookmark with one or more categories. Learn more about bookmarks by reading the documentation.",
-      position: "right"
-    }
-  }, {
-    element: ".search-modal-open",
-    popover: {
-      title: "Search Through All Books",
-      description: "Find topics of interest by searching through all Way of Mastery books.",
-      position: "bottom"
-    }
-  }, {
-    element: ".audio-player-toggle",
-    popover: {
-      title: "Listen to the Audio",
-      description: "Click the speaker icon to display the audio player and listen along as you read.",
-      position: "bottom"
-    }
-  }, {
-    element: ".toggle-paragraph-markers",
-    popover: {
-      title: "Show/Hide Paragraph Markers",
-      description: "Show or hide the markers that preceed each paragraph.",
-      position: "bottom"
-    }
-  }, {
-    element: ".top-of-page",
-    popover: {
-      title: "Go To Top of Page",
-      description: "Quickly jump to the top of the page.",
-      position: "bottom"
-    }
-  }, {
-    element: "#contents-modal-open",
-    popover: {
-      title: "Table of Contents",
-      description: "View the table of contents.",
-      position: "bottom"
-    }
-  }, {
-    element: "#about-dropdown-menu",
-    popover: {
-      title: "Get Help",
-      description: "Learn how to use features of the Library.",
-      position: "bottom"
-    }
-  }, {
-    element: ".login-menu-option",
-    popover: {
-      title: "Sign In/Sign Out",
-      description: "Create an account and sign in or sign out. When you sign in, bookmarks you create will be available on all devices you use to access the library.",
-      position: "bottom"
-    }
-  }]);
+  let transcriptDriverSteps = [];
 
-  //show bookmark menu
-  //$("#bookmark-dropdown-menu").dropdown("show");
+  transcriptDriverSteps.push(cmiTranscriptBanner);
+  transcriptDriverSteps.push(cmiTranscriptSourceTitle);
+  transcriptDriverSteps.push(cmiTranscriptBookTitle);
+  transcriptDriverSteps.push(transcriptMenuBookmarkItem);
+  transcriptDriverSteps.push(transcriptMenuSearchItem);
+
+  if (!$(".audio-player-toggle").hasClass("hide")) {
+    transcriptDriverSteps.push(transcriptMenuAudioItem);
+  }
+
+  transcriptDriverSteps.push(transcriptMenuParagraphMarkerItem);
+  transcriptDriverSteps.push(transcriptMenuPageTopItem);
+
+  if ($("#contents-modal-open").length > 0) {
+    transcriptDriverSteps.push(transcriptMenuContentsItem);
+    transcriptDriverSteps.push(transcriptMenuPreviousPageItem);
+    transcriptDriverSteps.push(transcriptMenuNextPageItem);
+  }
+
+  transcriptDriverSteps.push(transcriptMenuHelpItem);
+  transcriptDriverSteps.push(transcriptMenuLoginItem);
+
+  driver.defineSteps(transcriptDriverSteps);
   driver.start();
 }
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
@@ -37517,10 +37625,17 @@ $(document).ready(() => {
   __WEBPACK_IMPORTED_MODULE_10__modules_about_about__["a" /* default */].initialize();
 
   //load config file and do initializations that depend on a loaded config file
-  Object(__WEBPACK_IMPORTED_MODULE_2__modules_config_config__["f" /* loadConfig */])(Object(__WEBPACK_IMPORTED_MODULE_6__modules_contents_toc__["b" /* getBookId */])()).then(() => {
-    __WEBPACK_IMPORTED_MODULE_6__modules_contents_toc__["a" /* default */].initialize("transcript");
+  Object(__WEBPACK_IMPORTED_MODULE_2__modules_config_config__["f" /* loadConfig */])(Object(__WEBPACK_IMPORTED_MODULE_6__modules_contents_toc__["b" /* getBookId */])()).then(result => {
     __WEBPACK_IMPORTED_MODULE_4__modules_search_search__["a" /* default */].initialize();
-    __WEBPACK_IMPORTED_MODULE_7__modules_audio_audio__["a" /* default */].initialize();
+
+    /*
+      result of 0 indicates no contents config found
+      - toc, and audio depend on config file
+    */
+    if (result !== 0) {
+      __WEBPACK_IMPORTED_MODULE_6__modules_contents_toc__["a" /* default */].initialize("transcript");
+      __WEBPACK_IMPORTED_MODULE_7__modules_audio_audio__["a" /* default */].initialize();
+    }
     Object(__WEBPACK_IMPORTED_MODULE_1__modules_util_url__["d" /* showParagraph */])();
 
     //get pid of shared annotation and pass it to bookmark.initizalize

@@ -110,10 +110,17 @@ $(document).ready(() => {
 
   //load config file and do initializations that depend on a loaded config file
   loadConfig(getBookId())
-    .then(() => {
-      toc.initialize("transcript");
+    .then((result) => {
       search.initialize();
-      audio.initialize();
+
+      /*
+        result of 0 indicates no contents config found
+        - toc, and audio depend on config file
+      */
+      if (result !== 0) {
+        toc.initialize("transcript");
+        audio.initialize();
+      }
       showParagraph();
 
       //get pid of shared annotation and pass it to bookmark.initizalize
