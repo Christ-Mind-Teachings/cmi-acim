@@ -44,6 +44,9 @@ collections:
   manual:
     output: true
     title: "A Course in Miracles: Manual"
+  preface:
+    output: true
+    title: "Preface to the ACIM Sparkly Edition"
 
 defaults:
   - scope:
@@ -76,6 +79,16 @@ defaults:
       image-width: 612
       image-height: 792
       bid: "manual"
+  - scope:
+      path: ""
+      type: preface
+    values:
+      layout: transcript
+      book: "Preface"
+      image: "/public/img/acim/preface.jpg"
+      image-width: 612
+      image-height: 792
+      bid: "preface"
 
 exclude: [
   Gemfile, Gemfile.lock, package.json, package-lock.json, node_modules, webpack.config.js, src, project

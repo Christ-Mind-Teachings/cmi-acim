@@ -8,7 +8,7 @@ footer:
 
 <div id="page-contents" class="ui two cards">
   <div class="card">
-    <a data-book="preface" href="/text/preface/" class="image">
+    <a data-book="preface" href="/preface/preface/" class="image">
       <img src="/public/img/acim/preface.jpg">
     </a>
     <div class="content">
