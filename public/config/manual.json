@@ -3,7 +3,7 @@
   "base": "/manual",
   "image": "/public/img/acim/manual-toc.jpg",
   "title": "Manual for Teachers",
-  "page": [
+  "contents": [
     {
       "title": "Introduction",
       "url": "/chap01/"

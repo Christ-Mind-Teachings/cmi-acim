@@ -250,6 +250,7 @@ function getSelectedText(range, fromNode = document.body) {
 
   var selectedText = {
     type: "Annotation",
+    title: $("#book-title").text(),
     url: location.pathname,
     pid: range.startContainer.parentNode.id,
     id: uuid(),

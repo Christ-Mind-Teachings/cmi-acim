@@ -86,14 +86,14 @@ function renderWorkbookSection(sections, pidx, lesson) {
   generate toc html for Workbook
   Workbook is organized in part > section > pages
 */
-function makeWorkbookContents(parts) {
+function makeWorkbookContents(contents) {
   var lesson = {count: 0};
   return (`
     <div class="ui relaxed list">
-      ${parts.map((part, pidx) => `
+      ${contents.map((content, pidx) => `
         <div class="item"> 
           <div class="content">
-            ${part.section ? renderWorkbookSection(part.section, pidx, lesson) : "" } 
+            ${content.section ? renderWorkbookSection(content.section, pidx, lesson) : "" } 
           </div>
         </div>
       `).join("")}
@@ -157,36 +157,36 @@ function textNexPrev($el) {
 
   if (nextChapter === -1) {
     //disable 'next-page'
-    $(".next-page").addClass("disabled");
+    $("#next-page-menu-item").addClass("disabled");
   }
   else {
     //incase the control has been disabled
-    $(".next-page").removeClass("disabled");
+    $("#next-page-menu-item").removeClass("disabled");
     let nextSecid = nextChapter * 100 + nextSection;
 
     let nexthref = $(`a[data-secid="${nextSecid}"]`).attr("href");
     let nextText = $(`a[data-secid="${nextSecid}"]`).text();
 
     //set next tooltip and href
-    $("a.next-page > span").attr("data-tooltip", `${nextText}`);
-    $("a.next-page").attr("href", `${nexthref}`);
+    $("#next-page-menu-item > span").attr("data-tooltip", `${nextText}`);
+    $("#next-page-menu-item").attr("href", `${nexthref}`);
   }
 
   if (prevChapter === -1) {
     //disable 'prev-page'
-    $(".previous-page").addClass("disabled");
+    $("#previous-page-menu-item").addClass("disabled");
   }
   else {
     //incase the control has been disabled
-    $(".previous-page").removeClass("disabled");
+    $("#previous-page-menu-item").removeClass("disabled");
     let prevSecid = prevChapter * 100 + prevSection;
 
     let prevhref = $(`a[data-secid="${prevSecid}"]`).attr("href");
     let prevText = $(`a[data-secid="${prevSecid}"]`).text();
 
     //set prev tooltip and href
-    $("a.previous-page > span").attr("data-tooltip", `${prevText}`);
-    $("a.previous-page").attr("href", `${prevhref}`);
+    $("#previous-page-menu-item > span").attr("data-tooltip", `${prevText}`);
+    $("#previous-page-menu-item").attr("href", `${prevhref}`);
   }
 }
 
@@ -201,19 +201,19 @@ function workbookNextPrev($el) {
 
   //disable prev control
   if (lessonId === 1) {
-    $(".previous-page").addClass("disabled");
+    $("#previous-page-menu-item").addClass("disabled");
   }
   else {
-    $(".previous-page").removeClass("disabled");
+    $("#previous-page-menu-item").removeClass("disabled");
     prevId = lessonId - 1;
   }
 
   //disable next control
   if (lessonId === LAST_ID) {
-    $(".next-page").addClass("disabled");
+    $("#next-page-menu-item").addClass("disabled");
   }
   else {
-    $(".next-page").removeClass("disabled");
+    $("#next-page-menu-item").removeClass("disabled");
     nextId = lessonId + 1;
   }
 
@@ -222,8 +222,8 @@ function workbookNextPrev($el) {
     text = $(`a[data-lid="${prevId}"]`).text();
 
     //set prev tooltip and href
-    $("a.previous-page > span").attr("data-tooltip", `${text}`);
-    $("a.previous-page").attr("href", `${href}`);
+    $("#previous-page-menu-item > span").attr("data-tooltip", `${text}`);
+    $("#previous-page-menu-item").attr("href", `${href}`);
   }
 
   if (nextId > -1) {
@@ -231,8 +231,8 @@ function workbookNextPrev($el) {
     text = $(`a[data-lid="${nextId}"]`).text();
 
     //set prev tooltip and href
-    $("a.next-page > span").attr("data-tooltip", `${text}`);
-    $("a.next-page").attr("href", `${href}`);
+    $("#next-page-menu-item > span").attr("data-tooltip", `${text}`);
+    $("#next-page-menu-item").attr("href", `${href}`);
   }
 }
 
@@ -247,19 +247,19 @@ function manualNextPrev($el) {
 
   //disable prev control
   if (lessonId === 1) {
-    $(".previous-page").addClass("disabled");
+    $("#previous-page-menu-item").addClass("disabled");
   }
   else {
-    $(".previous-page").removeClass("disabled");
+    $("#previous-page-menu-item").removeClass("disabled");
     prevId = lessonId - 1;
   }
 
   //disable next control
   if (lessonId === LAST_ID) {
-    $(".next-page").addClass("disabled");
+    $("#next-page-menu-item").addClass("disabled");
   }
   else {
-    $(".next-page").removeClass("disabled");
+    $("#next-page-menu-item").removeClass("disabled");
     nextId = lessonId + 1;
   }
 
@@ -268,8 +268,8 @@ function manualNextPrev($el) {
     text = $(`a[data-lid="${prevId}"]`).text();
 
     //set prev tooltip and href
-    $("a.previous-page > span").attr("data-tooltip", `${text}`);
-    $("a.previous-page").attr("href", `${href}`);
+    $("#previous-page-menu-item > span").attr("data-tooltip", `${text}`);
+    $("#previous-page-menu-item").attr("href", `${href}`);
   }
 
   if (nextId > -1) {
@@ -277,8 +277,8 @@ function manualNextPrev($el) {
     text = $(`a[data-lid="${nextId}"]`).text();
 
     //set prev tooltip and href
-    $("a.next-page > span").attr("data-tooltip", `${text}`);
-    $("a.next-page").attr("href", `${href}`);
+    $("#next-page-menu-item > span").attr("data-tooltip", `${text}`);
+    $("#next-page-menu-item").attr("href", `${href}`);
   }
 }
 
@@ -329,10 +329,10 @@ function loadTOC() {
           $(".toc-list").html(makeTextContents(contents.contents));
           break;
         case "workbook":
-          $(".toc-list").html(makeWorkbookContents(contents.part));
+          $(".toc-list").html(makeWorkbookContents(contents.contents));
           break;
         case "manual":
-          $(".toc-list").html(makeManualContents(contents.base, contents.page));
+          $(".toc-list").html(makeManualContents(contents.base, contents.contents));
           break;
         default:
           $(".toc-list").html(makeContents(contents.contents));
@@ -397,10 +397,10 @@ export default {
                 $(".toc-list").html(makeTextContents(contents.contents));
                 break;
               case "workbook":
-                $(".toc-list").html(makeWorkbookContents(contents.part));
+                $(".toc-list").html(makeWorkbookContents(contents.contents));
                 break;
               case "manual":
-                $(".toc-list").html(makeManualContents(contents.base, contents.page));
+                $(".toc-list").html(makeManualContents(contents.base, contents.contents));
                 break;
               default:
                 $(".toc-list").html(makeContents(contents.contents));

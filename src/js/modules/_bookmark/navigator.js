@@ -93,6 +93,21 @@ function generateBookmark(actualPid, bkmk, topics) {
  `;
 }
 
+/*
+  returns the url for the first annotation of the arg bookmark
+*/
+function getBookmarkUrl(bookmark) {
+  let url = "";
+  for (let prop in bookmark) {
+    if (bookmark.hasOwnProperty(prop)) {
+      url = `${bookmark[prop][0].selectedText.url}?bkmk=${bookmark[prop][0].rangeStart}`;
+      break;
+    }
+  }
+
+  return url;
+}
+
 function getNextPageUrl(pos, pageList, filterList, bookmarks) {
   if (pos > pageList.length) {
     return Promise.resolve(null);
@@ -122,22 +137,15 @@ function getNextPageUrl(pos, pageList, filterList, bookmarks) {
     }
   }
 
-  return new Promise((resolve, reject) => {
-    //we found a bookmark
+  return new Promise((resolve) => {
     if (found) {
       let pageKey = pageList[pagePos];
-      getPageInfo(pageKey)
-        .then((info) => {
-          //convert from key to paragraph id
-          let paragraphId = (parseInt(pid, 10) - 1).toString(10);
-          let url = `${info.url}?bkmk=p${paragraphId}`;
-          resolve(url);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      let url = getBookmarkUrl(bookmarks[pageKey]);
+      //console.log("next url is %s", url);
+      resolve(url);
     }
     else {
+      //console.log("next url is null");
       resolve(null);
     }
   });
@@ -172,24 +180,15 @@ function getPrevPageUrl(pos, pageList, filterList, bookmarks) {
     }
   }
 
-  return new Promise((resolve, reject) => {
-    //we found a bookmark
+  return new Promise((resolve) => {
     if (found) {
       let pageKey = pageList[pagePos];
-      getPageInfo(pageKey)
-        .then((info) => {
-          //convert from key to paragraph id
-          let paragraphId = (parseInt(pid, 10) - 1).toString(10);
-          let url = `${info.url}?bkmk=p${paragraphId}`;
-          // console.log("getPrev() found: %o", bookmarks[pageList[pagePos]][pid]);
-          // console.log("url prev: %s", url);
-          resolve(url);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      let url = getBookmarkUrl(bookmarks[pageKey]);
+      //console.log("prev url is %s", url);
+      resolve(url);
     }
     else {
+      //console.log("prev url is null");
       resolve(null);
     }
   });
@@ -209,7 +208,7 @@ function getNextPrevUrl(pageKey, bookmarks, bmModal) {
     return urls;
   }
 
-  console.log("current page: %s", pageKey);
+  //console.log("current page: %s", pageKey);
   let nextPromise = getNextPageUrl(pos + 1, pages, bmModal["modal"].topics, bookmarks);
   let prevPromise = getPrevPageUrl(pos - 1, pages, bmModal["modal"].topics, bookmarks);
 
@@ -387,20 +386,20 @@ function bookmarkManager(actualPid) {
     //get previous and next url's
     getNextPrevUrl(pageKey, bmList, bmModal)
       .then((responses) => {
-        //console.log("next url: ", responses);
+        console.log("next/prev urls: ", responses);
 
         //set prev and next hrefs
         if (responses[0] !== null) {
-          $(".bookmark-navigator .previous-page").attr("href", responses[0]);
+          $(".bookmark-navigator .previous-page").attr({ "href": responses[0] });
         }
         else {
-          $(".bookmark-navigator .previous-page").addClass("inactive");
+          $(".bookmark-navigator .previous-page").addClass("inactive").removeAttr("href");
         }
         if (responses[1] !== null) {
-          $(".bookmark-navigator .next-page").attr("href", responses[1]);
+          $(".bookmark-navigator .next-page").attr({ "href": responses[1] });
         }
         else {
-          $(".bookmark-navigator .next-page").addClass("inactive");
+          $(".bookmark-navigator .next-page").addClass("inactive").removeAttr("href");
         }
 
         //identify current bookmark in navigator
@@ -423,6 +422,7 @@ function bookmarkManager(actualPid) {
     update: either "previous", or "next" depending on what click handler called the function
 */
 function updateNavigator(pid, update) {
+  console.log("updateNavigator, pid: %s, update: %s", pid, update);
   let bmList = store.get(`bmList_${transcript.getSourceId()}`);
   let bmModal = store.get(`bmModal_${transcript.getSourceId()}`);
   getCurrentBookmark(gPageKey, pid, bmList, bmModal, update);

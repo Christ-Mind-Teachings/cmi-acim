@@ -1818,6 +1818,8 @@ const bookIds = ["xxx", ...books];
 //list the chapters or parts that make up each book, set the first item to 'xxx'
 const preface = ["xxx", "preface"];
 
+const text = ["xxx", "chap0100", "chap0101", "chap0102", "chap0200", "chap0201", "chap0202", "chap0203", "chap0204", "chap0205", "chap0300", "chap0301", "chap0302", "chap0303", "chap0304", "chap0305", "chap0306", "chap0307", "chap0308", "chap0400", "chap0401", "chap0402", "chap0403", "chap0404", "chap0405", "chap0406", "chap0407", "chap0408", "chap0500", "chap0501", "chap0502", "chap0503", "chap0504", "chap0505", "chap0506", "chap0507", "chap0508", "chap0600", "chap0601", "chap0602", "chap0603", "chap0604", "chap0700", "chap0701", "chap0702", "chap0703", "chap0704", "chap0705", "chap0706", "chap0707", "chap0708", "chap0709", "chap0710", "chap0711", "chap0800", "chap0801", "chap0802", "chap0803", "chap0804", "chap0805", "chap0806", "chap0807", "chap0808", "chap0809", "chap0810", "chap0900", "chap0901", "chap0902", "chap0903", "chap0904", "chap0905", "chap0906", "chap0907", "chap0908", "chap0909", "chap0910", "chap1000", "chap1001", "chap1002", "chap1003", "chap1004", "chap1005", "chap1006", "chap1007", "chap1100", "chap1101", "chap1102", "chap1103", "chap1104", "chap1105", "chap1106", "chap1107", "chap1108", "chap1109", "chap1200", "chap1201", "chap1202", "chap1203", "chap1204", "chap1205", "chap1206", "chap1300", "chap1301", "chap1302", "chap1303", "chap1304", "chap1305", "chap1306", "chap1307", "chap1308", "chap1400", "chap1401", "chap1402", "chap1403", "chap1404", "chap1405", "chap1406", "chap1500", "chap1501", "chap1502", "chap1503", "chap1504", "chap1505", "chap1506", "chap1507", "chap1508", "chap1509", "chap1510", "chap1600", "chap1601", "chap1602", "chap1603", "chap1604", "chap1605", "chap1606", "chap1607", "chap1700", "chap1701", "chap1702", "chap1703", "chap1704", "chap1705", "chap1706", "chap1707", "chap1708", "chap1800", "chap1801", "chap1802", "chap1803", "chap1804", "chap1805", "chap1806", "chap1807", "chap1808", "chap1809", "chap1810", "chap1900", "chap1901", "chap1902", "chap1903", "chap1904", "chap1905", "chap1906", "chap1907", "chap1908", "chap1909", "chap1910", "chap1911", "chap2000", "chap2001", "chap2002", "chap2003", "chap2004", "chap2005", "chap2006", "chap2007", "chap2008", "chap2100", "chap2101", "chap2102", "chap2103", "chap2104", "chap2105", "chap2106", "chap2107", "chap2108", "chap2200", "chap2201", "chap2202", "chap2203", "chap2204", "chap2205", "chap2206", "chap2300", "chap2301", "chap2302", "chap2303", "chap2304", "chap2400", "chap2401", "chap2402", "chap2403", "chap2404", "chap2405", "chap2406", "chap2407", "chap2500", "chap2501", "chap2502", "chap2503", "chap2504", "chap2505", "chap2506", "chap2507", "chap2508", "chap2509", "chap2600", "chap2601", "chap2602", "chap2603", "chap2604", "chap2605", "chap2606", "chap2607", "chap2608", "chap2609", "chap2610", "chap2700", "chap2701", "chap2702", "chap2703", "chap2704", "chap2705", "chap2706", "chap2707", "chap2708", "chap2800", "chap2801", "chap2802", "chap2803", "chap2804", "chap2805", "chap2806", "chap2807", "chap2900", "chap2901", "chap2902", "chap2903", "chap2904", "chap2905", "chap2906", "chap2907", "chap2908", "chap2909", "chap3000", "chap3001", "chap3002", "chap3003", "chap3004", "chap3005", "chap3006", "chap3007", "chap3008", "chap3100", "chap3101", "chap3102", "chap3103", "chap3104", "chap3105", "chap3106", "chap3107"];
+
 const workbook = ["xxx", "introp1", "l001", "l002", "l003", "l004", "l005", "l006", "l007", "l008", "l009", "l010", "l011", "l012", "l013", "l014", "l015", "l016", "l017", "l018", "l019", "l020", "l021", "l022", "l023", "l024", "l025", "l026", "l027", "l028", "l029", "l030", "l031", "l032", "l033", "l034", "l035", "l036", "l037", "l038", "l039", "l040", "l041", "l042", "l043", "l044", "l045", "l046", "l047", "l048", "l049", "l050", "review1", "l051", "l052", "l053", "l054", "l055", "l056", "l057", "l058", "l059", "l060", "l061", "l062", "l063", "l064", "l065", "l066", "l067", "l068", "l069", "l070", "l071", "l072", "l073", "l074", "l075", "l076", "l077", "l078", "l079", "l080", "review2", "l081", "l082", "l083", "l084", "l085", "l086", "l087", "l088", "l089", "l090", "l091", "l092", "l093", "l094", "l095", "l096", "l097", "l098", "l099", "l100", "l101", "l102", "l103", "l104", "l105", "l106", "l107", "l108", "l109", "l110", "review3", "l111", "l112", "l113", "l114", "l115", "l116", "l117", "l118", "l119", "l120", "l121", "l122", "l123", "l124", "l125", "l126", "l127", "l128", "l129", "l130", "l131", "l132", "l133", "l134", "l135", "l136", "l137", "l138", "l139", "l140", "review4", "l141", "l142", "l143", "l144", "l145", "l146", "l147", "l148", "l149", "l150", "l151", "l152", "l153", "l154", "l155", "l156", "l157", "l158", "l159", "l160", "l161", "l162", "l163", "l164", "l165", "l166", "l167", "l168", "l169", "l170", "review5", "l171", "l172", "l173", "l174", "l175", "l176", "l177", "l178", "l179", "l180", "intro181", "l181", "l182", "l183", "l184", "l185", "l186", "l187", "l188", "l189", "l190", "l191", "l192", "l193", "l194", "l195", "l196", "l197", "l198", "l199", "l200", "review6", "l201", "l202", "l203", "l204", "l205", "l206", "l207", "l208", "l209", "l210", "l211", "l212", "l213", "l214", "l215", "l216", "l217", "l218", "l219", "l220", "introp2", "forgiveness", "l221", "l222", "l223", "l224", "l225", "l226", "l227", "l228", "l229", "l230", "salvation", "l231", "l232", "l233", "l234", "l235", "l236", "l237", "l238", "l239", "l240", "world", "l241", "l242", "l243", "l244", "l245", "l246", "l247", "l248", "l249", "l250", "sin", "l251", "l252", "l253", "l254", "l255", "l256", "l257", "l258", "l259", "l260", "body", "l261", "l262", "l263", "l264", "l265", "l266", "l267", "l268", "l269", "l270", "christ", "l271", "l272", "l273", "l274", "l275", "l276", "l277", "l278", "l279", "l280", "holyspirit", "l281", "l282", "l283", "l284", "l285", "l286", "l287", "l288", "l289", "l290", "realworld", "l291", "l292", "l293", "l294", "l295", "l296", "l297", "l298", "l299", "l300", "secondcoming", "l301", "l302", "l303", "l304", "l305", "l306", "l307", "l308", "l309", "l310", "lastjudgement", "l311", "l312", "l313", "l314", "l315", "l316", "l317", "l318", "l319", "l320", "creation", "l321", "l322", "l323", "l324", "l325", "l326", "l327", "l328", "l329", "l330", "ego", "l331", "l332", "l333", "l334", "l335", "l336", "l337", "l338", "l339", "l340", "miracle", "l341", "l342", "l343", "l344", "l345", "l346", "l347", "l348", "l349", "l350", "whatami", "l351", "l352", "l353", "l354", "l355", "l356", "l357", "l358", "l359", "l360", "final", "l361", "epilog"];
 
 const manual = ["xxx", "chap01", "chap02", "chap03", "chap04", "chap05", "chap06", "chap07", "chap08", "chap09", "chap10", "chap11", "chap12", "chap13", "chap14", "chap15", "chap16", "chap17", "chap18", "chap19", "chap20", "chap21", "chap22", "chap23", "chap24", "chap25", "chap26", "chap27", "chap28", "chap29", "chap30", "chap31"];
@@ -1828,13 +1830,11 @@ const manual = ["xxx", "chap01", "chap02", "chap03", "chap04", "chap05", "chap06
   CC is the chapter Number and SS is the Section Number. The Introduction is 00.
 */
 function getUnitId(bid, unit, section) {
-  let chapter = 0;
   switch (bid) {
     case "preface":
       return preface.indexOf(unit);
     case "text":
-      chapter = parseInt(section.substr(4), 10);
-      return chapter;
+      return text.indexOf(section);
     case "workbook":
       return workbook.indexOf(unit);
     case "manual":
@@ -2022,9 +2022,9 @@ function getUrl(key) {
 
   switch (decodedKey.bookId) {
     case "text":
-      unit = sprintf("%04s", decodedKey.uid);
-      chapter = unit.substr(0, 2);
-      unit = `${chapter}/chap${unit}`;
+      unit = text[decodedKey.uid];
+      chapter = unit.substr(4, 2);
+      unit = `${chapter}/${unit}`;
       break;
     case "workbook":
       unit = workbook[decodedKey.uid];
@@ -2055,7 +2055,6 @@ module.exports = {
   getUrl: getUrl
 };
 
-/*
 function testIt(what, url) {
   let parts = splitUrl(url);
 
@@ -2074,6 +2073,7 @@ function testIt(what, url) {
   console.log("-------------------------");
 }
 
+/*
 let textUrl = "/text/02/chap0204/";
 let prefaceUrl = "/preface/preface/";
 let workbookUrl = "/workbook/l156/";
@@ -4553,13 +4553,42 @@ function getReservation(url) {
 }
 
 /*
-  Given a page key, return data from a config file
+  Needed for workbook.json and text.json since they have multiple levels
+  workbook: content > section > page
+  text: contents > sections
 
-  returns: book title, page title, url and optionally subtitle.
+  Flatten config file so we can use key.uid to lookup title and url for a given key
+  This is necessary for config files that contain more than one level.
+*/
+function flatten(data) {
+  let flat = [];
+  if (data.bid === "workbook") {
+    for (let content of data.contents) {
+      for (let section of content.section) {
+        for (let page of section.page) {
+          flat.push(page);
+        }
+      }
+    }
+  } else if (data.bid === "text") {
+    for (let content of data.contents) {
+      for (let section of content.sections) {
+        flat.push(section);
+      }
+    }
+  }
+  return flat;
+}
+
+/*
+  Given a page key, return data from a config file
+  returns: book title, page title, url.
 
   args:
     pageKey: a key uniuely identifying a transcript page
     data: optional, data that will be added to the result, used for convenience
+
+      data is passed when building a list of bookmarks for the bookmark modal
 */
 function getPageInfo(pageKey, data = false) {
   let decodedKey = transcript.decodeKey(pageKey);
@@ -4575,16 +4604,42 @@ function getPageInfo(pageKey, data = false) {
     getConfig(decodedKey.bookId, false).then(data => {
       info.bookTitle = data.title;
 
-      if (decodedKey.hasQuestions) {
-        info.title = data.contents[decodedKey.uid].title;
-        info.subTitle = data.contents[decodedKey.uid].questions[decodedKey.qid].title;
-        info.url = data.contents[decodedKey.uid].questions[decodedKey.qid].url;
+      //this will be a bookmark and we can get the title and from the
+      //annotation
+      if (info.data) {
+        for (let prop in info.data) {
+          if (info.data.hasOwnProperty(prop)) {
+            //console.log("info.data prop: %s", prop);
+            //console.log(info.data[prop][0].selectedText);
+            info.title = info.data[prop][0].selectedText.title;
+            info.url = info.data[prop][0].selectedText.url;
+            break;
+          }
+        }
+        resolve(info);
+        return;
       } else {
-        info.title = data.contents[decodedKey.uid].title;
-        info.url = data.contents[decodedKey.uid].url;
-      }
+        let flat = [];
 
-      resolve(info);
+        switch (decodedKey.bookId) {
+          case "workbook":
+          case "text":
+            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
+            if (!flat) {
+              flat = flatten(data);
+              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
+            }
+            info.title = flat[decodedKey.uid].title;
+            info.url = `/${decodedKey.bookId}/${flat[decodedKey.uid].url}`;
+            break;
+          default:
+            info.title = data.contents[decodedKey.uid].title;
+            info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
+            break;
+        }
+
+        resolve(info);
+      }
     }).catch(error => {
       reject(error);
     });
@@ -10538,6 +10593,7 @@ function getSelectedText(range, fromNode = document.body) {
 
   var selectedText = {
     type: "Annotation",
+    title: $("#book-title").text(),
     url: location.pathname,
     pid: range.startContainer.parentNode.id,
     id: uuid(),
@@ -33912,6 +33968,21 @@ function generateBookmark(actualPid, bkmk, topics) {
  `;
 }
 
+/*
+  returns the url for the first annotation of the arg bookmark
+*/
+function getBookmarkUrl(bookmark) {
+  let url = "";
+  for (let prop in bookmark) {
+    if (bookmark.hasOwnProperty(prop)) {
+      url = `${bookmark[prop][0].selectedText.url}?bkmk=${bookmark[prop][0].rangeStart}`;
+      break;
+    }
+  }
+
+  return url;
+}
+
 function getNextPageUrl(pos, pageList, filterList, bookmarks) {
   if (pos > pageList.length) {
     return Promise.resolve(null);
@@ -33940,19 +34011,14 @@ function getNextPageUrl(pos, pageList, filterList, bookmarks) {
     }
   }
 
-  return new Promise((resolve, reject) => {
-    //we found a bookmark
+  return new Promise(resolve => {
     if (found) {
       let pageKey = pageList[pagePos];
-      Object(__WEBPACK_IMPORTED_MODULE_0__config_config__["d" /* getPageInfo */])(pageKey).then(info => {
-        //convert from key to paragraph id
-        let paragraphId = (parseInt(pid, 10) - 1).toString(10);
-        let url = `${info.url}?bkmk=p${paragraphId}`;
-        resolve(url);
-      }).catch(err => {
-        console.error(err);
-      });
+      let url = getBookmarkUrl(bookmarks[pageKey]);
+      //console.log("next url is %s", url);
+      resolve(url);
     } else {
+      //console.log("next url is null");
       resolve(null);
     }
   });
@@ -33986,21 +34052,14 @@ function getPrevPageUrl(pos, pageList, filterList, bookmarks) {
     }
   }
 
-  return new Promise((resolve, reject) => {
-    //we found a bookmark
+  return new Promise(resolve => {
     if (found) {
       let pageKey = pageList[pagePos];
-      Object(__WEBPACK_IMPORTED_MODULE_0__config_config__["d" /* getPageInfo */])(pageKey).then(info => {
-        //convert from key to paragraph id
-        let paragraphId = (parseInt(pid, 10) - 1).toString(10);
-        let url = `${info.url}?bkmk=p${paragraphId}`;
-        // console.log("getPrev() found: %o", bookmarks[pageList[pagePos]][pid]);
-        // console.log("url prev: %s", url);
-        resolve(url);
-      }).catch(err => {
-        console.error(err);
-      });
+      let url = getBookmarkUrl(bookmarks[pageKey]);
+      //console.log("prev url is %s", url);
+      resolve(url);
     } else {
+      //console.log("prev url is null");
       resolve(null);
     }
   });
@@ -34020,7 +34079,7 @@ function getNextPrevUrl(pageKey, bookmarks, bmModal) {
     return urls;
   }
 
-  console.log("current page: %s", pageKey);
+  //console.log("current page: %s", pageKey);
   let nextPromise = getNextPageUrl(pos + 1, pages, bmModal["modal"].topics, bookmarks);
   let prevPromise = getPrevPageUrl(pos - 1, pages, bmModal["modal"].topics, bookmarks);
 
@@ -34193,18 +34252,18 @@ function bookmarkManager(actualPid) {
 
     //get previous and next url's
     getNextPrevUrl(pageKey, bmList, bmModal).then(responses => {
-      //console.log("next url: ", responses);
+      console.log("next/prev urls: ", responses);
 
       //set prev and next hrefs
       if (responses[0] !== null) {
-        $(".bookmark-navigator .previous-page").attr("href", responses[0]);
+        $(".bookmark-navigator .previous-page").attr({ "href": responses[0] });
       } else {
-        $(".bookmark-navigator .previous-page").addClass("inactive");
+        $(".bookmark-navigator .previous-page").addClass("inactive").removeAttr("href");
       }
       if (responses[1] !== null) {
-        $(".bookmark-navigator .next-page").attr("href", responses[1]);
+        $(".bookmark-navigator .next-page").attr({ "href": responses[1] });
       } else {
-        $(".bookmark-navigator .next-page").addClass("inactive");
+        $(".bookmark-navigator .next-page").addClass("inactive").removeAttr("href");
       }
 
       //identify current bookmark in navigator
@@ -34225,6 +34284,7 @@ function bookmarkManager(actualPid) {
     update: either "previous", or "next" depending on what click handler called the function
 */
 function updateNavigator(pid, update) {
+  console.log("updateNavigator, pid: %s, update: %s", pid, update);
   let bmList = __WEBPACK_IMPORTED_MODULE_3_store___default.a.get(`bmList_${transcript.getSourceId()}`);
   let bmModal = __WEBPACK_IMPORTED_MODULE_3_store___default.a.get(`bmModal_${transcript.getSourceId()}`);
   getCurrentBookmark(gPageKey, pid, bmList, bmModal, update);
@@ -34635,7 +34695,7 @@ function generateParagraphList(pid, bkmk, url, pTopicList) {
   `;
 }
 
-function generateBookmarksForPage(bookmarks, url) {
+function generateBookmarksForPage(bookmarks, url, bookId) {
   let html = "";
 
   //loop over all paragraphs containing bookmarks
@@ -34660,7 +34720,7 @@ function generatePageTitle(page) {
   return title;
 }
 
-function generateBookmarksForBookPages(pages) {
+function generateBookmarksForBookPages(pages, bookId) {
   return `
     ${pages.map(page => `
       <div class="item"> <!-- item: ${page.title} -->
@@ -34670,7 +34730,7 @@ function generateBookmarksForBookPages(pages) {
             ${generatePageTitle(page)}
           </div>
           <div class="list">
-            ${generateBookmarksForPage(page.bookmarks, page.url)}
+            ${generateBookmarksForPage(page.bookmarks, page.url, bookId)}
           </div>
         </div>
       </div>
@@ -34711,7 +34771,7 @@ function generateBookmarkList(books) {
             ${book.bookTitle}
           </div>
           <div id="${book.bookId}-list" class="hide-bookmarks list">
-            ${generateBookmarksForBookPages(book.pages)}
+            ${generateBookmarksForBookPages(book.pages, book.bookId)}
           </div>
         </div>
       </div> <!-- item: ${book.bookId} -->
@@ -35914,14 +35974,14 @@ function renderWorkbookSection(sections, pidx, lesson) {
   generate toc html for Workbook
   Workbook is organized in part > section > pages
 */
-function makeWorkbookContents(parts) {
+function makeWorkbookContents(contents) {
   var lesson = { count: 0 };
   return `
     <div class="ui relaxed list">
-      ${parts.map((part, pidx) => `
+      ${contents.map((content, pidx) => `
         <div class="item"> 
           <div class="content">
-            ${part.section ? renderWorkbookSection(part.section, pidx, lesson) : ""} 
+            ${content.section ? renderWorkbookSection(content.section, pidx, lesson) : ""} 
           </div>
         </div>
       `).join("")}
@@ -35982,34 +36042,34 @@ function textNexPrev($el) {
 
   if (nextChapter === -1) {
     //disable 'next-page'
-    $(".next-page").addClass("disabled");
+    $("#next-page-menu-item").addClass("disabled");
   } else {
     //incase the control has been disabled
-    $(".next-page").removeClass("disabled");
+    $("#next-page-menu-item").removeClass("disabled");
     let nextSecid = nextChapter * 100 + nextSection;
 
     let nexthref = $(`a[data-secid="${nextSecid}"]`).attr("href");
     let nextText = $(`a[data-secid="${nextSecid}"]`).text();
 
     //set next tooltip and href
-    $("a.next-page > span").attr("data-tooltip", `${nextText}`);
-    $("a.next-page").attr("href", `${nexthref}`);
+    $("#next-page-menu-item > span").attr("data-tooltip", `${nextText}`);
+    $("#next-page-menu-item").attr("href", `${nexthref}`);
   }
 
   if (prevChapter === -1) {
     //disable 'prev-page'
-    $(".previous-page").addClass("disabled");
+    $("#previous-page-menu-item").addClass("disabled");
   } else {
     //incase the control has been disabled
-    $(".previous-page").removeClass("disabled");
+    $("#previous-page-menu-item").removeClass("disabled");
     let prevSecid = prevChapter * 100 + prevSection;
 
     let prevhref = $(`a[data-secid="${prevSecid}"]`).attr("href");
     let prevText = $(`a[data-secid="${prevSecid}"]`).text();
 
     //set prev tooltip and href
-    $("a.previous-page > span").attr("data-tooltip", `${prevText}`);
-    $("a.previous-page").attr("href", `${prevhref}`);
+    $("#previous-page-menu-item > span").attr("data-tooltip", `${prevText}`);
+    $("#previous-page-menu-item").attr("href", `${prevhref}`);
   }
 }
 
@@ -36027,17 +36087,17 @@ function workbookNextPrev($el) {
 
   //disable prev control
   if (lessonId === 1) {
-    $(".previous-page").addClass("disabled");
+    $("#previous-page-menu-item").addClass("disabled");
   } else {
-    $(".previous-page").removeClass("disabled");
+    $("#previous-page-menu-item").removeClass("disabled");
     prevId = lessonId - 1;
   }
 
   //disable next control
   if (lessonId === LAST_ID) {
-    $(".next-page").addClass("disabled");
+    $("#next-page-menu-item").addClass("disabled");
   } else {
-    $(".next-page").removeClass("disabled");
+    $("#next-page-menu-item").removeClass("disabled");
     nextId = lessonId + 1;
   }
 
@@ -36046,8 +36106,8 @@ function workbookNextPrev($el) {
     text = $(`a[data-lid="${prevId}"]`).text();
 
     //set prev tooltip and href
-    $("a.previous-page > span").attr("data-tooltip", `${text}`);
-    $("a.previous-page").attr("href", `${href}`);
+    $("#previous-page-menu-item > span").attr("data-tooltip", `${text}`);
+    $("#previous-page-menu-item").attr("href", `${href}`);
   }
 
   if (nextId > -1) {
@@ -36055,8 +36115,8 @@ function workbookNextPrev($el) {
     text = $(`a[data-lid="${nextId}"]`).text();
 
     //set prev tooltip and href
-    $("a.next-page > span").attr("data-tooltip", `${text}`);
-    $("a.next-page").attr("href", `${href}`);
+    $("#next-page-menu-item > span").attr("data-tooltip", `${text}`);
+    $("#next-page-menu-item").attr("href", `${href}`);
   }
 }
 
@@ -36074,17 +36134,17 @@ function manualNextPrev($el) {
 
   //disable prev control
   if (lessonId === 1) {
-    $(".previous-page").addClass("disabled");
+    $("#previous-page-menu-item").addClass("disabled");
   } else {
-    $(".previous-page").removeClass("disabled");
+    $("#previous-page-menu-item").removeClass("disabled");
     prevId = lessonId - 1;
   }
 
   //disable next control
   if (lessonId === LAST_ID) {
-    $(".next-page").addClass("disabled");
+    $("#next-page-menu-item").addClass("disabled");
   } else {
-    $(".next-page").removeClass("disabled");
+    $("#next-page-menu-item").removeClass("disabled");
     nextId = lessonId + 1;
   }
 
@@ -36093,8 +36153,8 @@ function manualNextPrev($el) {
     text = $(`a[data-lid="${prevId}"]`).text();
 
     //set prev tooltip and href
-    $("a.previous-page > span").attr("data-tooltip", `${text}`);
-    $("a.previous-page").attr("href", `${href}`);
+    $("#previous-page-menu-item > span").attr("data-tooltip", `${text}`);
+    $("#previous-page-menu-item").attr("href", `${href}`);
   }
 
   if (nextId > -1) {
@@ -36102,8 +36162,8 @@ function manualNextPrev($el) {
     text = $(`a[data-lid="${nextId}"]`).text();
 
     //set prev tooltip and href
-    $("a.next-page > span").attr("data-tooltip", `${text}`);
-    $("a.next-page").attr("href", `${href}`);
+    $("#next-page-menu-item > span").attr("data-tooltip", `${text}`);
+    $("#next-page-menu-item").attr("href", `${href}`);
   }
 }
 
@@ -36153,10 +36213,10 @@ function loadTOC() {
         $(".toc-list").html(makeTextContents(contents.contents));
         break;
       case "workbook":
-        $(".toc-list").html(makeWorkbookContents(contents.part));
+        $(".toc-list").html(makeWorkbookContents(contents.contents));
         break;
       case "manual":
-        $(".toc-list").html(makeManualContents(contents.base, contents.page));
+        $(".toc-list").html(makeManualContents(contents.base, contents.contents));
         break;
       default:
         $(".toc-list").html(makeContents(contents.contents));
@@ -36219,10 +36279,10 @@ function getBookId() {
               $(".toc-list").html(makeTextContents(contents.contents));
               break;
             case "workbook":
-              $(".toc-list").html(makeWorkbookContents(contents.part));
+              $(".toc-list").html(makeWorkbookContents(contents.contents));
               break;
             case "manual":
-              $(".toc-list").html(makeManualContents(contents.base, contents.page));
+              $(".toc-list").html(makeManualContents(contents.base, contents.contents));
               break;
             default:
               $(".toc-list").html(makeContents(contents.contents));

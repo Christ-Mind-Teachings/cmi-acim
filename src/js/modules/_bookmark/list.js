@@ -119,7 +119,7 @@ function generateParagraphList(pid, bkmk, url, pTopicList) {
   `;
 }
 
-function generateBookmarksForPage(bookmarks, url) {
+function generateBookmarksForPage(bookmarks, url, bookId) {
   let html = "";
 
   //loop over all paragraphs containing bookmarks
@@ -144,7 +144,7 @@ function generatePageTitle(page) {
   return title;
 }
 
-function generateBookmarksForBookPages(pages) {
+function generateBookmarksForBookPages(pages, bookId) {
   return `
     ${pages.map((page) => `
       <div class="item"> <!-- item: ${page.title} -->
@@ -154,7 +154,7 @@ function generateBookmarksForBookPages(pages) {
             ${generatePageTitle(page)}
           </div>
           <div class="list">
-            ${generateBookmarksForPage(page.bookmarks, page.url)}
+            ${generateBookmarksForPage(page.bookmarks, page.url, bookId)}
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@ function generateBookmarkList(books) {
             ${book.bookTitle}
           </div>
           <div id="${book.bookId}-list" class="hide-bookmarks list">
-            ${generateBookmarksForBookPages(book.pages)}
+            ${generateBookmarksForBookPages(book.pages, book.bookId)}
           </div>
         </div>
       </div> <!-- item: ${book.bookId} -->

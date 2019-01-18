@@ -2,7 +2,7 @@
   "bid": "workbook",
   "title": "ACIM Workbook",
   "image": "/public/img/acim/workbook-toc.jpg",
-  "part": [
+  "contents": [
     {
       "pid": "intro",
       "title": "Workbook Introduction",

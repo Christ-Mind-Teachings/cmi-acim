@@ -207,13 +207,43 @@ export function getReservation(url) {
 }
 
 /*
-  Given a page key, return data from a config file
+  Needed for workbook.json and text.json since they have multiple levels
+  workbook: content > section > page
+  text: contents > sections
 
-  returns: book title, page title, url and optionally subtitle.
+  Flatten config file so we can use key.uid to lookup title and url for a given key
+  This is necessary for config files that contain more than one level.
+*/
+function flatten(data) {
+  let flat = [];
+  if (data.bid === "workbook") {
+    for (let content of data.contents) {
+      for (let section of content.section) {
+        for (let page of section.page) {
+          flat.push(page);
+        }
+      }
+    }
+  }
+  else if (data.bid === "text") {
+    for (let content of data.contents) {
+      for (let section of content.sections) {
+        flat.push(section);
+      }
+    }
+  }
+  return flat;
+}
+
+/*
+  Given a page key, return data from a config file
+  returns: book title, page title, url.
 
   args:
     pageKey: a key uniuely identifying a transcript page
     data: optional, data that will be added to the result, used for convenience
+
+      data is passed when building a list of bookmarks for the bookmark modal
 */
 export function getPageInfo(pageKey, data = false) {
   let decodedKey = transcript.decodeKey(pageKey);
@@ -230,17 +260,43 @@ export function getPageInfo(pageKey, data = false) {
       .then((data) => {
         info.bookTitle = data.title;
 
-        if (decodedKey.hasQuestions) {
-          info.title = data.contents[decodedKey.uid].title;
-          info.subTitle = data.contents[decodedKey.uid].questions[decodedKey.qid].title;
-          info.url = data.contents[decodedKey.uid].questions[decodedKey.qid].url;
+        //this will be a bookmark and we can get the title and from the
+        //annotation
+        if (info.data) {
+          for (let prop in info.data) {
+            if (info.data.hasOwnProperty(prop)) {
+              //console.log("info.data prop: %s", prop);
+              //console.log(info.data[prop][0].selectedText);
+              info.title = info.data[prop][0].selectedText.title;
+              info.url = info.data[prop][0].selectedText.url;
+              break;
+            }
+          }
+          resolve(info);
+          return;
         }
         else {
-          info.title = data.contents[decodedKey.uid].title;
-          info.url = data.contents[decodedKey.uid].url;
-        }
+          let flat = [];
 
-        resolve(info);
+          switch(decodedKey.bookId) {
+            case "workbook":
+            case "text":
+              flat = store.get(`${decodedKey.bookId}-flat`);
+              if (!flat) {
+                flat = flatten(data);
+                store.set(`${decodedKey.bookId}-flat`, flat);
+              }
+              info.title = flat[decodedKey.uid].title;
+              info.url = `/${decodedKey.bookId}/${flat[decodedKey.uid].url}`;
+              break;
+            default:
+              info.title = data.contents[decodedKey.uid].title;
+              info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
+              break;
+          }
+
+          resolve(info);
+        }
       })
       .catch((error) => {
         reject(error);
