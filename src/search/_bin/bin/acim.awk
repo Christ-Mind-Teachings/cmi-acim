@@ -5,44 +5,29 @@
 # return 1 if we want to discard the paragraph
 #
 function discardParagraph(p) {
-  if (n = match(p,/[Yy]es/) > 0) {
+  # a reveiw lesson link
+  if (n = match(p,/^\[\*/) > 0) {
     return 1
   }
-  if (n = match(p,/^[Aa]men/) > 0) {
+  # no review lessn 'return to review' link
+  if (n = match(p,/^<a/) > 0) {
     return 1
   }
-  if (n = match(p,/[Nn]ow.*we.*begin\.$/) > 0) {
+  if (n = match(p,/and/i) > 0) {
     return 1
   }
-  if (n = match(p,/^[Nn]o$/) > 0) {
+  if (n = match(p,/for example/i) > 0) {
     return 1
   }
-  if (n = match(p,/[Mm]m/) > 0) {
+  if (n = match(p,/on the hour/i) > 0) {
     return 1
   }
-  if (n = match(p,/[Th]ank you/) > 0) {
+  if (n = match(p,/on the half hour/i) > 0) {
     return 1
   }
-  if (n = match(p,/[Ii]ndeed/) > 0) {
+  if (n = match(p,/for morning and evening review/i) > 0) {
     return 1
   }
-  if (n = match(p,/[Nn]o.*questions/) > 0) {
-    return 1
-  }
-  if (n = match(p,/[Aa]udience/) > 0) {
-    return 1
-  }
-  if (n = match(p,/how.*you.*doing/) > 0) {
-    return 1
-  }
-  # one line paragraph contain the word 'laughter'
-  if ((n = match(p,/[Ll]aughter/)) > 0) {
-    return 1
-  }
-  if ((n = match(p,/[Yy]es it does/)) > 0) {
-    return 1
-  }
-
   return 0
 }
 
@@ -78,6 +63,14 @@ $1 ~ /##/ {
 # a markdown class designation
 /^{:/ {
   omit = 1
+  next
+}
+/^<div/ || /^<\/div/ {
+  # found in acim study group transcripts
+  next
+}
+/^\[\^/ {
+  # a footnote reference
   next
 }
 /^$/ || /^>$/ || /^>\s*$/ {
@@ -129,8 +122,12 @@ $1 ~ /##/ {
     }
     # remove \%u200a
     gsub(/ /, "", text)
+    # remove \%u2013
+    gsub(/–/, "", text)
     # remove leading space
     gsub(/^ */, "", text)
+    # remove leading numbers
+    gsub(/^[0-9]*/, "", text)
     # collapse two spaces into one
     gsub(/  */," ",text)
     # remove underscores - text bracketed by __xxx__ are bolded by markdown

@@ -1,16 +1,5 @@
 ---
 title: What are the Characteristics of God's Teachers?
-toc:
--   Trust
--   Honesty
--   Tolerance
--   Gentleness
--   Joy
--   Defenselessness
--   Generosity
--   Patience
--   Faithfulness
--   Openmindedness
 ---
 
 The surface traits of God’s teachers are not at all alike. They do not
@@ -31,7 +20,6 @@ time it can be said that the advanced teachers of God have the following
 characteristics:
 
 ## 1. **TRUST**
-{: #trust}
 
 This is the foundation on which their ability to fulfill their function
 rests. Perception is a result of learning. In fact, perception is
@@ -123,7 +111,6 @@ to change tranquillity for something more desirable? What could be more
 desirable than this?
 
 ## 2. **HONESTY**
-{: #honesty}
 
 All other traits of God’s teachers rest on trust. Once that has been
 achieved the others cannot fail to follow. Only the trusting can afford
@@ -150,7 +137,6 @@ succeed? They choose in perfect honesty, sure of their choice
 themselves.
 
 ## 3. **TOLERANCE**
-{: #tolerance}
 
 God’s teachers do not judge. To judge is to be dishonest, for to judge is
 to assume a position you do not have. Judgement without self-deception
@@ -164,7 +150,6 @@ who is there who stands apart? Judgement destroys honesty and shatters
 trust. No teacher of God can judge and hope to learn.
 
 ## 4. **GENTLENESS**
-{: #gentleness}
 
 Harm is impossible for God’s teachers. They can neither harm nor be
 harmed. Harm is the outcome of judgement. It is the dishonest act that
@@ -191,7 +176,6 @@ Creator. Thus did they join their thoughts with Him Who is their Source.
 And so their will, which always was His Own, is free to be Itself.
 
 ## 5. **JOY**
-{: #joy}
 
 Joy is the inevitable result of gentleness. Gentleness means that fear
 is now impossible, and what could come to interfere with joy? The open
@@ -206,7 +190,6 @@ them in thanks as well. His need of them is just as great as theirs of
 Him. How joyous it is to share the purpose of salvation!
 
 ## 6. **DEFENSELESSNESS**
-{: #defenselessness}
 
 God’s teachers have learned how to be simple. They have no dreams
 that need defense against the truth. They do not try to make themselves.
@@ -221,7 +204,6 @@ It is not danger that comes when defenses are laid down. It is safety.
 It is peace. It is joy. And it is God.
 
 ## 7. **GENEROSITY**
-{: #generosity}
 
 The term generosity has special meaning to the teacher of God. It is not
 the usual meaning of the word; in fact, it is a meaning that must be
@@ -249,7 +231,6 @@ These are the things that belong to him. These he can give away in true
 generosity, protecting them forever for himself.
 
 ## 8. **PATIENCE**
-{: #patience}
 
 Those who are certain of the outcome can afford to wait, and wait
 without anxiety. Patience is natural to the teacher of God. All he sees
@@ -264,7 +245,6 @@ those who trust. Sure of the ultimate interpretation of all things in
 time, no outcome already seen or yet to come can cause them fear.
 
 ## 9. **FAITHFULNESS**
-{: #faithfulness}
 
 The extent of the teacher of God’s faithfulness is the measure of his
 advancement in the curriculum. Does he still select some aspects of his
@@ -290,7 +270,6 @@ finds. And having found, it rests in quiet certainty on That alone to
 which all faithfulness is due.
 
 ## 10. **OPENMINDEDNESS**
-{: #openmindedness}
 
 The centrality of openmindedness, perhaps the last of the attributes the
 teacher of God acquires, is easily understood when its relation to

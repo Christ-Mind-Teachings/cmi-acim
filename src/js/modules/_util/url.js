@@ -1,5 +1,8 @@
 import scroll from "scroll-into-view";
 
+//timeout interval before calling scroll
+const INTERVAL = 250;
+
 // get query string from window.location unless the arg 'qString' is not
 // null, in that case it represents the query string
 function getQueryString(key, qString) {
@@ -22,6 +25,16 @@ function getQueryString(key, qString) {
   return null;
 }
 
+function scrollComplete(message, type) {
+  console.log(`${message}: ${type}`);
+}
+
+function scrollIntoView(id, caller) {
+  scroll(document.getElementById(id), {align: {top: 0.2}}, (type) => {
+    scrollComplete(`scroll from url.js ${caller}(${id})`, type);
+  });
+}
+
 /*
   Check for url query string requesting to scroll given paragraph into view
   Syntax: ?v=pid, example: ?v=p20
@@ -31,7 +44,7 @@ function getQueryString(key, qString) {
 export function showParagraph() {
   let pId = getQueryString("v");
   if (pId) {
-    scroll(document.getElementById(pId), {align: {top: 0.2}});
+    setTimeout(scrollIntoView, INTERVAL, pId, "showParagraph");
   }
 }
 
@@ -39,7 +52,7 @@ export function showBookmark() {
   let pId = getQueryString("bkmk");
 
   if (pId) {
-    scroll(document.getElementById(pId), {align: {top: 0.2}});
+    setTimeout(scrollIntoView, INTERVAL, pId, "showBookmark");
     return pId;
   }
   return null;
@@ -49,6 +62,7 @@ export function showSearchMatch() {
   let pId = getQueryString("srch");
 
   if (pId) {
+    setTimeout(scrollIntoView, INTERVAL, pId, "showSearchMatch");
     return pId;
   }
   return null;

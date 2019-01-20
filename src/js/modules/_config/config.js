@@ -24,7 +24,7 @@ let config;
 */
 function refreshNeeded(bid) {
   if (location.hostname === "localhost") {
-    console.log("reloading config for %s", bid);
+    //console.log("reloading config for %s", bid);
     return true;
   }
 
@@ -135,7 +135,7 @@ export function loadConfig(book) {
       })
       .catch((error) => {
         config = null;
-        reject(`Config file: ${url} is not valid JSON`);
+        reject(`Config file: ${url} is not valid JSON: ${error}`);
       });
   });
 }
@@ -260,34 +260,64 @@ export function getPageInfo(pageKey, data = false) {
       .then((data) => {
         info.bookTitle = data.title;
 
-        //this will be a bookmark and we can get the title and from the
-        //annotation
+        /*
+          This is called to get title and url when bookmarks are loaded, we get this from 
+          the annotation.
+        */
         if (info.data) {
           for (let prop in info.data) {
             if (info.data.hasOwnProperty(prop)) {
               //console.log("info.data prop: %s", prop);
               //console.log(info.data[prop][0].selectedText);
-              info.title = info.data[prop][0].selectedText.title;
-              info.url = info.data[prop][0].selectedText.url;
-              break;
+              if (info.data[prop].length > 0) {
+                info.title = info.data[prop][0].selectedText.title;
+                info.url = info.data[prop][0].selectedText.url;
+                break;
+              }
             }
           }
           resolve(info);
           return;
         }
         else {
+          /*
+            This is called to get title and url for search results
+          */
           let flat = [];
+          let unit;
+          let chapter;
 
           switch(decodedKey.bookId) {
+            case "preface":
+              info.title = "Use of Terms";
+              info.url = "/preface/preface/";
+              break;
+            case "manual":
+              info.title = data.contents[decodedKey.uid - 1].title;
+              info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
+              break;
             case "workbook":
+              flat = store.get(`${decodedKey.bookId}-flat`);
+              if (!flat) {
+                flat = flatten(data);
+                store.set(`${decodedKey.bookId}-flat`, flat);
+              }
+              unit = flat[decodedKey.uid - 1];
+
+              info.title = `${unit.lesson?unit.lesson + ". ":""}${unit.title}`;
+              info.url = `/${decodedKey.bookId}/${unit.url}`;
+              break;
             case "text":
               flat = store.get(`${decodedKey.bookId}-flat`);
               if (!flat) {
                 flat = flatten(data);
                 store.set(`${decodedKey.bookId}-flat`, flat);
               }
-              info.title = flat[decodedKey.uid].title;
-              info.url = `/${decodedKey.bookId}/${flat[decodedKey.uid].url}`;
+              unit = flat[decodedKey.uid - 1];
+              chapter = unit.url.substr(4,2);
+
+              info.title = `${unit.title}`;
+              info.url = `/${decodedKey.bookId}/${chapter}/${unit.url}`;
               break;
             default:
               info.title = data.contents[decodedKey.uid].title;

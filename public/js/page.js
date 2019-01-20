@@ -4377,7 +4377,7 @@ let config;
 */
 function refreshNeeded(bid) {
   if (location.hostname === "localhost") {
-    console.log("reloading config for %s", bid);
+    //console.log("reloading config for %s", bid);
     return true;
   }
 
@@ -4482,7 +4482,7 @@ function loadConfig(book) {
       resolve(2);
     }).catch(error => {
       config = null;
-      reject(`Config file: ${url} is not valid JSON`);
+      reject(`Config file: ${url} is not valid JSON: ${error}`);
     });
   });
 }
@@ -4604,33 +4604,63 @@ function getPageInfo(pageKey, data = false) {
     getConfig(decodedKey.bookId, false).then(data => {
       info.bookTitle = data.title;
 
-      //this will be a bookmark and we can get the title and from the
-      //annotation
+      /*
+        This is called to get title and url when bookmarks are loaded, we get this from 
+        the annotation.
+      */
       if (info.data) {
         for (let prop in info.data) {
           if (info.data.hasOwnProperty(prop)) {
             //console.log("info.data prop: %s", prop);
             //console.log(info.data[prop][0].selectedText);
-            info.title = info.data[prop][0].selectedText.title;
-            info.url = info.data[prop][0].selectedText.url;
-            break;
+            if (info.data[prop].length > 0) {
+              info.title = info.data[prop][0].selectedText.title;
+              info.url = info.data[prop][0].selectedText.url;
+              break;
+            }
           }
         }
         resolve(info);
         return;
       } else {
+        /*
+          This is called to get title and url for search results
+        */
         let flat = [];
+        let unit;
+        let chapter;
 
         switch (decodedKey.bookId) {
+          case "preface":
+            info.title = "Use of Terms";
+            info.url = "/preface/preface/";
+            break;
+          case "manual":
+            info.title = data.contents[decodedKey.uid - 1].title;
+            info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
+            break;
           case "workbook":
+            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
+            if (!flat) {
+              flat = flatten(data);
+              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
+            }
+            unit = flat[decodedKey.uid - 1];
+
+            info.title = `${unit.lesson ? unit.lesson + ". " : ""}${unit.title}`;
+            info.url = `/${decodedKey.bookId}/${unit.url}`;
+            break;
           case "text":
             flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
             if (!flat) {
               flat = flatten(data);
               __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
             }
-            info.title = flat[decodedKey.uid].title;
-            info.url = `/${decodedKey.bookId}/${flat[decodedKey.uid].url}`;
+            unit = flat[decodedKey.uid - 1];
+            chapter = unit.url.substr(4, 2);
+
+            info.title = `${unit.title}`;
+            info.url = `/${decodedKey.bookId}/${chapter}/${unit.url}`;
             break;
           default:
             info.title = data.contents[decodedKey.uid].title;
@@ -6860,6 +6890,9 @@ return jQuery;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_scroll_into_view__);
 
 
+//timeout interval before calling scroll
+const INTERVAL = 250;
+
 // get query string from window.location unless the arg 'qString' is not
 // null, in that case it represents the query string
 function getQueryString(key, qString) {
@@ -6881,6 +6914,16 @@ function getQueryString(key, qString) {
   return null;
 }
 
+function scrollComplete(message, type) {
+  console.log(`${message}: ${type}`);
+}
+
+function scrollIntoView(id, caller) {
+  __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default()(document.getElementById(id), { align: { top: 0.2 } }, type => {
+    scrollComplete(`scroll from url.js ${caller}(${id})`, type);
+  });
+}
+
 /*
   Check for url query string requesting to scroll given paragraph into view
   Syntax: ?v=pid, example: ?v=p20
@@ -6890,7 +6933,7 @@ function getQueryString(key, qString) {
 function showParagraph() {
   let pId = getQueryString("v");
   if (pId) {
-    __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default()(document.getElementById(pId), { align: { top: 0.2 } });
+    setTimeout(scrollIntoView, INTERVAL, pId, "showParagraph");
   }
 }
 
@@ -6898,7 +6941,7 @@ function showBookmark() {
   let pId = getQueryString("bkmk");
 
   if (pId) {
-    __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default()(document.getElementById(pId), { align: { top: 0.2 } });
+    setTimeout(scrollIntoView, INTERVAL, pId, "showBookmark");
     return pId;
   }
   return null;
@@ -6908,6 +6951,7 @@ function showSearchMatch() {
   let pId = getQueryString("srch");
 
   if (pId) {
+    setTimeout(scrollIntoView, INTERVAL, pId, "showSearchMatch");
     return pId;
   }
   return null;
@@ -33862,20 +33906,19 @@ module.exports = unicodeToArray;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["a"] = initNavigator;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_config__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_intersection__ = __webpack_require__(385);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_intersection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_intersection__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_range__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_range___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_range__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_store__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_store__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_scroll_into_view__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_scroll_into_view__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user_netlify__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_toastr__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_intersection__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_intersection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_intersection__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_range__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_range___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_range__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_store__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_store__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_scroll_into_view__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_scroll_into_view__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_netlify__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_toastr__);
 
-
+//import {getPageInfo} from "../_config/config";
 
 
 
@@ -33924,7 +33967,7 @@ function generateAnnotation(annotation, topics = []) {
   });
 
   if (topics.length > 0) {
-    match = __WEBPACK_IMPORTED_MODULE_1_lodash_intersection___default()(topicList, topics);
+    match = __WEBPACK_IMPORTED_MODULE_0_lodash_intersection___default()(topicList, topics);
   }
 
   if (topics.length === 0 || match.length > 0) {
@@ -33970,13 +34013,16 @@ function generateBookmark(actualPid, bkmk, topics) {
 
 /*
   returns the url for the first annotation of the arg bookmark
+  Note: deleted annotations are empty arrays so skip over them.
 */
 function getBookmarkUrl(bookmark) {
-  let url = "";
+  let url;
   for (let prop in bookmark) {
     if (bookmark.hasOwnProperty(prop)) {
-      url = `${bookmark[prop][0].selectedText.url}?bkmk=${bookmark[prop][0].rangeStart}`;
-      break;
+      if (bookmark[prop][0]) {
+        url = `${bookmark[prop][0].selectedText.url}?bkmk=${bookmark[prop][0].rangeStart}`;
+        break;
+      }
     }
   }
 
@@ -34001,7 +34047,7 @@ function getNextPageUrl(pos, pageList, filterList, bookmarks) {
           found = true;
           break outer;
         } else {
-          let match = __WEBPACK_IMPORTED_MODULE_1_lodash_intersection___default()(filterList, pageMarks[pid][a].topicList || []);
+          let match = __WEBPACK_IMPORTED_MODULE_0_lodash_intersection___default()(filterList, pageMarks[pid][a].topicList || []);
           if (match.length > 0) {
             found = true;
             break outer;
@@ -34015,8 +34061,13 @@ function getNextPageUrl(pos, pageList, filterList, bookmarks) {
     if (found) {
       let pageKey = pageList[pagePos];
       let url = getBookmarkUrl(bookmarks[pageKey]);
-      //console.log("next url is %s", url);
-      resolve(url);
+
+      //it's possible the url was not found so check for that
+      if (url) {
+        resolve(url);
+      } else {
+        resolve(null);
+      }
     } else {
       //console.log("next url is null");
       resolve(null);
@@ -34042,7 +34093,7 @@ function getPrevPageUrl(pos, pageList, filterList, bookmarks) {
           found = true;
           break outer;
         } else {
-          let match = __WEBPACK_IMPORTED_MODULE_1_lodash_intersection___default()(filterList, pageMarks[pid][a].topicList || []);
+          let match = __WEBPACK_IMPORTED_MODULE_0_lodash_intersection___default()(filterList, pageMarks[pid][a].topicList || []);
           if (match.length > 0) {
             found = true;
             break outer;
@@ -34116,7 +34167,7 @@ function getPreviousPid(currentPos, pageMarks, pageBookmarks, topics) {
       let bookmark = pageBookmarks[pageMarks[newPos]];
       for (let i = 0; i < bookmark.length; i++) {
         if (bookmark[i].topicList && bookmark[i].topicList.length > 0) {
-          if (__WEBPACK_IMPORTED_MODULE_1_lodash_intersection___default()(bookmark[i].topicList, topics).length > 0) {
+          if (__WEBPACK_IMPORTED_MODULE_0_lodash_intersection___default()(bookmark[i].topicList, topics).length > 0) {
             //we found a bookmark containing a topic in the topicList
             return `p${(parseInt(pageMarks[newPos], 10) - 1).toString(10)}`;
           }
@@ -34159,7 +34210,7 @@ function getNextPid(currentPos, pageMarks, pageBookmarks, topics) {
       let bookmark = pageBookmarks[pageMarks[newPos]];
       for (let i = 0; i < bookmark.length; i++) {
         if (bookmark[i].topicList && bookmark[i].topicList.length > 0) {
-          if (__WEBPACK_IMPORTED_MODULE_1_lodash_intersection___default()(bookmark[i].topicList, topics).length > 0) {
+          if (__WEBPACK_IMPORTED_MODULE_0_lodash_intersection___default()(bookmark[i].topicList, topics).length > 0) {
             //we found a bookmark containing a topic in the topicList
             return `p${(parseInt(pageMarks[newPos], 10) - 1).toString(10)}`;
           }
@@ -34234,6 +34285,17 @@ function getCurrentBookmark(pageKey, actualPid, allBookmarks, bmModal, whoCalled
     $(".bookmark-navigator .next-bookmark").removeClass("inactive");
     $(".bookmark-navigator .next-bookmark").html(`<i class="down arrow icon"></i> Next (${nextActualPid})`);
   }
+
+  /*
+  //when "both" the bookmark navigator is being initialized
+  if (whoCalled === "both") {
+    //scroll first bookmark into view
+    //this is being CANCELED!! Don't understand why
+    scroll(document.getElementById(actualPid), {align: {top: 0.2}}, (type) => {
+      scrollComplete("bookmark navigator initial scroll", type);
+    });
+  }
+  */
 }
 
 /*
@@ -34243,8 +34305,8 @@ function getCurrentBookmark(pageKey, actualPid, allBookmarks, bmModal, whoCalled
 function bookmarkManager(actualPid) {
   let sourceId = transcript.getSourceId();
   let pageKey = transcript.genPageKey().toString(10);
-  let bmList = __WEBPACK_IMPORTED_MODULE_3_store___default.a.get(`bmList_${sourceId}`);
-  let bmModal = __WEBPACK_IMPORTED_MODULE_3_store___default.a.get(`bmModal_${sourceId}`);
+  let bmList = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(`bmList_${sourceId}`);
+  let bmModal = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(`bmModal_${sourceId}`);
 
   if (bmList) {
     //store globally
@@ -34252,7 +34314,7 @@ function bookmarkManager(actualPid) {
 
     //get previous and next url's
     getNextPrevUrl(pageKey, bmList, bmModal).then(responses => {
-      console.log("next/prev urls: ", responses);
+      //console.log("next/prev urls: ", responses);
 
       //set prev and next hrefs
       if (responses[0] !== null) {
@@ -34284,9 +34346,9 @@ function bookmarkManager(actualPid) {
     update: either "previous", or "next" depending on what click handler called the function
 */
 function updateNavigator(pid, update) {
-  console.log("updateNavigator, pid: %s, update: %s", pid, update);
-  let bmList = __WEBPACK_IMPORTED_MODULE_3_store___default.a.get(`bmList_${transcript.getSourceId()}`);
-  let bmModal = __WEBPACK_IMPORTED_MODULE_3_store___default.a.get(`bmModal_${transcript.getSourceId()}`);
+  //console.log("updateNavigator, pid: %s, update: %s", pid, update);
+  let bmList = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(`bmList_${transcript.getSourceId()}`);
+  let bmModal = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(`bmModal_${transcript.getSourceId()}`);
   getCurrentBookmark(gPageKey, pid, bmList, bmModal, update);
 }
 
@@ -34297,6 +34359,10 @@ function clearSelectedAnnotation() {
   $(".bookmark-selected-text.show").removeClass("show");
 }
 
+function scrollComplete(message, type) {
+  console.log(`${message}: ${type}`);
+}
+
 function initClickListeners() {
   //previous bookmark
   $(".bookmark-navigator .previous-bookmark").on("click", function (e) {
@@ -34304,7 +34370,9 @@ function initClickListeners() {
     clearSelectedAnnotation();
 
     let actualPid = $(this).attr("data-pid");
-    __WEBPACK_IMPORTED_MODULE_4_scroll_into_view___default()(document.getElementById(actualPid), { align: { top: 0.2 } });
+    __WEBPACK_IMPORTED_MODULE_3_scroll_into_view___default()(document.getElementById(actualPid), { align: { top: 0.2 } }, type => {
+      scrollComplete(`bookmark navigator previous-bookmark(${actualPid})`, type);
+    });
     updateNavigator(actualPid, "previous");
   });
 
@@ -34313,7 +34381,9 @@ function initClickListeners() {
     clearSelectedAnnotation();
 
     let actualPid = $(this).attr("data-pid");
-    __WEBPACK_IMPORTED_MODULE_4_scroll_into_view___default()(document.getElementById(actualPid), { align: { top: 0.2 } });
+    __WEBPACK_IMPORTED_MODULE_3_scroll_into_view___default()(document.getElementById(actualPid), { align: { top: 0.2 } }, type => {
+      scrollComplete(`bookmark navigator next-bookmark(${actualPid})`, type);
+    });
     updateNavigator(actualPid, "next");
   });
 
@@ -34321,7 +34391,9 @@ function initClickListeners() {
     e.preventDefault();
 
     let actualPid = $(this).attr("data-pid");
-    __WEBPACK_IMPORTED_MODULE_4_scroll_into_view___default()(document.getElementById(actualPid), { align: { top: 0.2 } });
+    __WEBPACK_IMPORTED_MODULE_3_scroll_into_view___default()(document.getElementById(actualPid), { align: { top: 0.2 } }, type => {
+      scrollComplete(`bookmark navigator current-bookmark(${actualPid})`, type);
+    });
   });
 
   $(".bookmark-navigator .close-window").on("click", function (e) {
@@ -34344,9 +34416,9 @@ function initClickListeners() {
       return;
     }
 
-    userInfo = Object(__WEBPACK_IMPORTED_MODULE_5__user_netlify__["b" /* getUserInfo */])();
+    userInfo = Object(__WEBPACK_IMPORTED_MODULE_4__user_netlify__["b" /* getUserInfo */])();
     if (!userInfo) {
-      __WEBPACK_IMPORTED_MODULE_6_toastr___default.a.info("You must be signed in to share selected text");
+      __WEBPACK_IMPORTED_MODULE_5_toastr___default.a.info("You must be signed in to share selected text");
       return;
     }
 
@@ -34354,7 +34426,7 @@ function initClickListeners() {
     aid = annotation.data("aid");
     text = annotation.text().replace(/\n/, " ");
 
-    let url = `https://wom.christmind.info${location.pathname}?as=${pid}:${aid}:${userInfo.userId}`;
+    let url = `https://acim.christmind.info${location.pathname}?as=${pid}:${aid}:${userInfo.userId}`;
     let channel = $(this).hasClass("facebook") ? "facebook" : "email";
 
     // console.log("url: %s", url);
@@ -34370,7 +34442,7 @@ function initClickListeners() {
       };
       FB.ui(options, function () {});
     } else if (channel === "email") {
-      __WEBPACK_IMPORTED_MODULE_6_toastr___default.a.info("Sharing by email is not ready yet.");
+      __WEBPACK_IMPORTED_MODULE_5_toastr___default.a.info("Sharing by email is not ready yet.");
     }
   });
 
@@ -34383,7 +34455,7 @@ function initClickListeners() {
     let dataRange = $(this).attr("data-range");
     let rangeArray = dataRange.split("/");
     let numericRange = rangeArray.map(r => parseInt(r.substr(1), 10));
-    let annotationRange = __WEBPACK_IMPORTED_MODULE_2_lodash_range___default()(numericRange[0], numericRange[1] + 1);
+    let annotationRange = __WEBPACK_IMPORTED_MODULE_1_lodash_range___default()(numericRange[0], numericRange[1] + 1);
     let header = `
       <h4 class="ui header">
         <i title="Share to Facebook" class="share-annotation facebook small icon"></i>
@@ -35252,7 +35324,7 @@ module.exports = noop;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_toastr__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_toastr__);
 
-const searchEndpoint = "https://d9lsdwxpfg.execute-api.us-east-1.amazonaws.com/latest/wom";
+const searchEndpoint = "https://d9lsdwxpfg.execute-api.us-east-1.amazonaws.com/latest/acim";
 
 
 
@@ -35433,7 +35505,7 @@ function initSearchModal() {
 
 
 //this needs to use require because it is also used by a node app and node doesn't support import
-const womInfo = __webpack_require__(19);
+const keyInfo = __webpack_require__(19);
 const queryResultName = "query-result-wom";
 
 function getUnitName(pageInfo, unitInfo) {
@@ -35477,7 +35549,7 @@ function makeList(bid, title, pageInfo, matchArray) {
   for a given page, combine all matches into an array
 */
 function munge(bookMatches) {
-  let keyLength = womInfo.getKeyInfo().keyLength;
+  let keyLength = keyInfo.getKeyInfo().keyLength;
   let combined = [];
   let count = 0;
 
@@ -35506,14 +35578,15 @@ function munge(bookMatches) {
 
 //get unique pageKeys from query results and 
 function getPageKeys(data) {
-  let keyLength = womInfo.getKeyInfo().keyLength;
+  let keyLength = keyInfo.getKeyInfo().keyLength;
   let keys = data.map(m => m.key.substr(0, keyLength));
   return __WEBPACK_IMPORTED_MODULE_1_lodash_uniq___default()(keys);
 }
 
 function showSearchResults(data, query) {
-  const books = womInfo.getBooks();
+  const books = keyInfo.getBooks();
   let pageInfoPromises = [];
+  console.log("processing search results");
 
   //get array of all unique page info - promises
   for (let b = 0; b < books.length; b++) {
@@ -35567,8 +35640,8 @@ function showSearchResults(data, query) {
 
 //save the query result so it can be available until replaced by another query
 function saveQueryResults(queryString, matchCount, titleArray, pageInfo, data, originalResult) {
-  const books = womInfo.getBooks();
-  let keyLength = womInfo.getKeyInfo().keyLength;
+  const books = keyInfo.getBooks();
+  let keyLength = keyInfo.getKeyInfo().keyLength;
 
   //don't save if there were no matches
   if (matchCount === 0) {
@@ -35605,7 +35678,7 @@ function showSavedQuery() {
     return;
   }
 
-  const books = womInfo.getBooks();
+  const books = keyInfo.getBooks();
   let html = "";
 
   //generate html for search hits
@@ -36556,7 +36629,7 @@ const transcriptMenuContentsItem = {
 };
 
 const transcriptMenuPreviousPageItem = {
-  element: ".previous-page",
+  element: "#previous-page-menu-item",
   popover: {
     title: "Previous Page",
     description: "Go to the previous page. This will be disabled when the first page is displayed.",
@@ -36565,7 +36638,7 @@ const transcriptMenuPreviousPageItem = {
 };
 
 const transcriptMenuNextPageItem = {
-  element: ".next-page",
+  element: "#next-page-menu-item",
   popover: {
     title: "Next Page",
     description: "Go to the next page. This will be disabled when the last page is displayed.",

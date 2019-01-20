@@ -1,16 +1,11 @@
 ---
 title: How is Healing Accomplished?
-toc:
--   The Perceived Purpose of Sickness
--   The Shift in Perception
--   The Function of the Teacher of God
 ---
 
 Healing involves an understanding of what the illusion of sickness is
 for. Healing is impossible without this.
 
 ## 1. **THE PERCEIVED PURPOSE OF SICKNESS**
-{: #the-perceived-purpose-of-sickness}
 
 Healing is accomplished the instant the sufferer no longer sees any
 value in pain. Who would choose suffering unless he thought it brought
@@ -34,7 +29,6 @@ himself, his weakness is his strength. Now has he given himself what God
 would give to him, and thus entirely usurped the throne of his Creator.
 
 ## 2. **THE SHIFT IN PERCEPTION**
-{: #the-shift-in-perception}
 
 Healing must occur in exact proportion in which the valuelessness of
 sickness is recognized. One need but say, “There is no gain to me at all
@@ -86,7 +80,6 @@ perspective, without distortion and without fear, they re-establish
 Heaven.
 
 ## 3. **THE FUNCTION OF THE TEACHER OF GOD**
-{: #the-function-of-the-teacher-of-god}
 
 If the patient must change his mind in order to be healed, what does the
 teacher of God do? Can he change the patient’s mind for him? Certainly

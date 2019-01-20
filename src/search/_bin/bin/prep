@@ -4,15 +4,15 @@ workingDir=`pwd`
 scriptDir=`dirname $0`
 scriptName=`basename $0`
 
-unitDir="/Users/rmercer/Projects/cmi/site/cmi-wom"
-awkFile="wom.awk"
+unitDir="/Users/rmercer/Projects/cmi/site/cmi-acim"
+awkFile="acim.awk"
 debug=0
 
-source="wom"
+source="acim"
 
 function syntax {
   echo "prep -b <book> file"
-  echo " ex: prep -b tjl chap01"
+  echo " ex: prep -b manual chap01"
   exit 1
 }
 
@@ -28,12 +28,6 @@ shift $(($OPTIND -1))
 
 if [[ -z $1 ]]; then
   syntax
-fi
-
-if [ $book == "tjl" ]; then
-  awkFile="tjl.awk"
-elif [ $book == "wos" ]; then
-  awkFile="wos.awk"
 fi
 
 unit=$1

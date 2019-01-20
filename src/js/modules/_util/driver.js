@@ -190,7 +190,7 @@ const transcriptMenuContentsItem = {
 };
 
 const transcriptMenuPreviousPageItem = {
-  element: ".previous-page",
+  element: "#previous-page-menu-item",
   popover: {
     title: "Previous Page",
     description: "Go to the previous page. This will be disabled when the first page is displayed.",
@@ -199,7 +199,7 @@ const transcriptMenuPreviousPageItem = {
 };
 
 const transcriptMenuNextPageItem = {
-  element: ".next-page",
+  element: "#next-page-menu-item",
   popover: {
     title: "Next Page",
     description: "Go to the next page. This will be disabled when the last page is displayed.",

@@ -6,13 +6,16 @@ restricted-menu: true
 <div markdown="1" class="center">
 ---
 > ***“It is the Word of God, to be kept holy forever&hellip;”***
+{: omit}
 > 
 > *“This time there will be no failure, no loss of truth, no
 > misunderstanding and no misrepresentation I will direct its growth as it
 > reaches from the paper on which it was written into the hearts for which
 > it was intended.”*
+{: omit}
 > 
 > **(Special Message 12/31/75)**
+{: omit}
 
 ---
 
@@ -21,9 +24,11 @@ restricted-menu: true
 As preface to this edition of A Course In Miracles, we acknowledge our
 realization of the truth of the words spoken to us through Helen
 Schucman as those of Jesus, “the Way, the Truth and the Life.”
+{: omit}
 
 To you and all our brothers, we offer this edition of his A Course In
 Miracles.
+{: omit}
 
 The task of editing, deciding which material would be excluded from the
 original dictation and that to be included in the published version, was
@@ -31,21 +36,24 @@ entrusted to William Thetford. The edit of the Text used herein is
 Bill’s, as he was directed by Jesus. The Workbook and Manual are as close
 to the un-edited generation of “scribed” dictation from Jesus to Helen
 as is available to us at this time.
+{: omit}
 
 Similarly, the CAPITALIZATION and hyphenation of some of the words,
 along with the use of parenthesis and punctuation, remain consistent
 with the style of the “scribes” used in the source material.
+{: omit}
 
 We recognize and honor the original intent of our Savior Jesus to be
 known as author with Helen as a “just” scribe whose name is not to be
 associated with authorship, but with the willingness to hear his voice
 and take notes.
+{: omit}
 
 <div markdown="1" class="center">
 > *“Do not attempt to break God’s copyright, because His Authorship
-> alone can copy right.”*
+> alone can copy right.”* ~UR Text, 12/11/65
+{: omit}
 > 
-> **(UR Text, 12/11/65)**
 ---
 </div>
 
@@ -53,13 +61,16 @@ May this be to you, as it is NOW for us, the opening of your mind and
 heart to the Love of God. It is with His love and our gratitude that we
 offer thanks to all who have played their part in making this edition of
 A Course In Miracles available.
+{: omit}
 
 And now our thanks to all. May you realize the Peace of God as eternally
 yours, abiding in you now, and in this realization may you recognize the
 Kingdom of Heaven wherein you have always been at home.
+{: omit}
 
 <div markdown="1" class="center">
 > **God bless us everyone!**
+{: omit}
 </div>
 
 ## Publisher's Note
@@ -68,16 +79,19 @@ In the months from September to the beginning of December 1975,
 reportedly Helen scribed the section of A Course In Miracles which has
 been known up till now as the Clarification of Terms and was considered
 as an “appendix.”
+{: omit}
 
 For this presentation of Jesus’ masterpiece, it has been placed as
 PREFACE and is simply titled THE USE OF TERMS which is consistent with
 the original heading of the dictation and retains the style of its
 scribing.
+{: omit}
 
 If you find our placement of THE USE OF TERMS inappropriate we ask your
 forgiveness, yet having been guided in this, we pray that your exposure
 to and application of this “required course” allows an understanding for
 this seeming liberty.
+{: omit}
 
 You will read in the section entitled *The Use Of Terms* a reference
 declaring that “SOUL” had been excluded due to the controversial nature
@@ -90,6 +104,7 @@ controversial to Jesus at all, it is actually *infinitely* abundant,
 *eternally* vital and wholly complete. The seeming controversy caused by
 the use of the *term* “SOUL” could only be within a mind divided against
 itself unaware of its REALITY.
+{: omit}
 
 ## Use of Terms
 

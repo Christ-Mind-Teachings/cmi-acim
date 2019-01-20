@@ -4,7 +4,7 @@ import uniq from "lodash/uniq";
 import store from "store";
 
 //this needs to use require because it is also used by a node app and node doesn't support import
-const womInfo = require("../_config/key");
+const keyInfo = require("../_config/key");
 const queryResultName = "query-result-wom";
 
 function getUnitName(pageInfo, unitInfo) {
@@ -48,7 +48,7 @@ function makeList(bid, title, pageInfo, matchArray) {
   for a given page, combine all matches into an array
 */
 function munge(bookMatches) {
-  let keyLength = womInfo.getKeyInfo().keyLength;
+  let keyLength = keyInfo.getKeyInfo().keyLength;
   let combined = [];
   let count = 0;
 
@@ -79,14 +79,16 @@ function munge(bookMatches) {
 
 //get unique pageKeys from query results and 
 function getPageKeys(data) {
-  let keyLength = womInfo.getKeyInfo().keyLength;
+  let keyLength = keyInfo.getKeyInfo().keyLength;
   let keys = data.map(m => m.key.substr(0, keyLength));
   return uniq(keys);
+
 }
 
 export function showSearchResults(data, query) {
-  const books = womInfo.getBooks();
+  const books = keyInfo.getBooks();
   let pageInfoPromises = [];
+  console.log("processing search results");
 
   //get array of all unique page info - promises
   for (let b = 0; b < books.length; b++) {
@@ -143,8 +145,8 @@ export function showSearchResults(data, query) {
 
 //save the query result so it can be available until replaced by another query
 function saveQueryResults(queryString, matchCount, titleArray, pageInfo, data, originalResult) {
-  const books = womInfo.getBooks();
-  let keyLength = womInfo.getKeyInfo().keyLength;
+  const books = keyInfo.getBooks();
+  let keyLength = keyInfo.getKeyInfo().keyLength;
 
   //don't save if there were no matches
   if (matchCount === 0) {
@@ -181,7 +183,7 @@ export function showSavedQuery() {
     return;
   }
 
-  const books = womInfo.getBooks();
+  const books = keyInfo.getBooks();
   let html = "";
 
   //generate html for search hits
