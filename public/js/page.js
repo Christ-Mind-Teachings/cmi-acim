@@ -72,7 +72,7 @@
 // unguarded in another place, it seems safer to define global only for this module
 
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	__webpack_require__(30),
+	__webpack_require__(29),
 	__webpack_require__(3),
 	__webpack_require__(172),
 	__webpack_require__(40),
@@ -86,7 +86,7 @@
 	__webpack_require__(173),
 	__webpack_require__(14),
 	__webpack_require__(2),
-	__webpack_require__(31),
+	__webpack_require__(30),
 	__webpack_require__(108),
 	__webpack_require__(20)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( arr, document, getProto, slice, concat, push, indexOf,
@@ -491,7 +491,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 	__webpack_require__(41),
 	__webpack_require__(192),
 	__webpack_require__(195),
-	__webpack_require__(29),
+	__webpack_require__(28),
 	__webpack_require__(196),
 	__webpack_require__(130),
 	__webpack_require__(24),
@@ -4336,348 +4336,6 @@ return jQuery;
 
 /***/ }),
 /* 25 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = fetchTimingData;
-/* harmony export (immutable) */ __webpack_exports__["c"] = getConfig;
-/* harmony export (immutable) */ __webpack_exports__["f"] = loadConfig;
-/* harmony export (immutable) */ __webpack_exports__["b"] = getAudioInfo;
-/* harmony export (immutable) */ __webpack_exports__["e"] = getReservation;
-/* harmony export (immutable) */ __webpack_exports__["d"] = getPageInfo;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_store__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_store__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_indexOf__ = __webpack_require__(239);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_indexOf___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_indexOf__);
-
-
-
-
-//import {decodeKey, parseKey, genKey} from "./key";
-const transcript = __webpack_require__(19);
-
-//change these values to reflect transcript info
-const AWS_BUCKET = "assets.christmind.info";
-const SOURCE_ID = "ACIM";
-
-//mp3 and audio timing base directories
-const audioBase = `https://s3.amazonaws.com/${AWS_BUCKET}/${SOURCE_ID}/audio`;
-const timingBase = "/public/timing";
-
-//location of configuration files
-const configUrl = "/public/config";
-
-//the current configuration, initially null, assigned by getConfig()
-let config;
-
-/* 
-  check if config has changed since we last stored it
-*/
-function refreshNeeded(bid) {
-  if (location.hostname === "localhost") {
-    //console.log("reloading config for %s", bid);
-    return true;
-  }
-
-  return false;
-}
-
-function requestConfiguration(url) {
-  return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(url);
-}
-
-/*
-  Fetch audio timing data
-*/
-function fetchTimingData(url) {
-  return new Promise((resolve, reject) => {
-    __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(`${timingBase}${url}`).then(response => {
-      resolve(response.data);
-    }).catch(error => {
-      reject(error);
-    });
-  });
-}
-
-/*
-  We use book level configuration that is loaded by request via AJAX. Once
-  loaded the config is persisted in local storage. A check is made for
-  configuration data loaded from storage to determine if the data needs to
-  be reloaded. This is indicated using Define-webpack-plugin to set the timestamp
-  of configurations that have changed.
-
-  args:
-    book: the book identifier, woh, wot, etc
-    assign: when true, assign global variable 'config' to retrieved data
-*/
-function getConfig(book, assign = true) {
-  return new Promise((resolve, reject) => {
-    let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`config-${book}`);
-    let url;
-
-    //if config in local storage check if we need to get a freash copy
-    if (cfg && !refreshNeeded(cfg.bid)) {
-      if (assign) {
-        config = cfg;
-      }
-      resolve(cfg);
-      return;
-    }
-
-    //get config from server
-    url = `${configUrl}/${book}.json`;
-    requestConfiguration(url).then(response => {
-      //add fetch date before storing
-      response.data.lastFetchDate = Date.now();
-      __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`config-${book}`, response.data);
-      if (assign) {
-        config = response.data;
-      }
-      resolve(response.data);
-    }).catch(() => {
-      config = null;
-      reject(`Config file: ${url} is not valid JSON`);
-    });
-  });
-}
-
-/*
-  For transcript pages; load the configuration file.
-  For non-transcript pages; configuration is loaded by getConfig()
-
-  This is the same as getConfig() except it doesn't resolve passing the data
-  but a message indicating source of the configuration file
-
-  loadConfig resolves with:
-    0: no ${book}.json file found
-    1: config loaded from local store
-    2: config loaded from server
-
-*/
-function loadConfig(book) {
-  return new Promise((resolve, reject) => {
-    if (typeof book === "undefined") {
-      resolve(0);
-      return;
-    }
-    let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`config-${book}`);
-    let url;
-
-    //if config in local storage check if we need to get a freash copy
-    if (cfg && !refreshNeeded(cfg.bid)) {
-      config = cfg;
-      resolve(1);
-      return;
-    }
-
-    //get config from server
-    url = `${configUrl}/${book}.json`;
-    requestConfiguration(url).then(response => {
-      //add fetch date before storing
-      response.data.lastFetchDate = Date.now();
-      __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`config-${book}`, response.data);
-      config = response.data;
-      resolve(2);
-    }).catch(error => {
-      config = null;
-      reject(`Config file: ${url} is not valid JSON: ${error}`);
-    });
-  });
-}
-
-/*
-  get audio info from config file
-*/
-function _getAudioInfo(idx, cIdx) {
-  let audioInfo;
-
-  if (idx.length === 3) {
-    let qIdx = parseInt(idx[2].substr(1), 10) - 1;
-    audioInfo = config.contents[cIdx].questions[qIdx];
-  } else {
-    audioInfo = config.contents[cIdx];
-  }
-  return audioInfo ? audioInfo : {};
-}
-
-function getAudioInfo(url) {
-  //check that config has been initialized
-  if (!config) {
-    throw new Error("Configuration has not been initialized");
-  }
-
-  //remove leading and trailing "/"
-  url = url.substr(1);
-  url = url.substr(0, url.length - 1);
-
-  let idx = url.split("/");
-
-  //check the correct configuration file is loaded
-  if (config.bid !== idx[0]) {
-    throw new Error("Unexpected config file loaded; expecting %s but %s is loaded.", idx[0], config.bid);
-  }
-
-  let audioInfo = {};
-  let cIdx;
-  let lookup = [];
-
-  switch (idx[0]) {
-    //no audio
-    case "text":
-    case "workbook":
-    case "manual":
-      break;
-    default:
-      cIdx = parseInt(idx[1].substr(1), 10) - 1;
-      audioInfo = _getAudioInfo(idx, cIdx);
-      break;
-  }
-
-  audioInfo.audioBase = audioBase;
-  return audioInfo;
-}
-
-/*
- * get timer info for the current page
- */
-function getReservation(url) {
-  let audioInfo = getAudioInfo(url);
-
-  if (audioInfo.timer) {
-    return audioInfo.timer;
-  }
-
-  return null;
-}
-
-/*
-  Needed for workbook.json and text.json since they have multiple levels
-  workbook: content > section > page
-  text: contents > sections
-
-  Flatten config file so we can use key.uid to lookup title and url for a given key
-  This is necessary for config files that contain more than one level.
-*/
-function flatten(data) {
-  let flat = [];
-  if (data.bid === "workbook") {
-    for (let content of data.contents) {
-      for (let section of content.section) {
-        for (let page of section.page) {
-          flat.push(page);
-        }
-      }
-    }
-  } else if (data.bid === "text") {
-    for (let content of data.contents) {
-      for (let section of content.sections) {
-        flat.push(section);
-      }
-    }
-  }
-  return flat;
-}
-
-/*
-  Given a page key, return data from a config file
-  returns: book title, page title, url.
-
-  args:
-    pageKey: a key uniuely identifying a transcript page
-    data: optional, data that will be added to the result, used for convenience
-
-      data is passed when building a list of bookmarks for the bookmark modal
-*/
-function getPageInfo(pageKey, data = false) {
-  let decodedKey = transcript.decodeKey(pageKey);
-  let info = { pageKey: pageKey, bookId: decodedKey.bookId };
-
-  if (data) {
-    info.data = data;
-  }
-
-  return new Promise((resolve, reject) => {
-
-    //get configuration data specific to the bookId
-    getConfig(decodedKey.bookId, false).then(data => {
-      info.bookTitle = data.title;
-
-      /*
-        This is called to get title and url when bookmarks are loaded, we get this from 
-        the annotation.
-      */
-      if (info.data) {
-        for (let prop in info.data) {
-          if (info.data.hasOwnProperty(prop)) {
-            //console.log("info.data prop: %s", prop);
-            //console.log(info.data[prop][0].selectedText);
-            if (info.data[prop].length > 0) {
-              info.title = info.data[prop][0].selectedText.title;
-              info.url = info.data[prop][0].selectedText.url;
-              break;
-            }
-          }
-        }
-        resolve(info);
-        return;
-      } else {
-        /*
-          This is called to get title and url for search results
-        */
-        let flat = [];
-        let unit;
-        let chapter;
-
-        switch (decodedKey.bookId) {
-          case "preface":
-            info.title = "Use of Terms";
-            info.url = "/preface/preface/";
-            break;
-          case "manual":
-            info.title = data.contents[decodedKey.uid - 1].title;
-            info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
-            break;
-          case "workbook":
-            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
-            if (!flat) {
-              flat = flatten(data);
-              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
-            }
-            unit = flat[decodedKey.uid - 1];
-
-            info.title = `${unit.lesson ? unit.lesson + ". " : ""}${unit.title}`;
-            info.url = `/${decodedKey.bookId}/${unit.url}`;
-            break;
-          case "text":
-            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
-            if (!flat) {
-              flat = flatten(data);
-              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
-            }
-            unit = flat[decodedKey.uid - 1];
-            chapter = unit.url.substr(4, 2);
-
-            info.title = `${unit.title}`;
-            info.url = `/${decodedKey.bookId}/${chapter}/${unit.url}`;
-            break;
-          default:
-            info.title = data.contents[decodedKey.uid].title;
-            info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
-            break;
-        }
-
-        resolve(info);
-      }
-    }).catch(error => {
-      reject(error);
-    });
-  });
-}
-
-/***/ }),
-/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var assign = make_assign()
@@ -4802,7 +4460,7 @@ function isObject(val) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)))
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(7);
@@ -4814,7 +4472,7 @@ module.exports = Symbol;
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports) {
 
 var COMPLETE = 'complete',
@@ -5025,14 +4683,14 @@ module.exports = function(target, settings, callback){
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	__webpack_require__(0),
 	__webpack_require__(60),
 	__webpack_require__(15),
-	__webpack_require__(32),
+	__webpack_require__(31),
 	__webpack_require__(3),
 	__webpack_require__(59),
 	__webpack_require__(61),
@@ -5513,7 +5171,7 @@ return jQuery;
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
@@ -5525,7 +5183,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = (function() 
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
@@ -5540,7 +5198,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = (function() 
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
@@ -5570,10 +5228,352 @@ return camelCase;
 
 
 /***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = fetchTimingData;
+/* harmony export (immutable) */ __webpack_exports__["c"] = getConfig;
+/* harmony export (immutable) */ __webpack_exports__["f"] = loadConfig;
+/* harmony export (immutable) */ __webpack_exports__["b"] = getAudioInfo;
+/* harmony export (immutable) */ __webpack_exports__["e"] = getReservation;
+/* harmony export (immutable) */ __webpack_exports__["d"] = getPageInfo;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_store__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_store__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_indexOf__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_indexOf___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_indexOf__);
+
+
+
+
+//import {decodeKey, parseKey, genKey} from "./key";
+const transcript = __webpack_require__(19);
+
+//change these values to reflect transcript info
+const AWS_BUCKET = "assets.christmind.info";
+const SOURCE_ID = "ACIM";
+
+//mp3 and audio timing base directories
+const audioBase = `https://s3.amazonaws.com/${AWS_BUCKET}/${SOURCE_ID}/audio`;
+const timingBase = "/public/timing";
+
+//location of configuration files
+const configUrl = "/public/config";
+
+//the current configuration, initially null, assigned by getConfig()
+let config;
+
+/* 
+  check if config has changed since we last stored it
+*/
+function refreshNeeded(bid) {
+  if (location.hostname === "localhost") {
+    //console.log("reloading config for %s", bid);
+    return true;
+  }
+
+  return false;
+}
+
+function requestConfiguration(url) {
+  return __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(url);
+}
+
+/*
+  Fetch audio timing data
+*/
+function fetchTimingData(url) {
+  return new Promise((resolve, reject) => {
+    __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(`${timingBase}${url}`).then(response => {
+      resolve(response.data);
+    }).catch(error => {
+      reject(error);
+    });
+  });
+}
+
+/*
+  We use book level configuration that is loaded by request via AJAX. Once
+  loaded the config is persisted in local storage. A check is made for
+  configuration data loaded from storage to determine if the data needs to
+  be reloaded. This is indicated using Define-webpack-plugin to set the timestamp
+  of configurations that have changed.
+
+  args:
+    book: the book identifier, woh, wot, etc
+    assign: when true, assign global variable 'config' to retrieved data
+*/
+function getConfig(book, assign = true) {
+  return new Promise((resolve, reject) => {
+    let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`config-${book}`);
+    let url;
+
+    //if config in local storage check if we need to get a freash copy
+    if (cfg && !refreshNeeded(cfg.bid)) {
+      if (assign) {
+        config = cfg;
+      }
+      resolve(cfg);
+      return;
+    }
+
+    //get config from server
+    url = `${configUrl}/${book}.json`;
+    requestConfiguration(url).then(response => {
+      //add fetch date before storing
+      response.data.lastFetchDate = Date.now();
+      __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`config-${book}`, response.data);
+      if (assign) {
+        config = response.data;
+      }
+      resolve(response.data);
+    }).catch(() => {
+      config = null;
+      reject(`Config file: ${url} is not valid JSON`);
+    });
+  });
+}
+
+/*
+  For transcript pages; load the configuration file.
+  For non-transcript pages; configuration is loaded by getConfig()
+
+  This is the same as getConfig() except it doesn't resolve passing the data
+  but a message indicating source of the configuration file
+
+  loadConfig resolves with:
+    0: no ${book}.json file found
+    1: config loaded from local store
+    2: config loaded from server
+
+*/
+function loadConfig(book) {
+  return new Promise((resolve, reject) => {
+    if (typeof book === "undefined") {
+      resolve(0);
+      return;
+    }
+    let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`config-${book}`);
+    let url;
+
+    //if config in local storage check if we need to get a freash copy
+    if (cfg && !refreshNeeded(cfg.bid)) {
+      config = cfg;
+      resolve(1);
+      return;
+    }
+
+    //get config from server
+    url = `${configUrl}/${book}.json`;
+    requestConfiguration(url).then(response => {
+      //add fetch date before storing
+      response.data.lastFetchDate = Date.now();
+      __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`config-${book}`, response.data);
+      config = response.data;
+      resolve(2);
+    }).catch(error => {
+      config = null;
+      reject(`Config file: ${url} is not valid JSON: ${error}`);
+    });
+  });
+}
+
+/*
+  get audio info from config file
+*/
+function _getAudioInfo(idx, cIdx) {
+  let audioInfo;
+
+  if (idx.length === 3) {
+    let qIdx = parseInt(idx[2].substr(1), 10) - 1;
+    audioInfo = config.contents[cIdx].questions[qIdx];
+  } else {
+    audioInfo = config.contents[cIdx];
+  }
+  return audioInfo ? audioInfo : {};
+}
+
+function getAudioInfo(url) {
+  //check that config has been initialized
+  if (!config) {
+    throw new Error("Configuration has not been initialized");
+  }
+
+  //remove leading and trailing "/"
+  url = url.substr(1);
+  url = url.substr(0, url.length - 1);
+
+  let idx = url.split("/");
+
+  //check the correct configuration file is loaded
+  if (config.bid !== idx[0]) {
+    throw new Error("Unexpected config file loaded; expecting %s but %s is loaded.", idx[0], config.bid);
+  }
+
+  let audioInfo = {};
+  let cIdx;
+  let lookup = [];
+
+  switch (idx[0]) {
+    //no audio
+    case "text":
+    case "workbook":
+    case "manual":
+      break;
+    default:
+      cIdx = parseInt(idx[1].substr(1), 10) - 1;
+      audioInfo = _getAudioInfo(idx, cIdx);
+      break;
+  }
+
+  audioInfo.audioBase = audioBase;
+  return audioInfo;
+}
+
+/*
+ * get timer info for the current page
+ */
+function getReservation(url) {
+  let audioInfo = getAudioInfo(url);
+
+  if (audioInfo.timer) {
+    return audioInfo.timer;
+  }
+
+  return null;
+}
+
+/*
+  Needed for workbook.json and text.json since they have multiple levels
+  workbook: content > section > page
+  text: contents > sections
+
+  Flatten config file so we can use key.uid to lookup title and url for a given key
+  This is necessary for config files that contain more than one level.
+*/
+function flatten(data) {
+  let flat = [];
+  if (data.bid === "workbook") {
+    for (let content of data.contents) {
+      for (let section of content.section) {
+        for (let page of section.page) {
+          flat.push(page);
+        }
+      }
+    }
+  } else if (data.bid === "text") {
+    for (let content of data.contents) {
+      for (let section of content.sections) {
+        flat.push(section);
+      }
+    }
+  }
+  return flat;
+}
+
+/*
+  Given a page key, return data from a config file
+  returns: book title, page title, url.
+
+  args:
+    pageKey: a key uniuely identifying a transcript page
+    data: optional, data that will be added to the result, used for convenience
+
+      data is passed when building a list of bookmarks for the bookmark modal
+*/
+function getPageInfo(pageKey, data = false) {
+  let decodedKey = transcript.decodeKey(pageKey);
+  let info = { pageKey: pageKey, bookId: decodedKey.bookId };
+
+  if (data) {
+    info.data = data;
+  }
+
+  return new Promise((resolve, reject) => {
+
+    //get configuration data specific to the bookId
+    getConfig(decodedKey.bookId, false).then(data => {
+      info.bookTitle = data.title;
+
+      /*
+        This is called to get title and url when bookmarks are loaded, we get this from 
+        the annotation.
+      */
+      if (info.data) {
+        for (let prop in info.data) {
+          if (info.data.hasOwnProperty(prop)) {
+            //console.log("info.data prop: %s", prop);
+            //console.log(info.data[prop][0].selectedText);
+            if (info.data[prop].length > 0) {
+              info.title = info.data[prop][0].selectedText.title;
+              info.url = info.data[prop][0].selectedText.url;
+              break;
+            }
+          }
+        }
+        resolve(info);
+        return;
+      } else {
+        /*
+          This is called to get title and url for search results
+        */
+        let flat = [];
+        let unit;
+        let chapter;
+
+        switch (decodedKey.bookId) {
+          case "preface":
+            info.title = "Use of Terms";
+            info.url = "/preface/preface/";
+            break;
+          case "manual":
+            info.title = data.contents[decodedKey.uid - 1].title;
+            info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
+            break;
+          case "workbook":
+            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
+            if (!flat) {
+              flat = flatten(data);
+              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
+            }
+            unit = flat[decodedKey.uid - 1];
+
+            info.title = `${unit.lesson ? unit.lesson + ". " : ""}${unit.title}`;
+            info.url = `/${decodedKey.bookId}/${unit.url}`;
+            break;
+          case "text":
+            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
+            if (!flat) {
+              flat = flatten(data);
+              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
+            }
+            unit = flat[decodedKey.uid - 1];
+            chapter = unit.url.substr(4, 2);
+
+            info.title = `${unit.title}`;
+            info.url = `/${decodedKey.bookId}/${chapter}/${unit.url}`;
+            break;
+          default:
+            info.title = data.contents[decodedKey.uid].title;
+            info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
+            break;
+        }
+
+        resolve(info);
+      }
+    }).catch(error => {
+      reject(error);
+    });
+  });
+}
+
+/***/ }),
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(27),
+var Symbol = __webpack_require__(26),
     getRawTag = __webpack_require__(243),
     objectToString = __webpack_require__(244);
 
@@ -6374,7 +6374,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = (function() 
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	__webpack_require__(30)
+	__webpack_require__(29)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( arr ) {
 	"use strict";
 
@@ -6886,7 +6886,7 @@ return jQuery;
 /* harmony export (immutable) */ __webpack_exports__["e"] = showSearchMatch;
 /* harmony export (immutable) */ __webpack_exports__["b"] = showAnnotation;
 /* harmony export (immutable) */ __webpack_exports__["a"] = getUser;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_scroll_into_view__);
 
 
@@ -6941,7 +6941,7 @@ function showBookmark() {
   let pId = getQueryString("bkmk");
 
   if (pId) {
-    setTimeout(scrollIntoView, INTERVAL, pId, "showBookmark");
+    //setTimeout(scrollIntoView, INTERVAL, pId, "showBookmark");
     return pId;
   }
   return null;
@@ -6951,7 +6951,7 @@ function showSearchMatch() {
   let pId = getQueryString("srch");
 
   if (pId) {
-    setTimeout(scrollIntoView, INTERVAL, pId, "showSearchMatch");
+    //setTimeout(scrollIntoView, INTERVAL, pId, "showSearchMatch");
     return pId;
   }
   return null;
@@ -7589,7 +7589,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	__webpack_require__(30)
+	__webpack_require__(29)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( arr ) {
 	"use strict";
 
@@ -8202,7 +8202,7 @@ return jQuery;
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	__webpack_require__(0),
-	__webpack_require__(32),
+	__webpack_require__(31),
 	__webpack_require__(3),
 	__webpack_require__(2),
 	__webpack_require__(59),
@@ -8219,7 +8219,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 	__webpack_require__(21),
 	__webpack_require__(22),
 	__webpack_require__(41),
-	__webpack_require__(29),
+	__webpack_require__(28),
 	__webpack_require__(185)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( jQuery, camelCase, document, isFunction, rcssNum, rnothtmlwhite, cssExpand,
 	isHiddenWithinTree, swap, adjustCSS, dataPriv, showHide ) {
@@ -8977,7 +8977,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 	__webpack_require__(66),
 	__webpack_require__(57),
 	__webpack_require__(2),
-	__webpack_require__(31),
+	__webpack_require__(30),
 	__webpack_require__(23)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( jQuery, document, dataPriv, acceptData, hasOwn, isFunction, isWindow ) {
 
@@ -10845,7 +10845,7 @@ return function( elem, options, callback, args ) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	__webpack_require__(30)
+	__webpack_require__(29)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( arr ) {
 	"use strict";
 
@@ -10859,7 +10859,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	__webpack_require__(30)
+	__webpack_require__(29)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( arr ) {
 	"use strict";
 
@@ -11373,7 +11373,7 @@ if ( document.readyState === "complete" ||
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	__webpack_require__(0),
-	__webpack_require__(32),
+	__webpack_require__(31),
 	__webpack_require__(11),
 	__webpack_require__(66)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( jQuery, camelCase, rnothtmlwhite, acceptData ) {
@@ -16518,7 +16518,7 @@ jQuery.Deferred.exceptionHook = function( error, stack ) {
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	__webpack_require__(0),
 	__webpack_require__(15),
-	__webpack_require__(32),
+	__webpack_require__(31),
 	__webpack_require__(9),
 	__webpack_require__(118)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( jQuery, access, camelCase, dataPriv, dataUser ) {
@@ -16889,7 +16889,7 @@ return support;
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	__webpack_require__(0),
-	__webpack_require__(29)
+	__webpack_require__(28)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( jQuery ) {
 
 "use strict";
@@ -18457,9 +18457,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 	__webpack_require__(110),
 	__webpack_require__(112),
 	__webpack_require__(63),
-	__webpack_require__(31),
+	__webpack_require__(30),
 	__webpack_require__(6),
-	__webpack_require__(29),
+	__webpack_require__(28),
 	__webpack_require__(4) // contains
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( jQuery, access, document, documentElement, isFunction, rnumnonpx,
              curCSS, addGetHookIf, support, isWindow ) {
@@ -18690,8 +18690,8 @@ return jQuery;
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	__webpack_require__(0),
 	__webpack_require__(15),
-	__webpack_require__(31),
-	__webpack_require__(29)
+	__webpack_require__(30),
+	__webpack_require__(28)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( jQuery, access, isWindow ) {
 
 "use strict";
@@ -18754,10 +18754,10 @@ return jQuery;
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	__webpack_require__(0),
 	__webpack_require__(16),
-	__webpack_require__(32),
+	__webpack_require__(31),
 	__webpack_require__(20),
 	__webpack_require__(2),
-	__webpack_require__(31),
+	__webpack_require__(30),
 	__webpack_require__(40),
 
 	__webpack_require__(208)
@@ -23620,7 +23620,7 @@ if ( !noGlobal ) {
 /* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var util = __webpack_require__(26)
+var util = __webpack_require__(25)
 var slice = util.slice
 var pluck = util.pluck
 var each = util.each
@@ -23878,7 +23878,7 @@ module.exports = [
 /* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var util = __webpack_require__(26)
+var util = __webpack_require__(25)
 var Global = util.Global
 
 module.exports = {
@@ -23926,7 +23926,7 @@ function clearAll() {
 // versions 6 and 7, where no localStorage, etc
 // is available.
 
-var util = __webpack_require__(26)
+var util = __webpack_require__(25)
 var Global = util.Global
 
 module.exports = {
@@ -23974,7 +23974,7 @@ function clearAll() {
 // versions 6 and 7, where no localStorage, sessionStorage, etc
 // is available.
 
-var util = __webpack_require__(26)
+var util = __webpack_require__(25)
 var Global = util.Global
 
 module.exports = {
@@ -24107,7 +24107,7 @@ function _makeIEStorageElFunction() {
 // doesn't work but cookies do. This implementation is adopted from
 // https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage
 
-var util = __webpack_require__(26)
+var util = __webpack_require__(25)
 var Global = util.Global
 var trim = util.trim
 
@@ -24170,7 +24170,7 @@ function _has(key) {
 /* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var util = __webpack_require__(26)
+var util = __webpack_require__(25)
 var Global = util.Global
 
 module.exports = {
@@ -25806,7 +25806,7 @@ module.exports = toNumber;
 /* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(27);
+var Symbol = __webpack_require__(26);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -30749,7 +30749,7 @@ module.exports = setCacheHas;
 /* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(27),
+var Symbol = __webpack_require__(26),
     isArguments = __webpack_require__(84),
     isArray = __webpack_require__(8);
 
@@ -31275,7 +31275,7 @@ module.exports = arraySome;
 /* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(27),
+var Symbol = __webpack_require__(26),
     Uint8Array = __webpack_require__(151),
     eq = __webpack_require__(45),
     equalArrays = __webpack_require__(150),
@@ -32155,7 +32155,7 @@ module.exports = memoize;
 /* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(27),
+var Symbol = __webpack_require__(26),
     arrayMap = __webpack_require__(37),
     isArray = __webpack_require__(8),
     isSymbol = __webpack_require__(43);
@@ -32993,7 +32993,7 @@ module.exports = cloneRegExp;
 /* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(27);
+var Symbol = __webpack_require__(26);
 
 /** Used to convert symbols to primitives and strings. */
 var symbolProto = Symbol ? Symbol.prototype : undefined,
@@ -33912,7 +33912,7 @@ module.exports = unicodeToArray;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_range___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_range__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_store__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_store__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_scroll_into_view__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_scroll_into_view__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_scroll_into_view__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_netlify__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr__ = __webpack_require__(10);
@@ -34127,7 +34127,7 @@ function getNextPrevUrl(pageKey, bookmarks, bmModal) {
 
   pos = pages.indexOf(pageKey);
   if (pos === -1) {
-    return urls;
+    return Promise.reject("bookmark not found");
   }
 
   //console.log("current page: %s", pageKey);
@@ -34248,6 +34248,12 @@ function getCurrentBookmark(pageKey, actualPid, allBookmarks, bmModal, whoCalled
 
   let paragraphBookmarks = allBookmarks[pageKey][pidKey];
 
+  //the current bookmark (actualPid) does not exist
+  //this would happen where url includes ?bkmk=p3 and p3 does not have a bookmark
+  if (!paragraphBookmarks) {
+    return false;
+  }
+
   let html = generateBookmark(actualPid, paragraphBookmarks, topics);
   $("#bookmark-content").html(html);
 
@@ -34286,16 +34292,7 @@ function getCurrentBookmark(pageKey, actualPid, allBookmarks, bmModal, whoCalled
     $(".bookmark-navigator .next-bookmark").html(`<i class="down arrow icon"></i> Next (${nextActualPid})`);
   }
 
-  /*
-  //when "both" the bookmark navigator is being initialized
-  if (whoCalled === "both") {
-    //scroll first bookmark into view
-    //this is being CANCELED!! Don't understand why
-    scroll(document.getElementById(actualPid), {align: {top: 0.2}}, (type) => {
-      scrollComplete("bookmark navigator initial scroll", type);
-    });
-  }
-  */
+  return true;
 }
 
 /*
@@ -34329,9 +34326,27 @@ function bookmarkManager(actualPid) {
       }
 
       //identify current bookmark in navigator
-      getCurrentBookmark(pageKey, actualPid, bmList, bmModal, "both");
+      //returns false if actualPid does not contain a bookmark
+      if (!getCurrentBookmark(pageKey, actualPid, bmList, bmModal, "both")) {
+        __WEBPACK_IMPORTED_MODULE_5_toastr___default.a.info(`A bookmark at ${actualPid} was not found.`);
+        return;
+      }
+
+      //init navigator controls
+      initClickListeners();
+
+      //indicate bookmark navigator is active by adding class to ./transcript
+      $(".transcript").addClass("bookmark-navigator-active");
+
+      //show the navigator and scroll
+      $(".bookmark-navigator-wrapper").removeClass("hide-bookmark-navigator");
+      setTimeout(scrollIntoView, 250, actualPid, "bookmarkManager");
     }).catch(err => {
       console.error(err);
+
+      if (err === "bookmark not found") {
+        __WEBPACK_IMPORTED_MODULE_5_toastr___default.a.info(`A bookmark at ${actualPid} was not found.`);
+      }
     });
   } else {
     console.log(`bmList_${sourceId}`);
@@ -34361,6 +34376,12 @@ function clearSelectedAnnotation() {
 
 function scrollComplete(message, type) {
   console.log(`${message}: ${type}`);
+}
+
+function scrollIntoView(id, caller) {
+  __WEBPACK_IMPORTED_MODULE_3_scroll_into_view___default()(document.getElementById(id), { align: { top: 0.2 } }, type => {
+    scrollComplete(`scroll from bookmark navigator ${caller}(${id})`, type);
+  });
 }
 
 function initClickListeners() {
@@ -34485,13 +34506,7 @@ function initClickListeners() {
   Initialize the bookmark navigator so they can follow the list of bookmarks
 */
 function initNavigator(actualPid) {
-  //show the navigator
-  $(".bookmark-navigator-wrapper").removeClass("hide-bookmark-navigator");
   bookmarkManager(actualPid);
-  initClickListeners();
-
-  //indicate bookmark navigator is active by adding class to ./transcript
-  $(".transcript").addClass("bookmark-navigator-active");
 }
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
@@ -34636,7 +34651,7 @@ module.exports = castArrayLikeObject;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_config__ = __webpack_require__(25);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_config__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bmnet__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_toastr__);
@@ -35494,7 +35509,7 @@ function initSearchModal() {
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["b"] = showSearchResults;
 /* harmony export (immutable) */ __webpack_exports__["a"] = showSavedQuery;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_config__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_config__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_uniq__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_uniq___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_uniq__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_store__ = __webpack_require__(18);
@@ -35701,7 +35716,7 @@ function showSavedQuery() {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["a"] = initNavigator;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_scroll_into_view__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_store__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_store__);
@@ -35717,6 +35732,17 @@ function showSavedQuery() {
 const page = __webpack_require__(19);
 
 const queryResultName = "query-result-wom";
+const SCROLL_INTERVAL = 250;
+
+function scrollComplete(message, type) {
+  console.log(`${message}: ${type}`);
+}
+
+function scrollIntoView(id, caller) {
+  __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default()(document.getElementById(id), { align: { top: 0.2 } }, type => {
+    scrollComplete(`scroll from search navigator ${caller}(${id})`, type);
+  });
+}
 
 class PageMatches {
   constructor(query, start, end, hits) {
@@ -35727,11 +35753,15 @@ class PageMatches {
     this.hits = hits;
   }
 
-  setStart(current) {
+  setStart(current, first) {
     this.current = current;
     let pid = this.hits[current].location;
 
-    __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default()(document.getElementById(pid), { align: { top: 0.2 } });
+    if (first) {
+      setTimeout(scrollIntoView, SCROLL_INTERVAL, pid, "setStart(first)");
+    } else {
+      scrollIntoView(pid, "setStart()");
+    }
     this.setTitle();
   }
 
@@ -35894,7 +35924,7 @@ function initControls(pid) {
   let lastSearch = __WEBPACK_IMPORTED_MODULE_1_store___default.a.get(queryResultName);
 
   if (!lastSearch) {
-    __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.error("Show search result requested but can't find search results.");
+    __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.warning("There are no search results to show.");
     return;
   }
 
@@ -35905,8 +35935,20 @@ function initControls(pid) {
   let bid = page.decodeKey(pageKey).bookId;
   let title = lastSearch.titleArray[bid];
 
+  //when ?srch=p2 and p2 does not contain a search hit
+  if (!lastSearch.pageInfo[pageKey]) {
+    __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.warning(`There is no search result at ${pid}`);
+    return;
+  }
+
   let hitPositions = findPositions(pid, pageKeyString, lastSearch.flat);
   let url;
+
+  //check that requested search hit is valid
+  if (hitPositions.current === -1) {
+    __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.warning(`There is no search result at ${pid}`);
+    return;
+  }
 
   if (hitPositions.prev > -1) {
     url = `${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
@@ -35931,22 +35973,24 @@ function initControls(pid) {
   $(".search-navigator-header-book").text(`${title} - ${lastSearch.pageInfo[pageKey].title}`);
 
   let matches = new PageMatches(lastSearch.query, hitPositions.start, hitPositions.end, lastSearch.flat);
-  matches.setStart(hitPositions.current);
+
+  //arg 'true' causes 250ms deplay before calling scroll
+  matches.setStart(hitPositions.current, true);
 
   let markFail = markSearchHits(lastSearch.flat, hitPositions.start, hitPositions.end, lastSearch.query, "show");
   if (markFail) {
     __WEBPACK_IMPORTED_MODULE_2_toastr___default.a.info(`Failed to hilight ${markFail} search results`);
   }
   initClickListeners(matches);
+
+  //indicate search navigator is active by adding class to ./transcript
+  $(".transcript").addClass("search-navigator-active");
+  $(".search-navigator-wrapper").removeClass("hide-search-navigator");
 }
 
 function initNavigator(requestedPid) {
   //console.log("init search navigator pid: %s", requestedPid);
   initControls(requestedPid);
-
-  //indicate search navigator is active by adding class to ./transcript
-  $(".transcript").addClass("search-navigator-active");
-  $(".search-navigator-wrapper").removeClass("hide-search-navigator");
 }
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
@@ -35956,9 +36000,9 @@ function initNavigator(requestedPid) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["b"] = getBookId;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_scroll_into_view__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config_config__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config_config__ = __webpack_require__(32);
 
 
 

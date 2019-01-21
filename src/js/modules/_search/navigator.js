@@ -8,6 +8,17 @@ import notify from "toastr";
 const page = require("../_config/key");
 
 const queryResultName = "query-result-wom";
+const SCROLL_INTERVAL = 250;
+
+function scrollComplete(message, type) {
+  console.log(`${message}: ${type}`);
+}
+
+function scrollIntoView(id, caller) {
+  scroll(document.getElementById(id), {align: {top: 0.2}}, (type) => {
+    scrollComplete(`scroll from search navigator ${caller}(${id})`, type);
+  });
+}
 
 class PageMatches {
   constructor(query, start, end, hits) {
@@ -18,11 +29,16 @@ class PageMatches {
     this.hits = hits;
   }
 
-  setStart(current) {
+  setStart(current, first) {
     this.current = current;
     let pid = this.hits[current].location;
 
-    scroll(document.getElementById(pid), {align: {top: 0.2}});
+    if (first) {
+      setTimeout(scrollIntoView, SCROLL_INTERVAL, pid, "setStart(first)");
+    }
+    else {
+      scrollIntoView(pid, "setStart()");
+    }
     this.setTitle();
   }
 
@@ -188,7 +204,7 @@ function initControls(pid) {
   let lastSearch = store.get(queryResultName);
 
   if (!lastSearch) {
-    notify.error("Show search result requested but can't find search results.");
+    notify.warning("There are no search results to show.");
     return;
   }
 
@@ -199,8 +215,20 @@ function initControls(pid) {
   let bid = page.decodeKey(pageKey).bookId;
   let title = lastSearch.titleArray[bid];
 
+  //when ?srch=p2 and p2 does not contain a search hit
+  if (!lastSearch.pageInfo[pageKey]) {
+    notify.warning(`There is no search result at ${pid}`);
+    return;
+  }
+
   let hitPositions = findPositions(pid, pageKeyString, lastSearch.flat);
   let url;
+
+  //check that requested search hit is valid
+  if (hitPositions.current === -1) {
+    notify.warning(`There is no search result at ${pid}`);
+    return;
+  }
 
   if (hitPositions.prev > -1) {
     url = `${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
@@ -227,20 +255,22 @@ function initControls(pid) {
   $(".search-navigator-header-book").text(`${title} - ${lastSearch.pageInfo[pageKey].title}`);
 
   let matches = new PageMatches(lastSearch.query, hitPositions.start, hitPositions.end, lastSearch.flat);
-  matches.setStart(hitPositions.current);
+
+  //arg 'true' causes 250ms deplay before calling scroll
+  matches.setStart(hitPositions.current, true);
 
   let markFail = markSearchHits(lastSearch.flat, hitPositions.start, hitPositions.end, lastSearch.query, "show");
   if (markFail) {
     notify.info(`Failed to hilight ${markFail} search results`);
   }
   initClickListeners(matches);
+
+  //indicate search navigator is active by adding class to ./transcript
+  $(".transcript").addClass("search-navigator-active");
+  $(".search-navigator-wrapper").removeClass("hide-search-navigator");
 }
 
 export function initNavigator(requestedPid) {
   //console.log("init search navigator pid: %s", requestedPid);
   initControls(requestedPid);
-
-  //indicate search navigator is active by adding class to ./transcript
-  $(".transcript").addClass("search-navigator-active");
-  $(".search-navigator-wrapper").removeClass("hide-search-navigator");
 }

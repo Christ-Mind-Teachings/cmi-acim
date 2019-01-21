@@ -52,7 +52,7 @@ export function showBookmark() {
   let pId = getQueryString("bkmk");
 
   if (pId) {
-    setTimeout(scrollIntoView, INTERVAL, pId, "showBookmark");
+    //setTimeout(scrollIntoView, INTERVAL, pId, "showBookmark");
     return pId;
   }
   return null;
@@ -62,7 +62,7 @@ export function showSearchMatch() {
   let pId = getQueryString("srch");
 
   if (pId) {
-    setTimeout(scrollIntoView, INTERVAL, pId, "showSearchMatch");
+    //setTimeout(scrollIntoView, INTERVAL, pId, "showSearchMatch");
     return pId;
   }
   return null;

@@ -214,7 +214,7 @@ function getNextPrevUrl(pageKey, bookmarks, bmModal) {
 
   pos = pages.indexOf(pageKey);
   if (pos === -1) {
-    return urls;
+    return Promise.reject("bookmark not found");
   }
 
   //console.log("current page: %s", pageKey);
@@ -337,6 +337,12 @@ function getCurrentBookmark(pageKey, actualPid, allBookmarks, bmModal, whoCalled
 
   let paragraphBookmarks = allBookmarks[pageKey][pidKey];
 
+  //the current bookmark (actualPid) does not exist
+  //this would happen where url includes ?bkmk=p3 and p3 does not have a bookmark
+  if (!paragraphBookmarks) {
+    return false;
+  }
+
   let html = generateBookmark(actualPid, paragraphBookmarks, topics);
   $("#bookmark-content").html(html);
 
@@ -377,16 +383,7 @@ function getCurrentBookmark(pageKey, actualPid, allBookmarks, bmModal, whoCalled
     $(".bookmark-navigator .next-bookmark").html(`<i class="down arrow icon"></i> Next (${nextActualPid})`);
   }
 
-  /*
-  //when "both" the bookmark navigator is being initialized
-  if (whoCalled === "both") {
-    //scroll first bookmark into view
-    //this is being CANCELED!! Don't understand why
-    scroll(document.getElementById(actualPid), {align: {top: 0.2}}, (type) => {
-      scrollComplete("bookmark navigator initial scroll", type);
-    });
-  }
-  */
+  return true;
 }
 
 /*
@@ -423,10 +420,28 @@ function bookmarkManager(actualPid) {
         }
 
         //identify current bookmark in navigator
-        getCurrentBookmark(pageKey, actualPid, bmList, bmModal, "both");
+        //returns false if actualPid does not contain a bookmark
+        if (!getCurrentBookmark(pageKey, actualPid, bmList, bmModal, "both")) {
+          notify.info(`A bookmark at ${actualPid} was not found.`);
+          return;
+        }
+
+        //init navigator controls
+        initClickListeners();
+
+        //indicate bookmark navigator is active by adding class to ./transcript
+        $(".transcript").addClass("bookmark-navigator-active");
+
+        //show the navigator and scroll
+        $(".bookmark-navigator-wrapper").removeClass("hide-bookmark-navigator");
+        setTimeout(scrollIntoView, 250, actualPid, "bookmarkManager");
       })
       .catch((err) => {
         console.error(err);
+
+        if (err === "bookmark not found") {
+          notify.info(`A bookmark at ${actualPid} was not found.`);
+        }
       });
   }
   else {
@@ -457,6 +472,12 @@ function clearSelectedAnnotation() {
 
 function scrollComplete(message, type) {
   console.log(`${message}: ${type}`);
+}
+
+function scrollIntoView(id, caller) {
+  scroll(document.getElementById(id), {align: {top: 0.2}}, (type) => {
+    scrollComplete(`scroll from bookmark navigator ${caller}(${id})`, type);
+  });
 }
 
 function initClickListeners() {
@@ -582,12 +603,5 @@ function initClickListeners() {
   Initialize the bookmark navigator so they can follow the list of bookmarks
 */
 export function initNavigator(actualPid) {
-  //show the navigator
-  $(".bookmark-navigator-wrapper").removeClass("hide-bookmark-navigator");
   bookmarkManager(actualPid);
-  initClickListeners();
-
-  //indicate bookmark navigator is active by adding class to ./transcript
-  $(".transcript").addClass("bookmark-navigator-active");
-
 }
