@@ -1,12 +1,12 @@
-{% assign cmi-image = "https://wom.christmind.info/public/img/cmi-logo-200.png" %}
+{% assign cmi-image = "https://acim.christmind.info/public/img/cmi-logo-200.png" %}
 {% if page.layout == "transcript" %}
   {% assign type = "article" %}
-  {% assign description = page.fb.desc | default: "Way of Mastery: " | append: page.book | append: " " | append: page.title %}
-  {% assign title = "Way of Mastery: " | append: page.title %}
+  {% assign description = page.fb.desc | default: "A Course In Miracles" | append: page.book | append: " " | append: page.title %}
+  {% assign title = "A Course In Miracles: " | append: page.title %}
 {% else %}
   {% assign type = "website" %}
   {% assign description = page.fb.desc | default: site.description %}
-  {% assign title = page.title | default: "Way of Mastery" %}
+  {% assign title = page.title | default: "A Course In Miracles" %}
 {% endif %}
 
 <!-- facebook -->
@@ -48,7 +48,7 @@ image: 120x120 min - square
 twitter validator: https://cards-dev.twitter.com/validator
 {% endcomment %}
 {% if page.twitter.image %}
-  <meta name="twitter:image" content="https://wom.christmind.info/{{page.twitter.image}}" />
+  <meta name="twitter:image" content="https://acim.christmind.info/{{page.twitter.image}}" />
 {% else %}
   <meta name="twitter:image" content="{{cmi-image}}" />
 {% endif %}
