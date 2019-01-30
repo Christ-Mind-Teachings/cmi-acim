@@ -6,7 +6,18 @@ footer:
   display: true
 ---
 
-<div id="page-contents" class="ui two cards">
+<div id="page-contents" class="ui three cards">
+  <div class="card">
+    <a href="#" data-book="acq" class="toc-modal-open image">
+      <img src="/public/img/acim/acq-big.jpg">
+    </a>
+    <div class="content">
+      <div class="header">Get Acquainted</div>
+      <div class="description">
+        Learn about <em>A Course In Miralces</em>
+      </div>
+    </div>
+  </div>
   <div class="card">
     <a data-book="preface" href="/preface/preface/" class="image">
       <img src="/public/img/acim/preface.jpg">

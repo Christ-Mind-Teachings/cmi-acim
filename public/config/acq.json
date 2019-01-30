@@ -1,0 +1,20 @@
+{
+  "bid": "acq",
+  "base": "/acq",
+  "title": "Get Acquainted",
+  "image": "/public/img/acim/acq-toc.jpg",
+  "contents": [
+    {
+      "title": "Welcome",
+      "url": "/welcome/"
+    },
+    {
+      "title": "About ACIM",
+      "url": "/acim/"
+    },
+    {
+      "title": "Related Sites",
+      "url": "/web/"
+    }
+  ]
+}

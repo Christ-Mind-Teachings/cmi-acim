@@ -29,10 +29,11 @@ const sourceId = 12;
 
 //list the books, these correspond to collection names defined in _config.yml
 // * order according to how search results and bookmarks should appear
-const books = ["preface", "text", "workbook", "manual"];
+const books = ["preface", "text", "workbook", "manual", "acq"];
 const bookIds = ["xxx", ...books];
 
 //list the chapters or parts that make up each book, set the first item to 'xxx'
+const acq = ["xxx", "welcome", "acim", "web"];
 const preface = ["xxx", "preface"];
 
 const text = [ "xxx", "chap0100", "chap0101", "chap0102", "chap0200", "chap0201", "chap0202", "chap0203", "chap0204",
@@ -123,6 +124,8 @@ function getUnitId(bid, unit, section) {
       return workbook.indexOf(unit);
     case "manual":
       return manual.indexOf(unit);
+    case "acq":
+      return acq.indexOf(unit);
     default:
       throw new Error(`unexpected bookId: ${bid}`);
   }
@@ -319,6 +322,9 @@ function getUrl(key) {
       break;
     case "preface":
       unit = preface[decodedKey.uid];
+      break;
+    case "acq":
+      unit = acq[decodedKey.uid];
       break;
   }
 

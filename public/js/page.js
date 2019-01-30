@@ -1812,10 +1812,11 @@ const sourceId = 12;
 
 //list the books, these correspond to collection names defined in _config.yml
 // * order according to how search results and bookmarks should appear
-const books = ["preface", "text", "workbook", "manual"];
+const books = ["preface", "text", "workbook", "manual", "acq"];
 const bookIds = ["xxx", ...books];
 
 //list the chapters or parts that make up each book, set the first item to 'xxx'
+const acq = ["xxx", "welcome", "acim", "web"];
 const preface = ["xxx", "preface"];
 
 const text = ["xxx", "chap0100", "chap0101", "chap0102", "chap0200", "chap0201", "chap0202", "chap0203", "chap0204", "chap0205", "chap0300", "chap0301", "chap0302", "chap0303", "chap0304", "chap0305", "chap0306", "chap0307", "chap0308", "chap0400", "chap0401", "chap0402", "chap0403", "chap0404", "chap0405", "chap0406", "chap0407", "chap0408", "chap0500", "chap0501", "chap0502", "chap0503", "chap0504", "chap0505", "chap0506", "chap0507", "chap0508", "chap0600", "chap0601", "chap0602", "chap0603", "chap0604", "chap0700", "chap0701", "chap0702", "chap0703", "chap0704", "chap0705", "chap0706", "chap0707", "chap0708", "chap0709", "chap0710", "chap0711", "chap0800", "chap0801", "chap0802", "chap0803", "chap0804", "chap0805", "chap0806", "chap0807", "chap0808", "chap0809", "chap0810", "chap0900", "chap0901", "chap0902", "chap0903", "chap0904", "chap0905", "chap0906", "chap0907", "chap0908", "chap0909", "chap0910", "chap1000", "chap1001", "chap1002", "chap1003", "chap1004", "chap1005", "chap1006", "chap1007", "chap1100", "chap1101", "chap1102", "chap1103", "chap1104", "chap1105", "chap1106", "chap1107", "chap1108", "chap1109", "chap1200", "chap1201", "chap1202", "chap1203", "chap1204", "chap1205", "chap1206", "chap1300", "chap1301", "chap1302", "chap1303", "chap1304", "chap1305", "chap1306", "chap1307", "chap1308", "chap1400", "chap1401", "chap1402", "chap1403", "chap1404", "chap1405", "chap1406", "chap1500", "chap1501", "chap1502", "chap1503", "chap1504", "chap1505", "chap1506", "chap1507", "chap1508", "chap1509", "chap1510", "chap1600", "chap1601", "chap1602", "chap1603", "chap1604", "chap1605", "chap1606", "chap1607", "chap1700", "chap1701", "chap1702", "chap1703", "chap1704", "chap1705", "chap1706", "chap1707", "chap1708", "chap1800", "chap1801", "chap1802", "chap1803", "chap1804", "chap1805", "chap1806", "chap1807", "chap1808", "chap1809", "chap1810", "chap1900", "chap1901", "chap1902", "chap1903", "chap1904", "chap1905", "chap1906", "chap1907", "chap1908", "chap1909", "chap1910", "chap1911", "chap2000", "chap2001", "chap2002", "chap2003", "chap2004", "chap2005", "chap2006", "chap2007", "chap2008", "chap2100", "chap2101", "chap2102", "chap2103", "chap2104", "chap2105", "chap2106", "chap2107", "chap2108", "chap2200", "chap2201", "chap2202", "chap2203", "chap2204", "chap2205", "chap2206", "chap2300", "chap2301", "chap2302", "chap2303", "chap2304", "chap2400", "chap2401", "chap2402", "chap2403", "chap2404", "chap2405", "chap2406", "chap2407", "chap2500", "chap2501", "chap2502", "chap2503", "chap2504", "chap2505", "chap2506", "chap2507", "chap2508", "chap2509", "chap2600", "chap2601", "chap2602", "chap2603", "chap2604", "chap2605", "chap2606", "chap2607", "chap2608", "chap2609", "chap2610", "chap2700", "chap2701", "chap2702", "chap2703", "chap2704", "chap2705", "chap2706", "chap2707", "chap2708", "chap2800", "chap2801", "chap2802", "chap2803", "chap2804", "chap2805", "chap2806", "chap2807", "chap2900", "chap2901", "chap2902", "chap2903", "chap2904", "chap2905", "chap2906", "chap2907", "chap2908", "chap2909", "chap3000", "chap3001", "chap3002", "chap3003", "chap3004", "chap3005", "chap3006", "chap3007", "chap3008", "chap3100", "chap3101", "chap3102", "chap3103", "chap3104", "chap3105", "chap3106", "chap3107"];
@@ -1839,6 +1840,8 @@ function getUnitId(bid, unit, section) {
       return workbook.indexOf(unit);
     case "manual":
       return manual.indexOf(unit);
+    case "acq":
+      return acq.indexOf(unit);
     default:
       throw new Error(`unexpected bookId: ${bid}`);
   }
@@ -2034,6 +2037,9 @@ function getUrl(key) {
       break;
     case "preface":
       unit = preface[decodedKey.uid];
+      break;
+    case "acq":
+      unit = acq[decodedKey.uid];
       break;
   }
 
@@ -35521,7 +35527,7 @@ function initSearchModal() {
 
 //this needs to use require because it is also used by a node app and node doesn't support import
 const keyInfo = __webpack_require__(19);
-const queryResultName = "query-result-wom";
+const queryResultName = "query-result-acim";
 
 function getUnitName(pageInfo, unitInfo) {
   return pageInfo[unitInfo.pageKey].title;
@@ -35731,7 +35737,7 @@ function showSavedQuery() {
 
 const page = __webpack_require__(19);
 
-const queryResultName = "query-result-wom";
+const queryResultName = "query-result-acim";
 const SCROLL_INTERVAL = 250;
 
 function scrollComplete(message, type) {
@@ -36240,8 +36246,8 @@ function workbookNextPrev($el) {
 /*
   set next/prev controls on menu for workbook transcripts
 */
-function manualNextPrev($el) {
-  const LAST_ID = 31;
+function manualNextPrev($el, unitMax) {
+  const LAST_ID = unitMax;
   let prevId = -1,
       nextId = -1,
       href,
@@ -36310,7 +36316,10 @@ function highlightCurrentTranscript(bid) {
         workbookNextPrev($el);
         break;
       case "manual":
-        manualNextPrev($el);
+        manualNextPrev($el, 31);
+        break;
+      case "acq":
+        manualNextPrev($el, 3);
         break;
     }
   }
@@ -36333,6 +36342,7 @@ function loadTOC() {
         $(".toc-list").html(makeWorkbookContents(contents.contents));
         break;
       case "manual":
+      case "acq":
         $(".toc-list").html(makeManualContents(contents.base, contents.contents));
         break;
       default:
@@ -36399,6 +36409,7 @@ function getBookId() {
               $(".toc-list").html(makeWorkbookContents(contents.contents));
               break;
             case "manual":
+            case "acq":
               $(".toc-list").html(makeManualContents(contents.base, contents.contents));
               break;
             default:
@@ -36837,6 +36848,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+const ports = {
+  acim: 9912,
+  wom: 9910,
+  raj: 9913,
+  jsb: 9911,
+  www: 9999
+};
+
+function setLinks() {
+  if (location.hostname === "localhost") {
+    $("#www-christmind-info").attr("href", `http://localhost:${ports.www}/`);
+  }
+}
+
 /*
   Fix main menu to top of page when scrolled
 */
@@ -36854,6 +36879,7 @@ function initStickyMenu() {
 
 $(document).ready(() => {
   initStickyMenu();
+  setLinks();
 
   __WEBPACK_IMPORTED_MODULE_1__modules_bookmark_bookmark__["b" /* default */].initialize();
   __WEBPACK_IMPORTED_MODULE_2__modules_search_search__["a" /* default */].initialize();

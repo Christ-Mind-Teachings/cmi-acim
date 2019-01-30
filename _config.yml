@@ -1,5 +1,5 @@
 # CMI
-sourceId: 1
+sourceId: 12
 cmiTitle: "Teachings of Christ Mind"
 
 # Setup
@@ -9,7 +9,7 @@ description:  ''
 url:          'https://acim.christmind.info'
 baseurl:      ''
 keywords:     "Christ Mind Teachings, A Course in Miracles, Sparkly Edition "
-port:         1111
+port:         9912
 
 # About/contact
 author:
@@ -35,6 +35,9 @@ markdown: kramdown
 
 # Collections for transcripts
 collections:
+  acq:
+    output: true
+    title: "Get Acquainted"
   text:
     output: true
     title: "A Course in Miracles: Text"
@@ -49,6 +52,16 @@ collections:
     title: "Preface to the ACIM Sparkly Edition"
 
 defaults:
+  - scope:
+      path: ""
+      type: acq
+    values:
+      layout: transcript
+      book: "Get Acquainted"
+      image: "/public/img/acim/acq-big.jpg"
+      image-width: 612
+      image-height: 792
+      bid: "acq"
   - scope:
       path: ""
       type: text

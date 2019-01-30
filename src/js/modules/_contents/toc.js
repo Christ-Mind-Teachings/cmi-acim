@@ -239,8 +239,8 @@ function workbookNextPrev($el) {
 /*
   set next/prev controls on menu for workbook transcripts
 */
-function manualNextPrev($el) {
-  const LAST_ID = 31;
+function manualNextPrev($el, unitMax) {
+  const LAST_ID = unitMax;
   let prevId = -1, nextId = -1, href, text;
   let lid = $el.attr("data-lid");
   let lessonId = parseInt(lid, 10);
@@ -308,7 +308,10 @@ function highlightCurrentTranscript(bid) {
         workbookNextPrev($el);
         break;
       case "manual":
-        manualNextPrev($el);
+        manualNextPrev($el, 31);
+        break;
+      case "acq":
+        manualNextPrev($el, 3);
         break;
     }
   }
@@ -332,6 +335,7 @@ function loadTOC() {
           $(".toc-list").html(makeWorkbookContents(contents.contents));
           break;
         case "manual":
+        case "acq":
           $(".toc-list").html(makeManualContents(contents.base, contents.contents));
           break;
         default:
@@ -400,6 +404,7 @@ export default {
                 $(".toc-list").html(makeWorkbookContents(contents.contents));
                 break;
               case "manual":
+              case "acq":
                 $(".toc-list").html(makeManualContents(contents.base, contents.contents));
                 break;
               default:
