@@ -18,12 +18,21 @@ const cmiPageBanner = {
   }
 };
 
+const getAcquainted = {
+  element: "[data-book='acq']",
+  popover: {
+    title: "Get Acquainted",
+    description: "Get help and learn about ACIM",
+    position: "right"
+  }
+};
+
 const acimPreface = {
   element: "[data-book='preface']",
   popover: {
     title: "Preface",
     description: "The Preface to the ACIM Sparkly Edition",
-    position: "top"
+    position: "right"
   }
 };
 
@@ -32,7 +41,7 @@ const acimText = {
   popover: {
     title: "Text",
     description: "The Text of ACIM containing thirty one chapters",
-    position: "top"
+    position: "left"
   }
 };
 
@@ -41,7 +50,7 @@ const acimWorkbook = {
   popover: {
     title: "Workbook for Students",
     description: "The Workbook for Students containing one lesson for each day of the year.",
-    position: "top"
+    position: "right"
   }
 };
 
@@ -50,7 +59,7 @@ const acimManual = {
   popover: {
     title: "Manual for Teachers",
     description: "Answers common questions and clarifies terms used in ACIM.",
-    position: "top"
+    position: "left"
   }
 };
 
@@ -233,6 +242,7 @@ export function pageDriver() {
 
   driver.defineSteps([
     cmiPageTitle,
+    getAcquainted,
     acimPreface,
     acimText,
     acimWorkbook,

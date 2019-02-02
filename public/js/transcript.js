@@ -36298,7 +36298,7 @@ function manualNextPrev($el, unitMax) {
   Args:
     bid: bookId, 'text', 'workbook', 'manual'
 */
-function highlightCurrentTranscript(bid) {
+function highlightCurrentTranscript(bid, setNextPrev = true) {
   if ($(".transcript").length > 0) {
     let page = location.pathname;
     let $el = $(`.toc-list a[href='${page}']`);
@@ -36308,6 +36308,11 @@ function highlightCurrentTranscript(bid) {
     $el.addClass("current-unit").removeAttr("href");
     __WEBPACK_IMPORTED_MODULE_0_scroll_into_view___default()($el.get(0));
 
+    if (!setNextPrev) {
+      return;
+    }
+
+    //set prev/next menu links
     switch (bid) {
       case "text":
         textNexPrev($el);
@@ -36325,31 +36330,77 @@ function highlightCurrentTranscript(bid) {
   }
 }
 
-//called for transcript pages
-function loadTOC() {
-  console.log("transcript page: loading toc");
+/*
+  Loads TOC for current transcript page, marks current page in toc, and sets
+  next/prev menu links
+
+  On pages where the toc is created for items other than the menu toc the toc may need to be
+  reset, this is done by checking for toc.init === true. To work correctly, page elements with
+  .toc-modal-open must also have .combined, otherwise the toc will get messed up.
+*/
+function loadTOC(toc) {
+
+  //check if previously initialized
+  if (toc.init) {
+    //toc refresh not needed if not combined
+    if (!toc.combined) {
+      return;
+    }
+
+    //console.log("toc previously initialized, toc: %o", toc);
+    $(".toc-image").attr("src", `${toc.image}`);
+    $(".toc-title").html(`Table of Contents: <em>${toc.title}</em>`);
+    $(".toc-list").html(toc.html);
+
+    //set current-item, don't setNextPrev since it was already done.
+    highlightCurrentTranscript(toc.bid, false);
+
+    return;
+  }
+
   let book = $("#contents-modal-open").attr("data-book").toLowerCase();
+  toc.book = book;
 
   Object(__WEBPACK_IMPORTED_MODULE_1__config_config__["c" /* getConfig */])(book).then(contents => {
+    var html;
+
     $(".toc-image").attr("src", `${contents.image}`);
     $(".toc-title").html(`Table of Contents: <em>${contents.title}</em>`);
+    toc["image"] = contents.image;
+    toc["title"] = contents.title;
+    toc["bid"] = contents.bid;
 
     switch (contents.bid) {
       case "text":
-        $(".toc-list").html(makeTextContents(contents.contents));
+        html = makeTextContents(contents.contents);
+        //$(".toc-list").html(makeTextContents(contents.contents));
         break;
       case "workbook":
-        $(".toc-list").html(makeWorkbookContents(contents.contents));
+        html = makeWorkbookContents(contents.contents);
+        //$(".toc-list").html(makeWorkbookContents(contents.contents));
         break;
       case "manual":
       case "acq":
-        $(".toc-list").html(makeManualContents(contents.base, contents.contents));
+        html = makeManualContents(contents.base, contents.contents);
+        //$(".toc-list").html(makeManualContents(contents.base, contents.contents));
         break;
       default:
-        $(".toc-list").html(makeContents(contents.contents));
+        html = makeContents(contents.contents);
+        //$(".toc-list").html(makeContents(contents.contents));
         break;
     }
+    toc.html = html;
+    toc.init = true;
+    $(".toc-list").html(html);
     highlightCurrentTranscript(contents.bid);
+
+    /*
+    let page = location.pathname;
+    let $el = $(`.toc-list a[href='${page}']`);
+     console.log("toc pathname: %s", page);
+    console.log("toc current-item class: %s", $el.attr("class"));
+    console.log("toc current-item href: %s", $el.attr("href"));
+    */
   }).catch(error => {
     console.error(error);
     $(".toc-image").attr("src", "/public/img/cmi/toc_modal.png");
@@ -36373,6 +36424,8 @@ function getBookId() {
    * or local storage
    */
   initialize: function (env) {
+    let toc = { init: false, book: "", html: "" };
+
     //dialog settings
     $(uiTocModal).modal({
       dimmerSettings: { opacity: uiModalOpacity },
@@ -36381,7 +36434,7 @@ function getBookId() {
 
     //load toc once for transcript pages
     if (env === "transcript") {
-      loadTOC();
+      loadTOC(toc);
     }
 
     /*
@@ -36394,12 +36447,18 @@ function getBookId() {
     $(uiOpenTocModal).on("click", e => {
       e.preventDefault();
       let book = $(e.currentTarget).attr("data-book").toLowerCase();
+      let combined = $(e.currentTarget).hasClass("combined");
 
       //load the TOC if we're not on a transcript page
-      if (env !== "transcript") {
+      if (env !== "transcript" || env === "transcript" && combined) {
         Object(__WEBPACK_IMPORTED_MODULE_1__config_config__["c" /* getConfig */])(book).then(contents => {
           $(".toc-image").attr("src", `${contents.image}`);
           $(".toc-title").html(`Table of Contents: <em>${contents.title}</em>`);
+
+          //mark toc as combined
+          if (env === "transcript" && combined) {
+            toc["combined"] = true;
+          }
 
           switch (contents.bid) {
             case "text":
@@ -36425,9 +36484,12 @@ function getBookId() {
           $(".toc-list").html(`<p>Error: ${error.message}</p>`);
           $(uiTocModal).modal("show");
         });
-      } else {
-        $(uiTocModal).modal("show");
       }
+      //transcript and not combined
+      else {
+          loadTOC(toc);
+          $(uiTocModal).modal("show");
+        }
     });
   }
 });
@@ -36512,12 +36574,21 @@ const cmiPageBanner = {
   }
 };
 
+const getAcquainted = {
+  element: "[data-book='acq']",
+  popover: {
+    title: "Get Acquainted",
+    description: "Get help and learn about ACIM",
+    position: "right"
+  }
+};
+
 const acimPreface = {
   element: "[data-book='preface']",
   popover: {
     title: "Preface",
     description: "The Preface to the ACIM Sparkly Edition",
-    position: "top"
+    position: "right"
   }
 };
 
@@ -36526,7 +36597,7 @@ const acimText = {
   popover: {
     title: "Text",
     description: "The Text of ACIM containing thirty one chapters",
-    position: "top"
+    position: "left"
   }
 };
 
@@ -36535,7 +36606,7 @@ const acimWorkbook = {
   popover: {
     title: "Workbook for Students",
     description: "The Workbook for Students containing one lesson for each day of the year.",
-    position: "top"
+    position: "right"
   }
 };
 
@@ -36544,7 +36615,7 @@ const acimManual = {
   popover: {
     title: "Manual for Teachers",
     description: "Answers common questions and clarifies terms used in ACIM.",
-    position: "top"
+    position: "left"
   }
 };
 
@@ -36725,7 +36796,7 @@ function pageDriver() {
     opacity: 0.5
   });
 
-  driver.defineSteps([cmiPageTitle, acimPreface, acimText, acimWorkbook, acimManual]);
+  driver.defineSteps([cmiPageTitle, getAcquainted, acimPreface, acimText, acimWorkbook, acimManual]);
 
   driver.start();
 }
@@ -37902,6 +37973,11 @@ $(document).ready(() => {
     //until the share window is closed
     let pid = __WEBPACK_IMPORTED_MODULE_9__modules_share_share__["a" /* default */].initialize();
     __WEBPACK_IMPORTED_MODULE_3__modules_bookmark_bookmark__["b" /* default */].initialize(pid);
+
+    if ($(".disable-paragraph-marker").length > 0) {
+      console.log("disable paragraph markers");
+      $(".toggle-paragraph-markers").eq(0).trigger("click");
+    }
   }).catch(error => {
     //report error to the user - somehow
     console.error(error);
