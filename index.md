@@ -2,6 +2,13 @@
 layout: page
 masthead: home
 title: "A Course in Miracles: Sparkly Edition"
+fb:
+  desc: "The CMI Library includes the ACIM Sparkly Edition. Use of Terms, Text, Workbook, and Manual. All books are fully searchable and supports annotation and bookmarks."
+  image:
+    - acim/manual-toc.jpg
+    - acim/text-toc.jpg
+    - acim/workbook-toc.jpg
+    - acim/acq-toc.jpg
 footer:
   display: true
 ---
