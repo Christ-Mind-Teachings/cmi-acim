@@ -270,8 +270,20 @@ export function getPageInfo(pageKey, data = false) {
               //console.log("info.data prop: %s", prop);
               //console.log(info.data[prop][0].selectedText);
               if (info.data[prop].length > 0) {
-                info.title = info.data[prop][0].selectedText.title;
-                info.url = info.data[prop][0].selectedText.url;
+                //not all bookmarks have selectedText
+                if (info.data[prop][0].selectedText) {
+                  info.title = info.data[prop][0].selectedText.title;
+                  info.url = info.data[prop][0].selectedText.url;
+                }
+                else {
+                  if (info.data[prop][0].bookTitle) {
+                    info.title = info.data[prop][0].bookTitle;
+                  }
+                  else {
+                    info.title = "Don't know the title, sorry!";
+                  }
+                  info.url = transcript.getUrl(info.pageKey);
+                }
                 break;
               }
             }

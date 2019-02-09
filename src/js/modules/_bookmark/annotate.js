@@ -161,7 +161,7 @@ function noteHandler() {
 
     if (bookmarkData.bookmark) {
       let annotation = bookmarkData.bookmark.find(value => typeof value.aid === "undefined");
-      
+
       //we found a note - so edit it
       if (annotation) {
         editAnnotation(pid, undefined, annotation);
@@ -170,7 +170,7 @@ function noteHandler() {
     }
 
     //new note for paragraph
-    $(`#${pid}`).addClass("annotation-edit");
+    $(`#${pid}`).addClass("annotation-edit annotation-note");
     $(".annotation-edit").wrapAll(wrapper);
     $(".annotate-wrapper").prepend(form);
     getTopicList(pid);
@@ -296,8 +296,13 @@ function submitHandler() {
     //remove class "show" added when form was displayed
     $(`[data-annotation-id="${formData.aid}"]`).removeClass("show");
 
+    //this is a note annotation, no selected text, add page title to formData
+    if ($(".transcript .annotation-edit").hasClass("annotation-note")) {
+      formData.bookTitle = $("#book-title").text();
+    }
+
     annotation.submit(formData);
-    $(".transcript .annotation-edit").removeClass("annotation-edit");
+    $(".transcript .annotation-edit").removeClass("annotation-edit annotation-note");
   });
 }
 

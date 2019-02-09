@@ -5,7 +5,7 @@
   --signed-in-color: green;
   --signed-in-background: #f1f1f7;
 }
-<!-- 
+
 body {
   color: #454545;
   background-color: #fff;
@@ -81,6 +81,12 @@ body {
   padding-right: 4px;
   cursor: default!important;
   border-radius: 5px;
+}
+
+/* add margin so the navigator does not hide a bookmark or search result */
+.transcript.ui.text.container.bookmark-navigator-active,
+.transcript.ui.text.container.search-navigator-active {
+  margin-bottom: 250px;
 }
 
 /* footer */

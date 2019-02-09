@@ -1797,7 +1797,7 @@ module.exports = engine.createStore(storages, plugins)
        uuuu: unit Id
         ppp: paragraph number - not positional
 
-  NOTE: This module is used by code running in the browser and Node so the 
+  NOTE: This module is used by code running in the browser and Node so the
         common.js module system is used
 */
 
@@ -1825,25 +1825,39 @@ const workbook = ["xxx", "introp1", "l001", "l002", "l003", "l004", "l005", "l00
 
 const manual = ["xxx", "chap01", "chap02", "chap03", "chap04", "chap05", "chap06", "chap07", "chap08", "chap09", "chap10", "chap11", "chap12", "chap13", "chap14", "chap15", "chap16", "chap17", "chap18", "chap19", "chap20", "chap21", "chap22", "chap23", "chap24", "chap25", "chap26", "chap27", "chap28", "chap29", "chap30", "chap31"];
 
+const contents = {
+  acq: acq,
+  preface: preface,
+  text: text,
+  workbook: workbook,
+  manual: manual
+};
+
 /*
-  The unitId is the sequential value of a logical ordering of units in a book,
-  except for the 'Text' where it is given by the pattern "CCSS" where 
-  CC is the chapter Number and SS is the Section Number. The Introduction is 00.
+  return the position of unit in the bid array
+    arg: section is passed when bid = text
 */
 function getUnitId(bid, unit, section) {
-  switch (bid) {
-    case "preface":
-      return preface.indexOf(unit);
-    case "text":
-      return text.indexOf(section);
-    case "workbook":
-      return workbook.indexOf(unit);
-    case "manual":
-      return manual.indexOf(unit);
-    case "acq":
-      return acq.indexOf(unit);
-    default:
-      throw new Error(`unexpected bookId: ${bid}`);
+  if (section) {
+    unit = section;
+  }
+
+  if (contents[bid]) {
+    return contents[bid].indexOf(unit);
+  } else {
+    throw new Error(`unexpected bookId: ${bid}`);
+  }
+}
+
+/*
+  Return the number of chapters in the book (bid). 
+  Subtract one from length because of 'xxx' (fake chapter)
+*/
+function getNumberOfUnits(bid) {
+  if (contents[bid]) {
+    return contents[bid].length - 1;
+  } else {
+    throw new Error(`getNumberOfUnits() unexpected bookId: ${bid}`);
   }
 }
 
@@ -2014,6 +2028,30 @@ function decodeKey(key) {
   return decodedKey;
 }
 
+/*
+ * Convert page key to url
+ */
+function getUrl(key) {
+  let decodedKey = decodeKey(key);
+  let unit = "invalid";
+
+  if (decodedKey.error) {
+    return "/invalid/key/";
+  }
+
+  if (contents[decodedKey.bookId]) {
+    unit = contents[decodedKey.bookId][decodedKey.uid];
+
+    if (decodedKey.bookId === "text") {
+      let chapter = unit.substr(4, 2);
+      unit = `${chapter}/${unit}`;
+    }
+  }
+
+  return `/${decodedKey.bookId}/${unit}/`;
+}
+
+/*
 function getUrl(key) {
   let decodedKey = decodeKey(key);
   let unit = "invalid";
@@ -2023,10 +2061,10 @@ function getUrl(key) {
     return "";
   }
 
-  switch (decodedKey.bookId) {
+  switch(decodedKey.bookId) {
     case "text":
       unit = text[decodedKey.uid];
-      chapter = unit.substr(4, 2);
+      chapter = unit.substr(4,2);
       unit = `${chapter}/${unit}`;
       break;
     case "workbook":
@@ -2045,12 +2083,14 @@ function getUrl(key) {
 
   return `/${decodedKey.bookId}/${unit}/`;
 }
+*/
 
 function getBooks() {
   return books;
 }
 
 module.exports = {
+  getNumberOfUnits: getNumberOfUnits,
   getBooks: getBooks,
   getSourceId: getSourceId,
   getKeyInfo: getKeyInfo,
@@ -2060,36 +2100,6 @@ module.exports = {
   decodeKey: decodeKey,
   getUrl: getUrl
 };
-
-function testIt(what, url) {
-  let parts = splitUrl(url);
-
-  console.log("url: %s", url);
-  console.log("%s: %s", what, getUnitId(...parts));
-
-  let pKey = genPageKey(url);
-  console.log("pageKey: %s", pKey);
-
-  let paraKey = genParagraphKey(23, url);
-  console.log("paraKey: %s", paraKey);
-
-  let dkey = decodeKey(paraKey);
-  console.log("decoded key: %o", dkey);
-  console.log("url: %s", getUrl(paraKey));
-  console.log("-------------------------");
-}
-
-/*
-let textUrl = "/text/02/chap0204/";
-let prefaceUrl = "/preface/preface/";
-let workbookUrl = "/workbook/l156/";
-let manualUrl = "/manual/chap21/";
-
-testIt("preface", prefaceUrl);
-testIt("text", textUrl);
-testIt("workbook", workbookUrl);
-testIt("manual", manualUrl);
-*/
 
 /***/ }),
 /* 20 */
@@ -5513,8 +5523,18 @@ function getPageInfo(pageKey, data = false) {
             //console.log("info.data prop: %s", prop);
             //console.log(info.data[prop][0].selectedText);
             if (info.data[prop].length > 0) {
-              info.title = info.data[prop][0].selectedText.title;
-              info.url = info.data[prop][0].selectedText.url;
+              //not all bookmarks have selectedText
+              if (info.data[prop][0].selectedText) {
+                info.title = info.data[prop][0].selectedText.title;
+                info.url = info.data[prop][0].selectedText.url;
+              } else {
+                if (info.data[prop][0].bookTitle) {
+                  info.title = info.data[prop][0].bookTitle;
+                } else {
+                  info.title = "Don't know the title, sorry!";
+                }
+                info.url = transcript.getUrl(info.pageKey);
+              }
               break;
             }
           }
@@ -12612,6 +12632,7 @@ function getPageBookmarks(sharePid) {
             count++;
             hasBookmark = true;
           } else {
+            $(`#p${pid} > span.pnum`).attr("data-aid", bm.creationDate);
             hasAnnotation = true;
           }
         }
@@ -29712,7 +29733,7 @@ function noteHandler() {
     }
 
     //new note for paragraph
-    $(`#${pid}`).addClass("annotation-edit");
+    $(`#${pid}`).addClass("annotation-edit annotation-note");
     $(".annotation-edit").wrapAll(wrapper);
     $(".annotate-wrapper").prepend(form);
     getTopicList(pid);
@@ -29836,8 +29857,13 @@ function submitHandler() {
     //remove class "show" added when form was displayed
     $(`[data-annotation-id="${formData.aid}"]`).removeClass("show");
 
+    //this is a note annotation, no selected text, add page title to formData
+    if ($(".transcript .annotation-edit").hasClass("annotation-note")) {
+      formData.bookTitle = $("#book-title").text();
+    }
+
     __WEBPACK_IMPORTED_MODULE_2__bookmark__["a" /* annotation */].submit(formData);
-    $(".transcript .annotation-edit").removeClass("annotation-edit");
+    $(".transcript .annotation-edit").removeClass("annotation-edit annotation-note");
   });
 }
 
@@ -33964,6 +33990,10 @@ function generateHorizontalList(listArray) {
 function generateAnnotation(annotation, topics = []) {
   let match;
 
+  if (!annotation.topicList) {
+    annotation.topicList = [];
+  }
+
   //convert annotation topics list into string array
   let topicList = annotation.topicList.map(topic => {
     if (typeof topic === "object") {
@@ -34021,17 +34051,25 @@ function generateBookmark(actualPid, bkmk, topics) {
   returns the url for the first annotation of the arg bookmark
   Note: deleted annotations are empty arrays so skip over them.
 */
-function getBookmarkUrl(bookmark) {
+function getBookmarkUrl(bookmarks, pageKey) {
   let url;
+  let bookmark = bookmarks[pageKey];
   for (let prop in bookmark) {
     if (bookmark.hasOwnProperty(prop)) {
       if (bookmark[prop][0]) {
-        url = `${bookmark[prop][0].selectedText.url}?bkmk=${bookmark[prop][0].rangeStart}`;
+        let selectedText = bookmark[prop][0].selectedText;
+        if (selectedText) {
+          url = `${bookmark[prop][0].selectedText.url}?bkmk=${bookmark[prop][0].rangeStart}`;
+        } else {
+          //we have a bookmark with no selected text, have to get the url in another way
+          url = `${transcript.getUrl(pageKey)}?bkmk=${bookmark[prop][0].rangeStart}`;
+        }
         break;
       }
     }
   }
 
+  //console.log("url: %s", url);
   return url;
 }
 
@@ -34066,7 +34104,7 @@ function getNextPageUrl(pos, pageList, filterList, bookmarks) {
   return new Promise(resolve => {
     if (found) {
       let pageKey = pageList[pagePos];
-      let url = getBookmarkUrl(bookmarks[pageKey]);
+      let url = getBookmarkUrl(bookmarks, pageKey);
 
       //it's possible the url was not found so check for that
       if (url) {
@@ -34112,7 +34150,7 @@ function getPrevPageUrl(pos, pageList, filterList, bookmarks) {
   return new Promise(resolve => {
     if (found) {
       let pageKey = pageList[pagePos];
-      let url = getBookmarkUrl(bookmarks[pageKey]);
+      let url = getBookmarkUrl(bookmarks, pageKey);
       //console.log("prev url is %s", url);
       resolve(url);
     } else {
@@ -34438,11 +34476,6 @@ function initClickListeners() {
     let userInfo;
     let pid, aid, text;
 
-    //no highlighted text
-    if (annotation.length === 0) {
-      return;
-    }
-
     userInfo = Object(__WEBPACK_IMPORTED_MODULE_4__user_netlify__["b" /* getUserInfo */])();
     if (!userInfo) {
       __WEBPACK_IMPORTED_MODULE_5_toastr___default.a.info("You must be signed in to share selected text");
@@ -34450,10 +34483,17 @@ function initClickListeners() {
     }
 
     pid = $(".selected-annotation-wrapper p").attr("id");
-    aid = annotation.data("aid");
-    text = annotation.text().replace(/\n/, " ");
 
-    let url = `https://acim.christmind.info${location.pathname}?as=${pid}:${aid}:${userInfo.userId}`;
+    //no highlighted text so grab the whole paragraph
+    if (annotation.length === 0) {
+      aid = $(`#${pid} > span.pnum`).attr("data-aid");
+      text = $(`#${pid}`).text().replace(/\n/, " ");
+    } else {
+      aid = annotation.data("aid");
+      text = annotation.text().replace(/\n/, " ");
+    }
+
+    let url = `https://${location.hostname}${location.pathname}?as=${pid}:${aid}:${userInfo.userId}`;
     let channel = $(this).hasClass("facebook") ? "facebook" : "email";
 
     // console.log("url: %s", url);
@@ -48031,7 +48071,9 @@ function clearSharedAnnotation() {
   console.log("clearSharedAnnotation");
 
   //unwrap shared annotation
-  sharedAnnotation.selectedText.wrap.unwrap();
+  if (sharedAnnotation.selectedText) {
+    sharedAnnotation.selectedText.wrap.unwrap();
+  }
 
   //remove wrapper
   $("#shared-annotation-wrapper > .header").remove();
@@ -48126,7 +48168,11 @@ function showAnnotation() {
     // console.log("annotation: %o", annotation);
 
     let node = document.getElementById(annotation.rangeStart);
-    Object(__WEBPACK_IMPORTED_MODULE_2__bookmark_selection__["d" /* highlight */])(annotation.selectedText, node);
+
+    if (annotation.selectedText) {
+      Object(__WEBPACK_IMPORTED_MODULE_2__bookmark_selection__["d" /* highlight */])(annotation.selectedText, node);
+    }
+
     $(`[data-aid="${aid}"]`).addClass("shared");
 
     wrapRange(annotation);

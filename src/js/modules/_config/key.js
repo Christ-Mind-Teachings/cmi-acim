@@ -14,7 +14,7 @@
        uuuu: unit Id
         ppp: paragraph number - not positional
 
-  NOTE: This module is used by code running in the browser and Node so the 
+  NOTE: This module is used by code running in the browser and Node so the
         common.js module system is used
 */
 
@@ -109,25 +109,41 @@ const manual = ["xxx", "chap01", "chap02", "chap03", "chap04", "chap05", "chap06
   "chap20", "chap21", "chap22", "chap23", "chap24", "chap25", "chap26", "chap27", "chap28", "chap29",
   "chap30", "chap31"];
 
+const contents = {
+  acq: acq,
+  preface: preface,
+  text: text,
+  workbook: workbook,
+  manual: manual
+};
+
 /*
-  The unitId is the sequential value of a logical ordering of units in a book,
-  except for the 'Text' where it is given by the pattern "CCSS" where 
-  CC is the chapter Number and SS is the Section Number. The Introduction is 00.
+  return the position of unit in the bid array
+    arg: section is passed when bid = text
 */
 function getUnitId(bid, unit, section) {
-  switch(bid) {
-    case "preface":
-      return preface.indexOf(unit);
-    case "text":
-      return text.indexOf(section);
-    case "workbook":
-      return workbook.indexOf(unit);
-    case "manual":
-      return manual.indexOf(unit);
-    case "acq":
-      return acq.indexOf(unit);
-    default:
-      throw new Error(`unexpected bookId: ${bid}`);
+  if (section) {
+    unit = section;
+  }
+
+  if (contents[bid]) {
+    return contents[bid].indexOf(unit);
+  }
+  else {
+    throw new Error(`unexpected bookId: ${bid}`);
+  }
+}
+
+/*
+  Return the number of chapters in the book (bid). 
+  Subtract one from length because of 'xxx' (fake chapter)
+*/
+function getNumberOfUnits(bid) {
+  if (contents[bid]) {
+    return contents[bid].length - 1;
+  }
+  else {
+    throw new Error(`getNumberOfUnits() unexpected bookId: ${bid}`);
   }
 }
 
@@ -299,6 +315,30 @@ function decodeKey(key) {
   return decodedKey;
 }
 
+/*
+ * Convert page key to url
+ */
+function getUrl(key) {
+  let decodedKey = decodeKey(key);
+  let unit = "invalid";
+
+  if (decodedKey.error) {
+    return "/invalid/key/";
+  }
+
+  if (contents[decodedKey.bookId]) {
+    unit = contents[decodedKey.bookId][decodedKey.uid];
+
+    if (decodedKey.bookId === "text") {
+      let chapter = unit.substr(4,2);
+      unit = `${chapter}/${unit}`;
+    }
+  }
+
+  return `/${decodedKey.bookId}/${unit}/`;
+}
+
+/*
 function getUrl(key) {
   let decodedKey = decodeKey(key);
   let unit = "invalid";
@@ -330,12 +370,14 @@ function getUrl(key) {
 
   return `/${decodedKey.bookId}/${unit}/`;
 }
+*/
 
 function getBooks() {
   return books;
 }
 
 module.exports = {
+  getNumberOfUnits: getNumberOfUnits,
   getBooks: getBooks,
   getSourceId: getSourceId,
   getKeyInfo: getKeyInfo,
@@ -346,32 +388,3 @@ module.exports = {
   getUrl: getUrl
 };
 
-function testIt(what, url) {
-  let parts = splitUrl(url);
-
-  console.log("url: %s", url);
-  console.log("%s: %s", what, getUnitId(...parts));
-
-  let pKey = genPageKey(url);
-  console.log("pageKey: %s", pKey);
-
-  let paraKey = genParagraphKey(23, url);
-  console.log("paraKey: %s", paraKey);
-
-  let dkey = decodeKey(paraKey);
-  console.log("decoded key: %o", dkey);
-  console.log("url: %s", getUrl(paraKey));
-  console.log("-------------------------");
-}
-
-/*
-let textUrl = "/text/02/chap0204/";
-let prefaceUrl = "/preface/preface/";
-let workbookUrl = "/workbook/l156/";
-let manualUrl = "/manual/chap21/";
-
-testIt("preface", prefaceUrl);
-testIt("text", textUrl);
-testIt("workbook", workbookUrl);
-testIt("manual", manualUrl);
-*/
