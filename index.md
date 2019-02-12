@@ -3,7 +3,7 @@ layout: page
 masthead: home
 title: "A Course in Miracles: Sparkly Edition"
 fb:
-  desc: "The CMI Library includes the ACIM Sparkly Edition. Use of Terms, Text, Workbook, and Manual. All books are fully searchable and supports annotation and bookmarks."
+  desc: "The CMI Library includes the ACIM Sparkly Edition. Use of Terms, Text, Workbook, and Manual. All books are fully searchable and support annotation and bookmarks."
   image:
     - acim/manual-toc.jpg
     - acim/text-toc.jpg
@@ -13,15 +13,21 @@ footer:
   display: true
 ---
 
+## Welcome to the ACIM Sparkly Edition! 
+{: .ui.header}
+
+*A Course In Miracles* is included in the Library because it is **literally** life changing in its surprising authority on topics that no one can know, its trusted source and incredible consistency. Clarity on the nature of Being from out of this world its words are naturally known to be true by the way they feel.
+
+The *Sparkly Edition* of the Course is included here because that is the version from which [Raj](https://raj.christmind.info) reads in the *ACIM Study Group* which is also included in the Library.
+
 <div id="page-contents" class="ui three cards">
   <div class="card">
     <a href="#" data-book="acq" class="toc-modal-open image" data-tooltip="Click to view the Getting Acquainted table of contents." data-position="top center">
       <img src="/public/img/acim/acq-big.jpg">
     </a>
     <div class="content">
-      <div class="header">Get Acquainted</div>
       <div class="description">
-        Learn about <em>A Course In Miralces</em>
+        Learn about the history and versions of <em>A Course In Miracles.</em>
       </div>
     </div>
   </div>
@@ -30,9 +36,8 @@ footer:
       <img src="/public/img/acim/preface.jpg">
     </a>
     <div class="content">
-      <div class="header">A Course in Miracles: Preface</div>
       <div class="description">
-        Preface
+        The <em>Preface</em> discusses the Sparkly Edition and includes the <em>Use of Terms</em>.
       </div>
     </div>
   </div>
@@ -41,9 +46,8 @@ footer:
       <img src="/public/img/acim/text.jpg">
     </a>
     <div class="content">
-      <div class="header">A Course in Miracles: Text</div>
       <div class="description">
-        The Text of A Course in Miracles
+        The central teaching of <em>A Course In Miracles</em>.
       </div>
     </div>
   </div>
@@ -52,9 +56,8 @@ footer:
       <img src="/public/img/acim/workbook.jpg">
     </a>
     <div class="content">
-      <div class="header">A Course in Miracles: Workbook for Students</div>
       <div class="description">
-        ACIM Workbook
+        The <em>Workbook</em> presents the practical application of the concepts in the <em>Text</em> through a series of 365 daily lessons.
       </div>
     </div>
   </div>
@@ -63,9 +66,8 @@ footer:
       <img src="/public/img/acim/manual.jpg">
     </a>
     <div class="content">
-      <div class="header">A Course in Miracles: Manual for Teachers</div>
       <div class="description">
-        ACIM Manual for Teachers
+        A manual for the teachers of God answering many important questions.
       </div>
     </div>
   </div>
