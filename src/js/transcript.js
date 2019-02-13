@@ -89,12 +89,7 @@ function initStickyMenu() {
   });
 
   // show dropdown on hover
-  // $(".main.menu  .ui.dropdown").dropdown({
-  $("#bookmark-dropdown-menu").dropdown({
-    on: "hover"
-  });
-
-  $("#about-dropdown-menu").dropdown({
+  $(".main.menu  .ui.dropdown").dropdown({
     on: "hover"
   });
 }
