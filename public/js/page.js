@@ -29591,6 +29591,7 @@ const form = `
     <div class="fields">
       <button class="annotation-submit ui green button" type="submit">Submit</button>
       <button class="annotation-cancel ui red basic button">Cancel</button>
+      <button class="annotation-share ui green disabled basic button">Share</button>
       <div class="twelve wide field">
         <button class="annotation-delete ui red disabled right floated button">Delete</button>
       </div>
@@ -29699,11 +29700,12 @@ function editAnnotation(pid, aid, annotation) {
   } else {
     $(`#${pid}`).addClass("annotation-edit");
   }
-  console.log("editAnnotation");
+  //console.log("editAnnotation");
 
   $(".annotation-edit").wrapAll(wrapper);
   $(".annotate-wrapper").prepend(form);
   $(".annotation-delete.disabled").removeClass("disabled");
+  $(".annotation-share.disabled").removeClass("disabled");
   getTopicList(pid, aid, annotation);
 }
 
@@ -29885,6 +29887,69 @@ function cancelHandler() {
   });
 }
 
+/*
+  Handle share button pressed on annotation form
+*/
+function shareHandler() {
+  $(".transcript").on("click", "#annotation-form .annotation-share", function (e) {
+    e.preventDefault();
+
+    let formData = getFormData();
+    unwrap();
+
+    //remove class "show" added when form was displayed
+    $(`[data-annotation-id="${formData.aid}"]`).removeClass("show");
+
+    __WEBPACK_IMPORTED_MODULE_2__bookmark__["a" /* annotation */].cancel(formData);
+    $(".transcript .annotation-edit").removeClass("annotation-edit");
+
+    //now, wrap annotation for display
+    //console.log("share formData: %o", formData);
+
+    let aid = formData.aid;
+    let rangeArray = [formData.rangeStart, formData.rangeEnd];
+    let numericRange = rangeArray.map(r => parseInt(r.substr(1), 10));
+    let annotationRange = __WEBPACK_IMPORTED_MODULE_3_lodash_range___default()(numericRange[0], numericRange[1] + 1);
+    let header = `
+      <h4 class="ui header">
+        <i title="Share to Facebook" class="share-annotation facebook small icon"></i>
+        <i title="Share via email" class="share-annotation envelope outline small icon"></i>
+        <div class="content">
+          ${formData.Comment}
+        </div>
+        <i title="Close Window" class="share-annotation window close small icon"></i>
+      </h4>
+    `;
+    let header2 = `
+      <h4 class="ui left floated header">
+        <i title="Share to Facebook" class="share-annotation facebook small icon"></i>
+        <i title="Share via email" class="share-annotation envelope outline small icon"></i>
+        <div class="content">
+          ${formData.Comment}
+        </div>
+      </h4>
+      <h4 class="ui right floated header">
+        <i title="Close Window" class="share-annotation window close small icon"></i>
+      </h4>
+    `;
+
+    for (let i = 0; i < annotationRange.length; i++) {
+      if (i === 0) {
+        $(`#p${annotationRange[i]}`).addClass("selected-annotation clearBoth");
+      } else {
+        $(`#p${annotationRange[i]}`).addClass("selected-annotation");
+      }
+    }
+
+    $(".selected-annotation").wrapAll("<div class='selected-annotation-wrapper ui clearing raised segment'></div>");
+    $(".selected-annotation-wrapper").prepend(header2);
+
+    if (aid !== "undefined") {
+      $(`[data-annotation-id="${aid}"]`).addClass("show");
+    }
+  });
+}
+
 function deleteHandler() {
   $(".transcript").on("click", "#annotation-form .annotation-delete", function (e) {
     e.preventDefault();
@@ -29903,6 +29968,7 @@ function deleteHandler() {
 function initialize() {
   submitHandler();
   cancelHandler();
+  shareHandler();
   deleteHandler();
   editHandler();
   noteHandler();
@@ -33949,8 +34015,10 @@ module.exports = unicodeToArray;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_netlify__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shareByEmail__ = __webpack_require__(457);
 
 //import {getPageInfo} from "../_config/config";
+
 
 
 
@@ -34495,12 +34563,17 @@ function initClickListeners() {
 
     let srcTitle = $("#src-title").text();
     let bookTitle = $("#book-title").text();
-
-    //add document reference
-    text = `${text}\n~${srcTitle}: ${bookTitle}`;
+    let citation = `~ ${srcTitle}: ${bookTitle}`;
 
     let url = `https://${location.hostname}${location.pathname}?as=${pid}:${aid}:${userInfo.userId}`;
-    let channel = $(this).hasClass("facebook") ? "facebook" : "email";
+    let channel;
+    if ($(this).hasClass("facebook")) {
+      channel = "facebook";
+    } else if ($(this).hasClass("envelope")) {
+      channel = "email";
+    } else if ($(this).hasClass("close")) {
+      channel = "close";
+    }
 
     // console.log("url: %s", url);
     // console.log("quote: %s", text);
@@ -34510,12 +34583,15 @@ function initClickListeners() {
       let options = {
         method: "share",
         hashtag: "#christmind",
-        quote: text,
+        quote: `${text}\n${citation}`,
         href: url
       };
       FB.ui(options, function () {});
     } else if (channel === "email") {
-      __WEBPACK_IMPORTED_MODULE_5_toastr___default.a.info("Sharing by email is not ready yet.");
+      Object(__WEBPACK_IMPORTED_MODULE_6__shareByEmail__["b" /* shareByEmail */])(text, citation, url);
+    } else if (channel === "close") {
+      //when close window icon is present - when window created from annotation edit dialog
+      clearSelectedAnnotation();
     }
   });
 
@@ -37015,6 +37091,126 @@ $(document).ready(() => {
   __WEBPACK_IMPORTED_MODULE_5__modules_about_about__["a" /* default */].initialize();
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+
+/***/ }),
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["a"] = initShareByEmail;
+/* harmony export (immutable) */ __webpack_exports__["b"] = shareByEmail;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_netlify__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_toastr__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_toastr__);
+
+
+
+
+
+let shareInfo = {};
+
+//setup submit and cancel listeners
+function initShareByEmail() {
+  //submit
+  $("form[name='emailshare']").on("submit", function (e) {
+    e.preventDefault();
+
+    let formData = $("#email-share-form").form("get values");
+
+    if (formData.emailAddresses.length === 0) {
+      __WEBPACK_IMPORTED_MODULE_3_toastr___default.a.info("Please enter at least one email address.");
+      return;
+    }
+
+    const userInfo = Object(__WEBPACK_IMPORTED_MODULE_1__user_netlify__["b" /* getUserInfo */])();
+    if (!userInfo) {
+      __WEBPACK_IMPORTED_MODULE_3_toastr___default.a.warning("You must be signed in to share bookmarks.");
+      $(".email-share-dialog-wrapper").addClass("hide");
+      return;
+    }
+
+    shareInfo.to = formData.emailAddresses;
+    shareInfo.senderName = userInfo.name;
+    shareInfo.senderEmail = userInfo.email;
+    shareInfo.sid = __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* default */].sid;
+    console.log("shareInfo: %o", shareInfo);
+
+    //hide form not sure if this will work
+    $(".email-share-dialog-wrapper").addClass("hide");
+
+    __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_0__constants__["a" /* default */].share, shareInfo).then(response => {
+      if (response.status === 200) {
+        __WEBPACK_IMPORTED_MODULE_3_toastr___default.a.info("Email Sent!");
+      } else {
+        __WEBPACK_IMPORTED_MODULE_3_toastr___default.a.info(response.data.message);
+      }
+    }).catch(error => {
+      console.error("share error: %s", error);
+    });
+  });
+
+  //cancel
+  $("form[name='emailshare'] .email-share-cancel").on("click", function (e) {
+    e.preventDefault();
+
+    //hide form
+    $(".email-share-dialog-wrapper").addClass("hide");
+  });
+}
+
+/*
+*/
+function shareByEmail(quote, citation, url) {
+  shareInfo = { citation, quote, url };
+
+  //show input form
+  $(".hide.email-share-dialog-wrapper").removeClass("hide");
+}
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+
+/***/ }),
+/* 458 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+const local_ports = {
+  acim: 9912,
+  wom: 9910,
+  raj: 9913,
+  jsb: 9911,
+  www: 9999
+};
+
+const shareEndpoint = "https://rcd7l4adth.execute-api.us-east-1.amazonaws.com/latest/share";
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  sid: "ACIM",
+  ports: local_ports,
+  share: shareEndpoint
+});
 
 /***/ })
 /******/ ]);

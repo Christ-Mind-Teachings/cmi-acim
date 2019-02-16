@@ -6,6 +6,7 @@ import store from "store";
 import scroll from "scroll-into-view";
 import {getUserInfo} from "../_user/netlify";
 import notify from "toastr";
+import {shareByEmail} from "./shareByEmail";
 
 //import {getSourceId, genPageKey} from "../_config/key";
 const transcript = require("../_config/key");
@@ -561,12 +562,19 @@ function initClickListeners() {
 
     let srcTitle = $("#src-title").text();
     let bookTitle = $("#book-title").text();
+    let citation = `~ ${srcTitle}: ${bookTitle}`;
     
-    //add document reference
-    text = `${text}\n~${srcTitle}: ${bookTitle}`;
-
     let url = `https://${location.hostname}${location.pathname}?as=${pid}:${aid}:${userInfo.userId}`;
-    let channel = $(this).hasClass("facebook")?"facebook":"email";
+    let channel;
+    if ($(this).hasClass("facebook")) {
+      channel = "facebook";
+    }
+    else if ($(this).hasClass("envelope")) {
+      channel = "email";
+    }
+    else if ($(this).hasClass("close")) {
+      channel = "close";
+    }
 
     // console.log("url: %s", url);
     // console.log("quote: %s", text);
@@ -576,13 +584,17 @@ function initClickListeners() {
       let options = {
         method: "share",
         hashtag: "#christmind",
-        quote: text,
+        quote: `${text}\n${citation}`,
         href: url
       };
       FB.ui(options, function(){});
     }
     else if (channel === "email") {
-      notify.info("Sharing by email is not ready yet.");
+      shareByEmail(text, citation, url);
+    }
+    else if (channel === "close") {
+      //when close window icon is present - when window created from annotation edit dialog
+      clearSelectedAnnotation();
     }
   });
 
