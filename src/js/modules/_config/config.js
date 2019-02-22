@@ -1,6 +1,7 @@
 import store from "store";
 import axios from "axios";
 import indexOf from "lodash/indexOf";
+import {status} from "./status";
 
 //import {decodeKey, parseKey, genKey} from "./key";
 const transcript = require("./key");
@@ -19,16 +20,38 @@ const configUrl = "/public/config";
 //the current configuration, initially null, assigned by getConfig()
 let config;
 
-/* 
-  check if config has changed since we last stored it
+/*
+  The status constains the save date for each config file. We compare that to the saveDate
+  in the locally stored config file. If it's different or doesn't exist we need to get
+  a new version.
+
+  return: true - get a new version
+          false - use the one we've got
 */
-function refreshNeeded(bid) {
-  if (location.hostname === "localhost") {
-    //console.log("reloading config for %s", bid);
-    return true;
+function refreshNeeded(cfg) {
+  let saveDate = status[cfg.bid];
+
+  if (!cfg.saveDate) {
+    cfg.saveDate = saveDate;
+
+    //we don't use this anymore
+    if (cfg.lastFetchDate) {
+      delete cfg.lastFetchDate;
+    }
+    console.log("%s needs to be refreshed", cfg.bid);
+    return true; //refresh needed
   }
 
-  return false;
+  if (cfg.saveDate === saveDate) {
+    //no refresh needed
+    return false;
+  }
+  else {
+    //config file has changed, refresh needed
+    cfg.saveDate = saveDate;
+    console.log("%s needs to be refreshed", cfg.bid);
+    return true;
+  }
 }
 
 function requestConfiguration(url) {
@@ -67,7 +90,7 @@ export function getConfig(book, assign = true) {
     let url;
 
     //if config in local storage check if we need to get a freash copy
-    if (cfg && !refreshNeeded(cfg.bid)) {
+    if (cfg && !refreshNeeded(cfg)) {
       if (assign) {
         config = cfg;
       }
@@ -79,8 +102,8 @@ export function getConfig(book, assign = true) {
     url = `${configUrl}/${book}.json`;
     requestConfiguration(url)
       .then((response) => {
-        //add fetch date before storing
-        response.data.lastFetchDate = Date.now();
+        //add save date before storing
+        response.data.saveDate = status[response.data.bid];
         store.set(`config-${book}`, response.data);
         if (assign) {
           config = response.data;
@@ -117,7 +140,7 @@ export function loadConfig(book) {
     let url;
 
     //if config in local storage check if we need to get a freash copy
-    if (cfg && !refreshNeeded(cfg.bid)) {
+    if (cfg && !refreshNeeded(cfg)) {
       config = cfg;
       resolve(1);
       return;
@@ -127,8 +150,8 @@ export function loadConfig(book) {
     url = `${configUrl}/${book}.json`;
     requestConfiguration(url)
       .then((response) => {
-        //add fetch date before storing
-        response.data.lastFetchDate = Date.now();
+        //add save date before storing
+        response.data.saveDate = status[response.data.bid];
         store.set(`config-${book}`, response.data);
         config = response.data;
         resolve(2);

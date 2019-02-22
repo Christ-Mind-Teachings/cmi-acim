@@ -1,0 +1,1 @@
+export const status = {acq: "Sat Feb 2 13:53:26 WITA 2019", manual: "Wed Jan 16 11:36:02 WITA 2019", preface: "Wed Jan 16 11:36:22 WITA 2019", text: "Sun Jan 20 12:50:28 WITA 2019", workbook: "Wed Jan 16 14:00:56 WITA 2019"};

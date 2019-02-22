@@ -1,0 +1,28 @@
+#!/bin/bash
+
+configDir="public/config"
+
+# source location
+statusFileName="src/js/modules/_config/status.js"
+
+# name of all book config files
+configFiles="acq manual preface text workbook"
+
+((cnt=0))
+status="export const status = {"
+
+for i in $configFiles; do
+  dt=`date -r ${configDir}/${i}.json`
+  if (( cnt > 0 )); then
+    status="${status}, ${i}: \"${dt}\""
+  else
+    status="${status}${i}: \"${dt}\""
+  fi
+  ((cnt = cnt + 1))
+done
+
+status="${status}};"
+
+echo $status
+echo $status > ${statusFileName}
+
