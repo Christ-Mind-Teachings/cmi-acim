@@ -1,7 +1,7 @@
 {
   "name": "cmi-acim",
   "version": "0.1.0",
-  "description": "ACIM Sparkly Edition",
+  "description": "Teachings of Christ Mind: ACIM Sparkly Edition",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -10,7 +10,7 @@
     "start": "npm run jekyll & npm run watch"
   },
   "keywords": [
-    "cmi"
+    "cmi", "ACIM"
   ],
   "author": "Rick Mercer",
   "license": "MIT",
