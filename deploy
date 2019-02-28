@@ -6,7 +6,7 @@ configDir="public/config"
 statusFileName="src/js/modules/_config/status.js"
 
 # name of all book config files
-configFiles="acq manual preface text workbook"
+configFiles="acq manual preface text workbook raj"
 
 ((cnt=0))
 status="export const status = {"

@@ -11,6 +11,10 @@ fb:
     - acim/acq-toc.jpg
 footer:
   display: true
+  donate: true
+  id: "CMI-ACIM"
+  source: "ACIM"
+  repohref: "https://github.com/rmercer33/cmi-acim"
 ---
 
 ## Welcome to the ACIM Sparkly Edition! 

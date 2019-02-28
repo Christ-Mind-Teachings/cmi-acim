@@ -33,7 +33,7 @@ const books = ["preface", "text", "workbook", "manual", "acq"];
 const bookIds = ["xxx", ...books];
 
 //list the chapters or parts that make up each book, set the first item to 'xxx'
-const acq = ["xxx", "welcome", "acim", "web"];
+const acq = ["xxx", "welcome", "acim", "web", "raj"];
 const preface = ["xxx", "preface"];
 
 const text = [ "xxx", "chap0100", "chap0101", "chap0102", "chap0200", "chap0201", "chap0202", "chap0203", "chap0204",
