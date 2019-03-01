@@ -61,6 +61,7 @@ defaults:
       image: "/public/img/acim/acq-big.jpg"
       image-width: 612
       image-height: 792
+      audio: false
       bid: "acq"
   - scope:
       path: ""
@@ -72,6 +73,7 @@ defaults:
       image-width: 612
       image-height: 792
       bid: "text"
+      audio: false
   - scope:
       path: ""
       type: workbook
@@ -82,6 +84,7 @@ defaults:
       image-width: 612
       image-height: 792
       bid: "workbook"
+      audio: false
   - scope:
       path: ""
       type: manual
@@ -92,6 +95,7 @@ defaults:
       image-width: 612
       image-height: 792
       bid: "manual"
+      audio: false
   - scope:
       path: ""
       type: preface
@@ -102,6 +106,7 @@ defaults:
       image-width: 612
       image-height: 792
       bid: "preface"
+      audio: false
 
 exclude: [
   Gemfile, Gemfile.lock, package.json, package-lock.json, node_modules, webpack.config.js, src, project

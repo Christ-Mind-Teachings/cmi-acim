@@ -11,7 +11,7 @@ fb:
     - acim/acq-toc.jpg
 footer:
   display: true
-  donate: true
+  donate: false
   id: "CMI-ACIM"
   source: "ACIM"
   repohref: "https://github.com/rmercer33/cmi-acim"
