@@ -1,7 +1,7 @@
 {
   "bid": "preface",
-  "base": "/preface",
-  "image": "/public/img/acim/manual-toc.jpg",
+  "base": "/acim/preface",
+  "image": "/acim/public/img/acim/manual-toc.jpg",
   "title": "Preface to ACIM Sparkly Edition",
   "contents": [
     {

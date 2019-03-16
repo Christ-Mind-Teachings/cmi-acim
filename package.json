@@ -2,7 +2,6 @@
   "name": "cmi-acim",
   "version": "0.1.0",
   "description": "Teachings of Christ Mind: ACIM Sparkly Edition",
-  "main": "index.js",
   "scripts": {
     "test": "jest",
     "watch": "webpack --watch",

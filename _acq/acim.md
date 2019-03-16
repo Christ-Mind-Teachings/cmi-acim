@@ -61,7 +61,7 @@ Editing of the Course that resulted in the Foundation of Inner Peace edition and
 <div class="ui items">
   <div class="item">
     <a href="https://acim.org" class="ui tiny image" data-tooltip="Go to Foundation of Inner Peace website">
-      <img src="/public/img/acim/fipedition.jpg">
+      <img src="/acim/public/img/acim/fipedition.jpg">
     </a>
     <div class="content">
       <a class="header">Foundation of Inner Peace</a>
@@ -74,7 +74,7 @@ Editing of the Course that resulted in the Foundation of Inner Peace edition and
   </div>
   <div class="item">
     <a href="http://www.acim.circleofa.org/" class="ui tiny image" data-tooltip="Go to Circle of Atonement website">
-      <img src="/public/img/acim/circleofatonement.jpg">
+      <img src="/acim/public/img/acim/circleofatonement.jpg">
     </a>
     <div class="content">
       <a class="header">Circle of Atonement</a>
@@ -87,7 +87,7 @@ Editing of the Course that resulted in the Foundation of Inner Peace edition and
   </div>
   <div class="item">
     <a href="http://www.miraclesinactionpress.com/dthomp74/2008/TOOLBOX/Original%20Versions/The%20Urtext.htm" class="ui tiny image" data-tooltip="Go to Miracle in Actiion Press website">
-      <img src="/public/img/acim/urtextedition.jpg">
+      <img src="/acim/public/img/acim/urtextedition.jpg">
     </a>
     <div class="content">
       <a class="header">Miracle In Action Press</a>
@@ -100,7 +100,7 @@ Editing of the Course that resulted in the Foundation of Inner Peace edition and
   </div>
   <div class="item">
     <a href="https://www.jcim.net" class="ui tiny image" data-tooltip="Go to Course In Miracles Society website">
-      <img src="/public/img/acim/originaledition.jpg">
+      <img src="/acim/public/img/acim/originaledition.jpg">
     </a>
     <div class="content">
       <a class="header">Course In Miracles Society</a>
@@ -113,7 +113,7 @@ Editing of the Course that resulted in the Foundation of Inner Peace edition and
   </div>
   <div class="item">
     <a href="https://acimsearch.com" class="ui tiny image" data-tooltip="Go to Sparkly Edition website">
-      <img src="/public/img/acim/sparklyedition.jpg">
+      <img src="/acim/public/img/acim/sparklyedition.jpg">
     </a>
     <div class="content">
       <a class="header">Sparkly Edition</a>
@@ -132,7 +132,7 @@ Editing of the Course that resulted in the Foundation of Inner Peace edition and
 <div class="ui items">
   <div class="item">
     <a href="http://www.jcim.net/acim_us/Acim.php" class="ui tiny image" data-tooltip="Read the Original Edition Online">
-      <img src="/public/img/acim/originaledition.jpg">
+      <img src="/acim/public/img/acim/originaledition.jpg">
     </a>
     <div class="content">
       <div class="description">
@@ -144,7 +144,7 @@ Editing of the Course that resulted in the Foundation of Inner Peace edition and
   </div>
   <div class="item">
     <a href="http://acim-search.miraclevision.com/std-second-edition-and-supps/" class="ui tiny image" data-tooltip="Read the FIP 2nd Edition Online">
-      <img src="/public/img/acim/fipedition.jpg">
+      <img src="/acim/public/img/acim/fipedition.jpg">
     </a>
     <div class="content">
       <div class="description">
@@ -156,7 +156,7 @@ Editing of the Course that resulted in the Foundation of Inner Peace edition and
   </div>
   <div class="item">
     <a href="https://acourseinmiraclesnow.com/read-acim-online/" class="ui tiny image" data-tooltip="Read the FIP Edition Online">
-      <img src="/public/img/acim/fipedition.jpg">
+      <img src="/acim/public/img/acim/fipedition.jpg">
     </a>
     <div class="content">
       <div class="description">

@@ -2005,7 +2005,7 @@ const contents = {
   return the position of unit in the bid array
     arg: section is passed when bid = text
 */
-function getUnitId(bid, unit, section) {
+function getUnitId(source, bid, unit, section) {
   if (section) {
     unit = section;
   }
@@ -2105,7 +2105,7 @@ function genPageKey(url = location.pathname) {
   let parts = splitUrl(url);
 
   //make sure we have a valid book
-  key.bid = bookIds.indexOf(parts[0]);
+  key.bid = bookIds.indexOf(parts[1]);
   if (key.bid === -1) {
     return -1;
   }
@@ -2190,7 +2190,7 @@ function decodeKey(key) {
   let bid = parseInt(pageKeyString.substr(2, 1), 10);
   decodedKey.bookId = bookIds[bid];
 
-  //substract 1 from key value to get index
+  //subtract 1 from key value to get index
   decodedKey.uid = parseInt(pageKeyString.substr(3, 4), 10);
 
   return decodedKey;
@@ -5439,14 +5439,15 @@ const transcript = __webpack_require__(20);
 
 //change these values to reflect transcript info
 const AWS_BUCKET = "assets.christmind.info";
-const SOURCE_ID = "ACIM";
+const SOURCE_ID = "acim";
 
 //mp3 and audio timing base directories
 const audioBase = `https://s3.amazonaws.com/${AWS_BUCKET}/${SOURCE_ID}/audio`;
-const timingBase = "/public/timing";
+const timingBase = "/acim/public/timing";
 
 //location of configuration files
-const configUrl = "/public/config";
+const configUrl = "/acim/public/config";
+const configStore = "config.acim.";
 
 //the current configuration, initially null, assigned by getConfig()
 let config;
@@ -5514,10 +5515,10 @@ function fetchTimingData(url) {
 */
 function getConfig(book, assign = true) {
   return new Promise((resolve, reject) => {
-    let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`config-${book}`);
+    let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${configStore}${book}`);
     let url;
 
-    //if config in local storage check if we need to get a freash copy
+    //if config in local storage check if we need to get a fresh copy
     if (cfg && !refreshNeeded(cfg)) {
       if (assign) {
         config = cfg;
@@ -5531,7 +5532,7 @@ function getConfig(book, assign = true) {
     requestConfiguration(url).then(response => {
       //add save date before storing
       response.data.saveDate = __WEBPACK_IMPORTED_MODULE_3__status__["a" /* status */][response.data.bid];
-      __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`config-${book}`, response.data);
+      __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${configStore}${book}`, response.data);
       if (assign) {
         config = response.data;
       }
@@ -5562,10 +5563,10 @@ function loadConfig(book) {
       resolve(0);
       return;
     }
-    let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`config-${book}`);
+    let cfg = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${configStore}${book}`);
     let url;
 
-    //if config in local storage check if we need to get a freash copy
+    //if config in local storage check if we need to get a fresh copy
     if (cfg && !refreshNeeded(cfg)) {
       config = cfg;
       resolve(1);
@@ -5577,7 +5578,7 @@ function loadConfig(book) {
     requestConfiguration(url).then(response => {
       //add save date before storing
       response.data.saveDate = __WEBPACK_IMPORTED_MODULE_3__status__["a" /* status */][response.data.bid];
-      __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`config-${book}`, response.data);
+      __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${configStore}${book}`, response.data);
       config = response.data;
       resolve(2);
     }).catch(error => {
@@ -5593,8 +5594,8 @@ function loadConfig(book) {
 function _getAudioInfo(idx, cIdx) {
   let audioInfo;
 
-  if (idx.length === 3) {
-    let qIdx = parseInt(idx[2].substr(1), 10) - 1;
+  if (idx.length === 4) {
+    let qIdx = parseInt(idx[3].substr(1), 10) - 1;
     audioInfo = config.contents[cIdx].questions[qIdx];
   } else {
     audioInfo = config.contents[cIdx];
@@ -5615,22 +5616,22 @@ function getAudioInfo(url) {
   let idx = url.split("/");
 
   //check the correct configuration file is loaded
-  if (config.bid !== idx[0]) {
-    throw new Error("Unexpected config file loaded; expecting %s but %s is loaded.", idx[0], config.bid);
+  if (config.bid !== idx[1]) {
+    throw new Error(`Unexpected config file loaded; expecting ${idx[1]} but ${config.bid} is loaded.`);
   }
 
   let audioInfo = {};
   let cIdx;
   let lookup = [];
 
-  switch (idx[0]) {
+  switch (idx[1]) {
     //no audio
     case "text":
     case "workbook":
     case "manual":
       break;
     default:
-      cIdx = parseInt(idx[1].substr(1), 10) - 1;
+      cIdx = parseInt(idx[2].substr(1), 10) - 1;
       audioInfo = _getAudioInfo(idx, cIdx);
       break;
   }
@@ -5739,42 +5740,43 @@ function getPageInfo(pageKey, data = false) {
         let flat = [];
         let unit;
         let chapter;
+        let flat_store_id = `search.acim.${decodedKey.bookId}.flat`;
 
         switch (decodedKey.bookId) {
           case "preface":
             info.title = "Use of Terms";
-            info.url = "/preface/preface/";
+            info.url = "/acim/preface/preface/";
             break;
           case "manual":
             info.title = data.contents[decodedKey.uid - 1].title;
-            info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
+            info.url = `/acim/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
             break;
           case "workbook":
-            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
+            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(flat_store_id);
             if (!flat) {
               flat = flatten(data);
-              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
+              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(flat_store_id, flat);
             }
             unit = flat[decodedKey.uid - 1];
 
             info.title = `${unit.lesson ? unit.lesson + ". " : ""}${unit.title}`;
-            info.url = `/${decodedKey.bookId}/${unit.url}`;
+            info.url = `/acim/${decodedKey.bookId}/${unit.url}`;
             break;
           case "text":
-            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(`${decodedKey.bookId}-flat`);
+            flat = __WEBPACK_IMPORTED_MODULE_0_store___default.a.get(flat_store_id);
             if (!flat) {
               flat = flatten(data);
-              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(`${decodedKey.bookId}-flat`, flat);
+              __WEBPACK_IMPORTED_MODULE_0_store___default.a.set(flat_store_id, flat);
             }
             unit = flat[decodedKey.uid - 1];
             chapter = unit.url.substr(4, 2);
 
             info.title = `${unit.title}`;
-            info.url = `/${decodedKey.bookId}/${chapter}/${unit.url}`;
+            info.url = `/acim/${decodedKey.bookId}/${chapter}/${unit.url}`;
             break;
           default:
             info.title = data.contents[decodedKey.uid].title;
-            info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
+            info.url = `/acim/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
             break;
         }
 
@@ -5931,6 +5933,8 @@ module.exports = baseUnary;
 
 //import {parseKey, getKeyInfo, genPageKey, genParagraphKey } from "../_config/key";
 const transcript = __webpack_require__(20);
+const bm_list_store = "bm.acim.list";
+const bm_topic_list = "bm.acim.topics";
 
 //Index topics
 const topicsEndPoint = "https://93e93isn03.execute-api.us-east-1.amazonaws.com/latest";
@@ -6084,11 +6088,11 @@ function queryBookmarks(key) {
 }
 
 function storeBookmarkList(bookmarks, keyInfo) {
-  __WEBPACK_IMPORTED_MODULE_1_store___default.a.set(`bmList_${keyInfo.sourceId}`, bookmarks);
+  __WEBPACK_IMPORTED_MODULE_1_store___default.a.set(bm_list_store, bookmarks);
 }
 
 function getBookmarkList(keyInfo) {
-  return __WEBPACK_IMPORTED_MODULE_1_store___default.a.get(`bmList_${keyInfo.sourceId}`);
+  return __WEBPACK_IMPORTED_MODULE_1_store___default.a.get(bm_list_store);
 }
 
 /*
@@ -6286,7 +6290,7 @@ function getAnnotation(pid, aid) {
 */
 function fetchTopics() {
   const userInfo = Object(__WEBPACK_IMPORTED_MODULE_3__user_netlify__["b" /* getUserInfo */])();
-  let topics = __WEBPACK_IMPORTED_MODULE_1_store___default.a.get("topic-list");
+  let topics = __WEBPACK_IMPORTED_MODULE_1_store___default.a.get(bm_topic_list);
 
   //keep topics in cache for 2 hours
   const retentionTime = 60 * 1000 * 60 * 2;
@@ -6300,7 +6304,7 @@ function fetchTopics() {
           lastFetchDate: 0,
           topics: []
         };
-        __WEBPACK_IMPORTED_MODULE_1_store___default.a.set("topic-list", topics);
+        __WEBPACK_IMPORTED_MODULE_1_store___default.a.set(bm_topic_list, topics);
       }
       resolve(topics);
       return;
@@ -6318,7 +6322,7 @@ function fetchTopics() {
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(`${topicsEndPoint}/user/${userInfo.userId}/topics/${sourceId}`).then(topicInfo => {
       console.log("topicInfo.data: ", topicInfo.data);
       topicInfo.data.lastFetchDate = Date.now();
-      __WEBPACK_IMPORTED_MODULE_1_store___default.a.set("topic-list", topicInfo.data);
+      __WEBPACK_IMPORTED_MODULE_1_store___default.a.set(bm_topic_list, topicInfo.data);
       resolve(topicInfo.data);
     }).catch(error => {
       console.error("Error fetching topicList: ", error);
@@ -6331,7 +6335,7 @@ function fetchTopics() {
   add new topics to topic-list in application store
 */
 function addToTopicList(newTopics) {
-  let topics = __WEBPACK_IMPORTED_MODULE_1_store___default.a.get("topic-list");
+  let topics = __WEBPACK_IMPORTED_MODULE_1_store___default.a.get(bm_topic_list);
   let concatTopics = topics.topics.concat(newTopics);
 
   //improve sort
@@ -6363,7 +6367,7 @@ function addToTopicList(newTopics) {
   });
 
   topics.topics = concatTopics;
-  __WEBPACK_IMPORTED_MODULE_1_store___default.a.set("topic-list", topics);
+  __WEBPACK_IMPORTED_MODULE_1_store___default.a.set(bm_topic_list, topics);
 
   //add topics to server if user signed in
   let userInfo = Object(__WEBPACK_IMPORTED_MODULE_3__user_netlify__["b" /* getUserInfo */])();
@@ -12726,7 +12730,7 @@ module.exports = charenc;
 
 
 //add bookmark topics to bookmark selected text to support 
-//selective display of hightlight based on topic
+//selective display of highlight based on topic
 function addTopicsAsClasses(bookmark) {
   if (bookmark.topicList && bookmark.topicList.length > 0) {
     let topicList = bookmark.topicList.reduce((result, topic) => {
@@ -12787,7 +12791,7 @@ function getPageBookmarks(sharePid) {
 /*
   Clean up form values and prepare to send to API  
 */
-function createAnnotaion(formValues) {
+function createAnnotaton(formValues) {
   console.log("createAnnotation");
 
   let annotation = __WEBPACK_IMPORTED_MODULE_3_lodash_cloneDeep___default()(formValues);
@@ -12901,7 +12905,7 @@ function addToTopicList(newTopics, formValues) {
       formValues.newTopics = newUniqueTopics;
 
       //post the bookmark
-      createAnnotaion(formValues);
+      createAnnotaton(formValues);
     }
   }).catch(() => {
     throw new Error("error in removing duplicate topics");
@@ -12959,7 +12963,7 @@ const annotation = {
       addToTopicList(newTopics, formData);
     } else {
       //post the bookmark
-      createAnnotaion(formData);
+      createAnnotaton(formData);
     }
 
     //mark paragraph as having bookmark
@@ -13169,6 +13173,8 @@ module.exports = isFunction;
 
 //import {getSourceId, genPageKey} from "../_config/key";
 const transcript = __webpack_require__(20);
+const bm_modal_store = "bm.acim.modal";
+const bm_list_store = "bm.acim.list";
 
 let shareEventListenerCreated = false;
 let gPageKey;
@@ -13556,8 +13562,8 @@ function getCurrentBookmark(pageKey, actualPid, allBookmarks, bmModal, whoCalled
 function bookmarkManager(actualPid) {
   let sourceId = transcript.getSourceId();
   let pageKey = transcript.genPageKey().toString(10);
-  let bmList = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(`bmList_${sourceId}`);
-  let bmModal = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(`bmModal_${sourceId}`);
+  let bmList = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(bm_list_store);
+  let bmModal = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(bm_modal_store);
 
   if (bmList) {
     //store globally
@@ -13616,8 +13622,8 @@ function bookmarkManager(actualPid) {
 */
 function updateNavigator(pid, update) {
   //console.log("updateNavigator, pid: %s, update: %s", pid, update);
-  let bmList = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(`bmList_${transcript.getSourceId()}`);
-  let bmModal = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(`bmModal_${transcript.getSourceId()}`);
+  let bmList = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(bm_list_store);
+  let bmModal = __WEBPACK_IMPORTED_MODULE_2_store___default.a.get(bm_modal_store);
   getCurrentBookmark(gPageKey, pid, bmList, bmModal, update);
 }
 
@@ -13658,6 +13664,11 @@ function initShareDialog(source) {
     let userInfo;
     let pid, aid, text;
 
+    if ($(this).hasClass("close")) {
+      clearSelectedAnnotation();
+      return;
+    }
+
     userInfo = Object(__WEBPACK_IMPORTED_MODULE_4__user_netlify__["b" /* getUserInfo */])();
     if (!userInfo) {
       __WEBPACK_IMPORTED_MODULE_5_toastr___default.a.info("You must be signed in to share selected text");
@@ -13672,9 +13683,6 @@ function initShareDialog(source) {
     } else if ($(this).hasClass("linkify")) {
       //work is already done
       channel = "clipboard";
-      return;
-    } else if ($(this).hasClass("close")) {
-      clearSelectedAnnotation();
       return;
     }
 
@@ -26884,7 +26892,7 @@ module.exports = objectToString;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-const status = { acq: "Mon Feb 25 22:44:31 WITA 2019", manual: "Wed Jan 16 11:36:02 WITA 2019", preface: "Wed Jan 16 11:36:22 WITA 2019", text: "Sun Jan 20 12:50:28 WITA 2019", workbook: "Wed Jan 16 14:00:56 WITA 2019", raj: "Tue Feb 26 00:27:30 WITA 2019" };
+const status = { acq: "Fri Mar 15 21:57:28 WITA 2019", manual: "Fri Mar 15 21:57:44 WITA 2019", preface: "Fri Mar 15 21:58:00 WITA 2019", text: "Fri Mar 15 21:59:52 WITA 2019", workbook: "Fri Mar 15 22:00:50 WITA 2019", raj: "Sat Mar 16 11:43:51 WITA 2019" };
 /* harmony export (immutable) */ __webpack_exports__["a"] = status;
 
 
@@ -36370,7 +36378,7 @@ const uiModalOpacity = 0.5;
 
 function bookmarkModalState(option, modalInfo) {
   let sid = transcript.getSourceId();
-  let name = `bmModal_${sid}`;
+  const name = "bm.acim.modal";
   let info;
 
   switch (option) {
@@ -36530,7 +36538,7 @@ function generateBookmarkList(books) {
         <li>Clicking on the paragraph number, eg: (p21)</li>
       </ul>
       <p>
-        See <a href="https://www.christmind.info/acq/bookmark/">the Bookmark documentation</a> for more information.
+        See <a href="/acq/bookmark/">the Bookmark documentation</a> for more information.
       </p>
     `;
   }
@@ -37210,7 +37218,7 @@ function initSearchModal() {
 
 //this needs to use require because it is also used by a node app and node doesn't support import
 const keyInfo = __webpack_require__(20);
-const queryResultName = "query-result-acim";
+const queryResultName = "search.acim.result";
 
 function getUnitName(pageInfo, unitInfo) {
   return pageInfo[unitInfo.pageKey].title;
@@ -37420,7 +37428,8 @@ function showSavedQuery() {
 
 const page = __webpack_require__(20);
 
-const queryResultName = "query-result-raj";
+//const queryResultName = "query-result-raj";
+const queryResultName = "search.acim.result";
 const SCROLL_INTERVAL = 250;
 
 function scrollComplete(message, type) {
@@ -37645,14 +37654,14 @@ function initControls(pid) {
   }
 
   if (hitPositions.prev > -1) {
-    url = `${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
+    url = `/acim${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
     $(".search-navigator .previous-page").attr("href", url);
   } else {
     $(".search-navigator .previous-page").addClass("inactive");
   }
 
   if (hitPositions.next > -1) {
-    url = `${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
+    url = `/acim${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
     $(".search-navigator .next-page").attr("href", url);
   } else {
     $(".search-navigator .next-page").addClass("inactive");

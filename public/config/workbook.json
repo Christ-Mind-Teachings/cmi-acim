@@ -1,7 +1,7 @@
 {
   "bid": "workbook",
   "title": "ACIM Workbook",
-  "image": "/public/img/acim/workbook-toc.jpg",
+  "image": "/acim/public/img/acim/workbook-toc.jpg",
   "contents": [
     {
       "pid": "intro",
@@ -9,7 +9,7 @@
       "section": [
         {
           "title": "Workbook Introduction",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "intro",
           "page": [
             {
@@ -26,7 +26,7 @@
       "section": [
         {
           "title": "Lessons 1 - 50",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "l1-50",
           "page": [
             {
@@ -283,7 +283,7 @@
         },
         {
           "title": "Review I",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "r1",
           "page": [
             {
@@ -344,7 +344,7 @@
         },
         {
           "title": "Lessons 61 - 80",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "l61-80",
           "page": [
             {
@@ -451,7 +451,7 @@
         },
         {
           "title": "Review II",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "r2",
           "page": [
             {
@@ -512,7 +512,7 @@
         },
         {
           "title": "Lessons 91 - 110",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "l91-110",
           "page": [
             {
@@ -619,7 +619,7 @@
         },
         {
           "title": "Review III",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "r3",
           "page": [
             {
@@ -680,7 +680,7 @@
         },
         {
           "title": "Lessons 121 - 140",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "l121-140",
           "page": [
             {
@@ -787,7 +787,7 @@
         },
         {
           "title": "Review IV",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "r4",
           "page": [
             {
@@ -848,7 +848,7 @@
         },
         {
           "title": "Lessons 151 - 170",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "l151-170",
           "page": [
             {
@@ -955,7 +955,7 @@
         },
         {
           "title": "Review V",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "r5",
           "page": [
             {
@@ -1016,7 +1016,7 @@
         },
         {
           "title": "Lessons 181 - 200",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "l181-200",
           "page": [
             {
@@ -1127,7 +1127,7 @@
         },
         {
           "title": "Review VI",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "r6",
           "page": [
             {
@@ -1244,7 +1244,7 @@
       "section": [
         {
           "title": "Part II: Introduction",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "p2intro",
           "page": [
             {
@@ -1255,7 +1255,7 @@
         },
         {
           "title": "What is Forgiveness?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "forgiveness",
           "page": [
             {
@@ -1316,7 +1316,7 @@
         },
         {
           "title": "What is Salvation?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "salvation",
           "page": [
             {
@@ -1377,7 +1377,7 @@
         },
         {
           "title": "What is the World?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "world",
           "page": [
             {
@@ -1438,7 +1438,7 @@
         },
         {
           "title": "What is Sin?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "sin",
           "page": [
             {
@@ -1499,7 +1499,7 @@
         },
         {
           "title": "What is the Body?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "body",
           "page": [
             {
@@ -1560,7 +1560,7 @@
         },
         {
           "title": "What is the Christ?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "christ",
           "page": [
             {
@@ -1621,7 +1621,7 @@
         },
         {
           "title": "What is the Holy Spirit?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "holyspirit",
           "page": [
             {
@@ -1682,7 +1682,7 @@
         },
         {
           "title": "What is the Real World?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "realworld",
           "page": [
             {
@@ -1743,7 +1743,7 @@
         },
         {
           "title": "What is the Second Coming?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "secondcoming",
           "page": [
             {
@@ -1804,7 +1804,7 @@
         },
         {
           "title": "What is the Last Judgement?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "lastjudgement",
           "page": [
             {
@@ -1865,7 +1865,7 @@
         },
         {
           "title": "What is Creation?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "creation",
           "page": [
             {
@@ -1926,7 +1926,7 @@
         },
         {
           "title": "What is the Ego?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "ego",
           "page": [
             {
@@ -1987,7 +1987,7 @@
         },
         {
           "title": "What is a Miracle?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "miracle",
           "page": [
             {
@@ -2048,7 +2048,7 @@
         },
         {
           "title": "What am I?",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "whatami",
           "page": [
             {
@@ -2109,7 +2109,7 @@
         },
         {
           "title": "Final Lessons",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "finallessons",
           "page": [
             {
@@ -2151,7 +2151,7 @@
       "section": [
         {
           "title": "Workbook Epilog",
-          "base": "/workbook/",
+          "base": "/acim/workbook/",
           "ref": "epilog",
           "page": [
             {
