@@ -37420,7 +37420,7 @@ function showSavedQuery() {
 
 const page = __webpack_require__(20);
 
-const queryResultName = "query-result-raj";
+const queryResultName = "query-result-acim";
 const SCROLL_INTERVAL = 250;
 
 function scrollComplete(message, type) {
