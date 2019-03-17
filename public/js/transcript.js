@@ -36377,7 +36377,6 @@ const uiOpenBookmarkModal = ".bookmark-modal-open";
 const uiModalOpacity = 0.5;
 
 function bookmarkModalState(option, modalInfo) {
-  let sid = transcript.getSourceId();
   const name = "bm.acim.modal";
   let info;
 
@@ -38256,7 +38255,6 @@ function createClickHandlers() {
     e.preventDefault();
 
     if ($(this).hasClass("page-tour")) {
-      console.log("pageDriver");
       Object(__WEBPACK_IMPORTED_MODULE_0__util_driver__["a" /* pageDriver */])();
     }
 
@@ -38275,35 +38273,19 @@ function createClickHandlers() {
     }
 
     if ($(this).hasClass("read-documentation")) {
-      if (location.hostname === "localhost") {
-        location.href = "http://localhost:9999/acq/quick/";
-      } else {
-        location.href = "https://www.christmind.info/acq/quick/";
-      }
+      location.href = "/acq/quick/";
     }
 
     if ($(this).hasClass("view-documentation")) {
-      if (location.hostname === "localhost") {
-        location.href = "http://localhost:9999/acq/video/";
-      } else {
-        location.href = "https://www.christmind.info/acq/video/";
-      }
+      location.href = "/acq/video/";
     }
 
     if ($(this).hasClass("contact-me")) {
-      if (location.hostname === "localhost") {
-        location.href = "http://localhost:9999/acq/contact/";
-      } else {
-        location.href = "https://www.christmind.info/acq/contact/";
-      }
+      location.href = "/acq/contact/";
     }
 
     if ($(this).hasClass("profile-management")) {
-      if (location.hostname === "localhost") {
-        location.href = "http://localhost:9999/profile/email/";
-      } else {
-        location.href = "https://www.christmind.info/profile/email/";
-      }
+      location.href = "/profile/email/";
     }
   });
 

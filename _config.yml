@@ -8,7 +8,7 @@ cmiTitle: "Teachings of Christ Mind"
 title:        'A Course in Miracles'
 tagline:      'Sparkly Edition'
 description:  ''
-url:          'https://acim.christmind.info'
+url:          'https://www.christmind.info/acim'
 baseurl:      ''
 keywords:     "Christ Mind Teachings, A Course in Miracles, Sparkly Edition "
 port:         9912
@@ -20,7 +20,7 @@ author:
   email:             rmercer33@gmail.com
 
 fb-appId:     448658485318107
-src-url:      'https://acim.christmind.info'
+src-url:      'https://www.christmind.info/acim'
 
 # Permalinks
 permalink: pretty
@@ -60,7 +60,7 @@ defaults:
     values:
       layout: transcript
       book: "Get Acquainted"
-      image: "/public/img/acim/acq-big.jpg"
+      image: "/acim/public/img/acim/acq-big.jpg"
       image-width: 612
       image-height: 792
       audio: false
@@ -71,7 +71,7 @@ defaults:
     values:
       layout: transcript
       book: "Text"
-      image: "/public/img/acim/text.jpg"
+      image: "/acim/public/img/acim/text.jpg"
       image-width: 612
       image-height: 792
       bid: "text"
@@ -82,7 +82,7 @@ defaults:
     values:
       layout: transcript
       book: "Workbook for Students"
-      image: "/public/img/acim/workbook.jpg"
+      image: "/acim/public/img/acim/workbook.jpg"
       image-width: 612
       image-height: 792
       bid: "workbook"
@@ -93,7 +93,7 @@ defaults:
     values:
       layout: transcript
       book: "Manual"
-      image: "/public/img/acim/manual.jpg"
+      image: "/acim/public/img/acim/manual.jpg"
       image-width: 612
       image-height: 792
       bid: "manual"
@@ -104,7 +104,7 @@ defaults:
     values:
       layout: transcript
       book: "Preface"
-      image: "/public/img/acim/preface.jpg"
+      image: "/acim/public/img/acim/preface.jpg"
       image-width: 612
       image-height: 792
       bid: "preface"
