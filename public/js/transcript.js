@@ -39596,14 +39596,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_util_facebook__ = __webpack_require__(440);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_share_share__ = __webpack_require__(441);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_about_about__ = __webpack_require__(403);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__constants__ = __webpack_require__(74);
 /* eslint no-console: off */
 
 /*
   semantic requires jquery which is loaded used
   webpack.ProvidePlugin
 */
-
 
 
 
@@ -39694,7 +39692,6 @@ $(document).ready(() => {
 
   initStickyMenu();
   Object(__WEBPACK_IMPORTED_MODULE_1__modules_util_url__["c" /* loadStart */])();
-  __WEBPACK_IMPORTED_MODULE_12__constants__["a" /* default */].setLinks();
   labelParagraphs();
   createParagraphNumberToggleListener();
   __WEBPACK_IMPORTED_MODULE_6__modules_user_netlify__["a" /* default */].initialize();
