@@ -1,12 +1,12 @@
 {
   "bid": "text",
   "title": "ACIM Text",
-  "image": "/acim/public/img/acim/text-toc.jpg",
+  "image": "/t/acim/public/img/acim/text-toc.jpg",
   "contents": [
     {
       "id": 1,
       "title": "Introduction to Miracles",
-      "base": "/acim/text/01/",
+      "base": "/t/acim/text/01/",
       "sections": [
         {
           "title": "1. Introduction",
@@ -24,7 +24,7 @@
     },
     {
       "id": 2,
-      "base": "/acim/text/02/",
+      "base": "/t/acim/text/02/",
       "title": "The Illusion of Separation",
       "sections": [
         {
@@ -55,7 +55,7 @@
     },
     {
       "id": 3,
-      "base": "/acim/text/03/",
+      "base": "/t/acim/text/03/",
       "title": "Retraining the Mind",
       "sections": [
         {
@@ -98,7 +98,7 @@
     },
     {
       "id": 4,
-      "base": "/acim//ext/04/",
+      "base": "/t/acim//ext/04/",
       "title": "The Root of all Evil",
       "sections": [
         {
@@ -201,7 +201,7 @@
     },
     {
       "id": 5,
-      "base": "/acim/text/05/",
+      "base": "/t/acim/text/05/",
       "title": "Healing and Wholeness",
       "sections": [
         {
@@ -300,7 +300,7 @@
     },
     {
       "id": 6,
-      "base": "/acim/text/06/",
+      "base": "/t/acim/text/06/",
       "title": "Attack and Fear",
       "sections": [
         {
@@ -394,7 +394,7 @@
     },
     {
       "id": 7,
-      "base": "/acim/text/07/",
+      "base": "/t/acim/text/07/",
       "title": "The Consistency of the Kingdom",
       "sections": [
         {
@@ -541,7 +541,7 @@
     },
     {
       "id": 8,
-      "base": "/acim/text/08/",
+      "base": "/t/acim/text/08/",
       "title": "The Journey Back",
       "sections": [
         {
@@ -690,7 +690,7 @@
     },
     {
       "id": 9,
-      "base": "/acim/text/09/",
+      "base": "/t/acim/text/09/",
       "title": "The Correction of Error",
       "sections": [
         {
@@ -837,7 +837,7 @@
     },
     {
       "id": 10,
-      "base": "/acim/text/10/",
+      "base": "/t/acim/text/10/",
       "title": "God and the Ego",
       "sections": [
         {
@@ -960,7 +960,7 @@
     },
     {
       "id": 11,
-      "base": "/acim/text/11/",
+      "base": "/t/acim/text/11/",
       "title": "God’s Plan for Salvation",
       "sections": [
         {
@@ -1121,7 +1121,7 @@
     },
     {
       "id": 12,
-      "base": "/acim/text/12/",
+      "base": "/t/acim/text/12/",
       "title": "The Problem of Guilt",
       "sections": [
         {
@@ -1228,7 +1228,7 @@
     },
     {
       "id": 13,
-      "base": "/acim/text/13/",
+      "base": "/t/acim/text/13/",
       "title": "From Perception to Knowledge",
       "sections": [
         {
@@ -1385,7 +1385,7 @@
     },
     {
       "id": 14,
-      "base": "/acim/text/14/",
+      "base": "/t/acim/text/14/",
       "title": "Bringing Illusions to Truth",
       "sections": [
         {
@@ -1518,7 +1518,7 @@
     },
     {
       "id": 15,
-      "base": "/acim/text/15/",
+      "base": "/t/acim/text/15/",
       "title": "The Purpose of Time",
       "sections": [
         {
@@ -1757,7 +1757,7 @@
     },
     {
       "id": 16,
-      "base": "/acim/text/16/",
+      "base": "/t/acim/text/16/",
       "title": "The Forgiveness of Illusions",
       "sections": [
         {
@@ -1930,7 +1930,7 @@
     },
     {
       "id": 17,
-      "base": "/acim/text/17/",
+      "base": "/t/acim/text/17/",
       "title": "Forgiveness and Healing",
       "sections": [
         {
@@ -2081,7 +2081,7 @@
     },
     {
       "id": 18,
-      "base": "/acim/text/18/",
+      "base": "/t/acim/text/18/",
       "title": "The Dream and the Reality",
       "sections": [
         {
@@ -2222,7 +2222,7 @@
     },
     {
       "id": 19,
-      "base": "/acim/text/19/",
+      "base": "/t/acim/text/19/",
       "title": "Beyond the Body",
       "sections": [
         {
@@ -2397,7 +2397,7 @@
     },
     {
       "id": 20,
-      "base": "/acim/text/20/",
+      "base": "/t/acim/text/20/",
       "title": "The Promise of the Resurrection",
       "sections": [
         {
@@ -2476,7 +2476,7 @@
     },
     {
       "id": 21,
-      "base": "/acim/text/21/",
+      "base": "/t/acim/text/21/",
       "title": "The Inner Picture",
       "sections": [
         {
@@ -2519,7 +2519,7 @@
     },
     {
       "id": 22,
-      "base": "/acim/text/22/",
+      "base": "/t/acim/text/22/",
       "title": "Salvation and the Holy Relationship",
       "sections": [
         {
@@ -2554,7 +2554,7 @@
     },
     {
       "id": 23,
-      "base": "/acim/text/23/",
+      "base": "/t/acim/text/23/",
       "title": "The War Against Yourself",
       "sections": [
         {
@@ -2581,7 +2581,7 @@
     },
     {
       "id": 24,
-      "base": "/acim/text/24/",
+      "base": "/t/acim/text/24/",
       "title": "Specialness and Separation",
       "sections": [
         {
@@ -2620,7 +2620,7 @@
     },
     {
       "id": 25,
-      "base": "/acim/text/25/",
+      "base": "/t/acim/text/25/",
       "title": "The Remedy",
       "sections": [
         {
@@ -2667,7 +2667,7 @@
     },
     {
       "id": 26,
-      "base": "/acim/text/26/",
+      "base": "/t/acim/text/26/",
       "title": "The Transition",
       "sections": [
         {
@@ -2718,7 +2718,7 @@
     },
     {
       "id": 27,
-      "base": "/acim/text/27/",
+      "base": "/t/acim/text/27/",
       "title": "The Body and the Dream",
       "sections": [
         {
@@ -2775,7 +2775,7 @@
     },
     {
       "id": 28,
-      "base": "/acim/text/28/",
+      "base": "/t/acim/text/28/",
       "title": "The Undoing of Fear",
       "sections": [
         {
@@ -2814,7 +2814,7 @@
     },
     {
       "id": 29,
-      "base": "/acim/text/29/",
+      "base": "/t/acim/text/29/",
       "title": "The Awakening",
       "sections": [
         {
@@ -2861,7 +2861,7 @@
     },
     {
       "id": 30,
-      "base": "/acim/text/30/",
+      "base": "/t/acim/text/30/",
       "title": "The New Beginning",
       "sections": [
         {
@@ -2916,7 +2916,7 @@
     },
     {
       "id": 31,
-      "base": "/acim/text/31/",
+      "base": "/t/acim/text/31/",
       "title": "The Simplicity of Salvation",
       "sections": [
         {

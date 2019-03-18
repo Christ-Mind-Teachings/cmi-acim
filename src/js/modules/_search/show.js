@@ -28,7 +28,7 @@ function makeList(bid, title, pageInfo, matchArray) {
                   <i class="search icon"></i>
                   <div class="content">
                     <div class="header">
-                      <a href="${pageInfo[m.pageKey].url}?srch=${h.location}">Paragraph ${h.location.substr(1)}</a>
+                      <a href="/t${pageInfo[m.pageKey].url}?srch=${h.location}">Paragraph ${h.location.substr(1)}</a>
                     </div>
                     <div class="description">
                       ${h.context}

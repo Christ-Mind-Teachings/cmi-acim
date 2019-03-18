@@ -2005,7 +2005,7 @@ const contents = {
   return the position of unit in the bid array
     arg: section is passed when bid = text
 */
-function getUnitId(source, bid, unit, section) {
+function getUnitId(t, source, bid, unit, section) {
   if (section) {
     unit = section;
   }
@@ -2105,7 +2105,7 @@ function genPageKey(url = location.pathname) {
   let parts = splitUrl(url);
 
   //make sure we have a valid book
-  key.bid = bookIds.indexOf(parts[1]);
+  key.bid = bookIds.indexOf(parts[2]);
   if (key.bid === -1) {
     return -1;
   }
@@ -5443,10 +5443,10 @@ const SOURCE_ID = "acim";
 
 //mp3 and audio timing base directories
 const audioBase = `https://s3.amazonaws.com/${AWS_BUCKET}/${SOURCE_ID}/audio`;
-const timingBase = "/acim/public/timing";
+const timingBase = "/t/acim/public/timing";
 
 //location of configuration files
-const configUrl = "/acim/public/config";
+const configUrl = "/t/acim/public/config";
 const configStore = "config.acim.";
 
 //the current configuration, initially null, assigned by getConfig()
@@ -5616,22 +5616,22 @@ function getAudioInfo(url) {
   let idx = url.split("/");
 
   //check the correct configuration file is loaded
-  if (config.bid !== idx[1]) {
-    throw new Error(`Unexpected config file loaded; expecting ${idx[1]} but ${config.bid} is loaded.`);
+  if (config.bid !== idx[2]) {
+    throw new Error(`Unexpected config file loaded; expecting ${idx[2]} but ${config.bid} is loaded.`);
   }
 
   let audioInfo = {};
   let cIdx;
   let lookup = [];
 
-  switch (idx[1]) {
+  switch (idx[2]) {
     //no audio
     case "text":
     case "workbook":
     case "manual":
       break;
     default:
-      cIdx = parseInt(idx[2].substr(1), 10) - 1;
+      cIdx = parseInt(idx[3].substr(1), 10) - 1;
       audioInfo = _getAudioInfo(idx, cIdx);
       break;
   }
@@ -13175,6 +13175,7 @@ module.exports = isFunction;
 const transcript = __webpack_require__(20);
 const bm_modal_store = "bm.acim.modal";
 const bm_list_store = "bm.acim.list";
+const url_prefix = "/t/acim";
 
 let shareEventListenerCreated = false;
 let gPageKey;
@@ -13278,7 +13279,7 @@ function getBookmarkUrl(bookmarks, pageKey) {
           url = `${bookmark[prop][0].selectedText.url}?bkmk=${bookmark[prop][0].rangeStart}`;
         } else {
           //we have a bookmark with no selected text, have to get the url in another way
-          url = `${transcript.getUrl(pageKey)}?bkmk=${bookmark[prop][0].rangeStart}`;
+          url = `${url_prefix}${transcript.getUrl(pageKey)}?bkmk=${bookmark[prop][0].rangeStart}`;
         }
         break;
       }
@@ -26892,7 +26893,7 @@ module.exports = objectToString;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-const status = { acq: "Fri Mar 15 21:57:28 WITA 2019", manual: "Fri Mar 15 21:57:44 WITA 2019", preface: "Fri Mar 15 21:58:00 WITA 2019", text: "Fri Mar 15 21:59:52 WITA 2019", workbook: "Fri Mar 15 22:00:50 WITA 2019", raj: "Sat Mar 16 11:43:51 WITA 2019" };
+const status = { acq: "Mon Mar 18 13:04:41 WITA 2019", manual: "Mon Mar 18 12:54:43 WITA 2019", preface: "Mon Mar 18 12:54:50 WITA 2019", text: "Mon Mar 18 12:56:32 WITA 2019", workbook: "Mon Mar 18 12:57:03 WITA 2019", raj: "Mon Mar 18 12:55:38 WITA 2019" };
 /* harmony export (immutable) */ __webpack_exports__["a"] = status;
 
 
@@ -37240,7 +37241,7 @@ function makeList(bid, title, pageInfo, matchArray) {
                   <i class="search icon"></i>
                   <div class="content">
                     <div class="header">
-                      <a href="${pageInfo[m.pageKey].url}?srch=${h.location}">Paragraph ${h.location.substr(1)}</a>
+                      <a href="/t${pageInfo[m.pageKey].url}?srch=${h.location}">Paragraph ${h.location.substr(1)}</a>
                     </div>
                     <div class="description">
                       ${h.context}
@@ -37653,14 +37654,14 @@ function initControls(pid) {
   }
 
   if (hitPositions.prev > -1) {
-    url = `/acim${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
+    url = `/t/acim${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
     $(".search-navigator .previous-page").attr("href", url);
   } else {
     $(".search-navigator .previous-page").addClass("inactive");
   }
 
   if (hitPositions.next > -1) {
-    url = `/acim${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
+    url = `/t/acim${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
     $(".search-navigator .next-page").attr("href", url);
   } else {
     $(".search-navigator .next-page").addClass("inactive");

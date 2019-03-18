@@ -1,5 +1,5 @@
 # CMI
-destination: "../cmi-www/_site/acim"
+destination: "../cmi-www/_site/t/acim"
 
 sourceId: 12
 cmiTitle: "Teachings of Christ Mind"
@@ -8,7 +8,7 @@ cmiTitle: "Teachings of Christ Mind"
 title:        'A Course in Miracles'
 tagline:      'Sparkly Edition'
 description:  ''
-url:          'https://www.christmind.info/acim'
+url:          'https://www.christmind.info/t/acim'
 baseurl:      ''
 keywords:     "Christ Mind Teachings, A Course in Miracles, Sparkly Edition "
 port:         9912
@@ -20,7 +20,7 @@ author:
   email:             rmercer33@gmail.com
 
 fb-appId:     448658485318107
-src-url:      'https://www.christmind.info/acim'
+src-url:      'https://www.christmind.info/t/acim'
 
 # Permalinks
 permalink: pretty
@@ -60,7 +60,7 @@ defaults:
     values:
       layout: transcript
       book: "Get Acquainted"
-      image: "/acim/public/img/acim/acq-big.jpg"
+      image: "/t/acim/public/img/acim/acq-big.jpg"
       image-width: 612
       image-height: 792
       audio: false
@@ -71,7 +71,7 @@ defaults:
     values:
       layout: transcript
       book: "Text"
-      image: "/acim/public/img/acim/text.jpg"
+      image: "/t/acim/public/img/acim/text.jpg"
       image-width: 612
       image-height: 792
       bid: "text"
@@ -82,7 +82,7 @@ defaults:
     values:
       layout: transcript
       book: "Workbook for Students"
-      image: "/acim/public/img/acim/workbook.jpg"
+      image: "/t/acim/public/img/acim/workbook.jpg"
       image-width: 612
       image-height: 792
       bid: "workbook"
@@ -93,7 +93,7 @@ defaults:
     values:
       layout: transcript
       book: "Manual"
-      image: "/acim/public/img/acim/manual.jpg"
+      image: "/t/acim/public/img/acim/manual.jpg"
       image-width: 612
       image-height: 792
       bid: "manual"
@@ -104,7 +104,7 @@ defaults:
     values:
       layout: transcript
       book: "Preface"
-      image: "/acim/public/img/acim/preface.jpg"
+      image: "/t/acim/public/img/acim/preface.jpg"
       image-width: 612
       image-height: 792
       bid: "preface"

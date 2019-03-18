@@ -238,7 +238,7 @@ function initControls(pid) {
   }
 
   if (hitPositions.prev > -1) {
-    url = `/acim${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
+    url = `/t/acim${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
     $(".search-navigator .previous-page").attr("href", url);
   }
   else {
@@ -246,7 +246,7 @@ function initControls(pid) {
   }
 
   if (hitPositions.next > -1) {
-    url = `/acim${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
+    url = `/t/acim${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
     $(".search-navigator .next-page").attr("href", url);
   }
   else {

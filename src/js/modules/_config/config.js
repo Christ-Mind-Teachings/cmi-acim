@@ -12,10 +12,10 @@ const SOURCE_ID = "acim";
 
 //mp3 and audio timing base directories
 const audioBase = `https://s3.amazonaws.com/${AWS_BUCKET}/${SOURCE_ID}/audio`;
-const timingBase = "/acim/public/timing";
+const timingBase = "/t/acim/public/timing";
 
 //location of configuration files
-const configUrl = "/acim/public/config";
+const configUrl = "/t/acim/public/config";
 const configStore = "config.acim.";
 
 //the current configuration, initially null, assigned by getConfig()
@@ -193,22 +193,22 @@ export function getAudioInfo(url) {
   let idx = url.split("/");
 
   //check the correct configuration file is loaded
-  if (config.bid !== idx[1]) {
-    throw new Error(`Unexpected config file loaded; expecting ${idx[1]} but ${config.bid} is loaded.`);
+  if (config.bid !== idx[2]) {
+    throw new Error(`Unexpected config file loaded; expecting ${idx[2]} but ${config.bid} is loaded.`);
   }
 
   let audioInfo = {};
   let cIdx;
   let lookup = [];
 
-  switch(idx[1]) {
+  switch(idx[2]) {
     //no audio
     case "text":
     case "workbook":
     case "manual":
       break;
     default:
-      cIdx = parseInt(idx[2].substr(1), 10) - 1;
+      cIdx = parseInt(idx[3].substr(1), 10) - 1;
       audioInfo = _getAudioInfo(idx, cIdx);
       break;
   }
