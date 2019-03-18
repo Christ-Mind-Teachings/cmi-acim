@@ -13688,21 +13688,18 @@ function initShareDialog(source) {
     }
 
     pid = $(".selected-annotation-wrapper p").attr("id");
+    let url = $(".selected-annotation-wrapper i[data-clipboard-text]").attr("data-clipboard-text");
 
     //no highlighted text so grab the whole paragraph
     if (annotation.length === 0) {
-      aid = $(`#${pid} > span.pnum`).attr("data-aid");
       text = $(`#${pid}`).text().replace(/\n/, " ");
     } else {
-      aid = annotation.data("aid");
       text = annotation.text().replace(/\n/, " ");
     }
 
     let srcTitle = $("#src-title").text();
     let bookTitle = $("#book-title").text();
     let citation = `~ ${srcTitle}: ${bookTitle}`;
-
-    let url = `https://${location.hostname}${location.pathname}?as=${pid}:${aid}:${userInfo.userId}`;
 
     if (channel === "facebook") {
       let options = {
@@ -37430,6 +37427,8 @@ const page = __webpack_require__(20);
 
 //const queryResultName = "query-result-raj";
 const queryResultName = "search.acim.result";
+const url_prefix = "/t/acim";
+
 const SCROLL_INTERVAL = 250;
 
 function scrollComplete(message, type) {
@@ -37654,14 +37653,14 @@ function initControls(pid) {
   }
 
   if (hitPositions.prev > -1) {
-    url = `/t/acim${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
+    url = `${url_prefix}${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
     $(".search-navigator .previous-page").attr("href", url);
   } else {
     $(".search-navigator .previous-page").addClass("inactive");
   }
 
   if (hitPositions.next > -1) {
-    url = `/t/acim${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
+    url = `${url_prefix}${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
     $(".search-navigator .next-page").attr("href", url);
   } else {
     $(".search-navigator .next-page").addClass("inactive");

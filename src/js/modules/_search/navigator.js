@@ -9,6 +9,8 @@ const page = require("../_config/key");
 
 //const queryResultName = "query-result-raj";
 const queryResultName = "search.acim.result";
+const url_prefix = "/t/acim";
+
 const SCROLL_INTERVAL = 250;
 
 function scrollComplete(message, type) {
@@ -238,7 +240,7 @@ function initControls(pid) {
   }
 
   if (hitPositions.prev > -1) {
-    url = `/t/acim${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
+    url = `${url_prefix}${lastSearch.flat[hitPositions.prev].url}?srch=${lastSearch.flat[hitPositions.prev].location}`;
     $(".search-navigator .previous-page").attr("href", url);
   }
   else {
@@ -246,7 +248,7 @@ function initControls(pid) {
   }
 
   if (hitPositions.next > -1) {
-    url = `/t/acim${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
+    url = `${url_prefix}${lastSearch.flat[hitPositions.next].url}?srch=${lastSearch.flat[hitPositions.next].location}`;
     $(".search-navigator .next-page").attr("href", url);
   }
   else {
