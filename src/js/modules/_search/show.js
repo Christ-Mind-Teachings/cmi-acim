@@ -5,7 +5,7 @@ import store from "store";
 
 //this needs to use require because it is also used by a node app and node doesn't support import
 const keyInfo = require("../_config/key");
-const queryResultName = "query-result-acim";
+const queryResultName = "search.acim.result";
 
 function getUnitName(pageInfo, unitInfo) {
   return pageInfo[unitInfo.pageKey].title;
@@ -28,7 +28,7 @@ function makeList(bid, title, pageInfo, matchArray) {
                   <i class="search icon"></i>
                   <div class="content">
                     <div class="header">
-                      <a href="${pageInfo[m.pageKey].url}?srch=${h.location}">Paragraph ${h.location.substr(1)}</a>
+                      <a href="/t${pageInfo[m.pageKey].url}?srch=${h.location}">Paragraph ${h.location.substr(1)}</a>
                     </div>
                     <div class="description">
                       ${h.context}

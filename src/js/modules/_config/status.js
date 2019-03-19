@@ -1,1 +1,1 @@
-export const status = {acq: "Mon Feb 25 22:44:31 WITA 2019", manual: "Wed Jan 16 11:36:02 WITA 2019", preface: "Wed Jan 16 11:36:22 WITA 2019", text: "Sun Jan 20 12:50:28 WITA 2019", workbook: "Wed Jan 16 14:00:56 WITA 2019", raj: "Tue Feb 26 00:27:30 WITA 2019"};
+export const status = {acq: "Mon Mar 18 13:04:41 WITA 2019", manual: "Mon Mar 18 12:54:43 WITA 2019", preface: "Mon Mar 18 12:54:50 WITA 2019", text: "Mon Mar 18 12:56:32 WITA 2019", workbook: "Mon Mar 18 12:57:03 WITA 2019", raj: "Mon Mar 18 12:55:38 WITA 2019"};

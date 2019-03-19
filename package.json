@@ -2,20 +2,24 @@
   "name": "cmi-acim",
   "version": "0.1.0",
   "description": "Teachings of Christ Mind: ACIM Sparkly Edition",
-  "main": "index.js",
   "scripts": {
     "test": "jest",
     "watch": "webpack --watch",
     "jekyll": "bundle exec jekyll s",
     "start": "npm run jekyll & npm run watch",
-    "deploy": "./deploy"
+    "deploy": "./deploy",
+    "d:jekyll": "JEKYLL_ENV=development bundle exec jekyll build --config ./_config.prod.yml",
+    "deploy:dev": "npm run p:webpack && npm run d:jekyll",
+    "p:webpack": "webpack",
+    "p:jekyll": "JEKYLL_ENV=production bundle exec jekyll build --config ./_config.prod.yml",
+    "deploy:prod": "npm run p:webpack && npm run p:jekyll"
   },
   "keywords": [
     "cmi",
     "ACIM"
   ],
   "author": "Rick Mercer",
-  "homepage": "https://acim.christmind.info/",
+  "homepage": "https://www.christmind.info/t/acim",
   "repository": "github:rmercer33/cmi-acim",
   "license": "MIT",
   "devDependencies": {

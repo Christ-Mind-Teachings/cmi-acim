@@ -8,18 +8,18 @@ import {initNavigator} from "./navigator";
 import list from "./list";
 //const topicsEndPoint = "https://s3.amazonaws.com/assets.christmind.info/wom/topics.json";
 import topics from "./topics";
-import { 
-  markSelection, 
-  getSelection, 
-  deleteNewSelection, 
-  deleteSelection, 
+import {
+  markSelection,
+  getSelection,
+  deleteNewSelection,
+  deleteSelection,
   initialize as selectInit,
   updateHighlightColor,
   updateSelectionTopicList
 } from "./selection";
 
-//add bookmark topics to bookmark selected text to support 
-//selective display of hightlight based on topic
+//add bookmark topics to bookmark selected text to support
+//selective display of highlight based on topic
 function addTopicsAsClasses(bookmark) {
   if (bookmark.topicList && bookmark.topicList.length > 0) {
     let topicList = bookmark.topicList.reduce((result, topic) => {
@@ -83,7 +83,7 @@ function getPageBookmarks(sharePid) {
 /*
   Clean up form values and prepare to send to API  
 */
-function createAnnotaion(formValues) {
+function createAnnotaton(formValues) {
   console.log("createAnnotation");
 
   let annotation = cloneDeep(formValues);
@@ -199,7 +199,7 @@ function addToTopicList(newTopics, formValues) {
         formValues.newTopics = newUniqueTopics;
 
         //post the bookmark
-        createAnnotaion(formValues);
+        createAnnotaton(formValues);
       }
     })
     .catch(() => {
@@ -260,7 +260,7 @@ export const annotation = {
     }
     else {
       //post the bookmark
-      createAnnotaion(formData);
+      createAnnotaton(formData);
     }
 
     //mark paragraph as having bookmark

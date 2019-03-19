@@ -121,7 +121,7 @@ const contents = {
   return the position of unit in the bid array
     arg: section is passed when bid = text
 */
-function getUnitId(bid, unit, section) {
+function getUnitId(t, source, bid, unit, section) {
   if (section) {
     unit = section;
   }
@@ -223,7 +223,7 @@ function genPageKey(url = location.pathname) {
   let parts = splitUrl(url);
 
   //make sure we have a valid book
-  key.bid = bookIds.indexOf(parts[0]);
+  key.bid = bookIds.indexOf(parts[2]);
   if (key.bid === -1) {
     return -1;
   }
@@ -309,7 +309,7 @@ function decodeKey(key) {
   let bid = parseInt(pageKeyString.substr(2,1), 10);
   decodedKey.bookId = bookIds[bid];
 
-  //substract 1 from key value to get index
+  //subtract 1 from key value to get index
   decodedKey.uid = parseInt(pageKeyString.substr(3,4), 10);
 
   return decodedKey;

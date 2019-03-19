@@ -8,14 +8,15 @@ const transcript = require("./key");
 
 //change these values to reflect transcript info
 const AWS_BUCKET = "assets.christmind.info";
-const SOURCE_ID = "ACIM";
+const SOURCE_ID = "acim";
 
 //mp3 and audio timing base directories
 const audioBase = `https://s3.amazonaws.com/${AWS_BUCKET}/${SOURCE_ID}/audio`;
-const timingBase = "/public/timing";
+const timingBase = "/t/acim/public/timing";
 
 //location of configuration files
-const configUrl = "/public/config";
+const configUrl = "/t/acim/public/config";
+const configStore = "config.acim.";
 
 //the current configuration, initially null, assigned by getConfig()
 let config;
@@ -86,10 +87,10 @@ export function fetchTimingData(url) {
 */
 export function getConfig(book, assign = true) {
   return new Promise((resolve, reject) => {
-    let cfg = store.get(`config-${book}`);
+    let cfg = store.get(`${configStore}${book}`);
     let url;
 
-    //if config in local storage check if we need to get a freash copy
+    //if config in local storage check if we need to get a fresh copy
     if (cfg && !refreshNeeded(cfg)) {
       if (assign) {
         config = cfg;
@@ -104,7 +105,7 @@ export function getConfig(book, assign = true) {
       .then((response) => {
         //add save date before storing
         response.data.saveDate = status[response.data.bid];
-        store.set(`config-${book}`, response.data);
+        store.set(`${configStore}${book}`, response.data);
         if (assign) {
           config = response.data;
         }
@@ -136,10 +137,10 @@ export function loadConfig(book) {
       resolve(0);
       return;
     }
-    let cfg = store.get(`config-${book}`);
+    let cfg = store.get(`${configStore}${book}`);
     let url;
 
-    //if config in local storage check if we need to get a freash copy
+    //if config in local storage check if we need to get a fresh copy
     if (cfg && !refreshNeeded(cfg)) {
       config = cfg;
       resolve(1);
@@ -152,7 +153,7 @@ export function loadConfig(book) {
       .then((response) => {
         //add save date before storing
         response.data.saveDate = status[response.data.bid];
-        store.set(`config-${book}`, response.data);
+        store.set(`${configStore}${book}`, response.data);
         config = response.data;
         resolve(2);
       })
@@ -169,8 +170,8 @@ export function loadConfig(book) {
 function _getAudioInfo(idx, cIdx) {
   let audioInfo;
 
-  if (idx.length === 3) {
-    let qIdx = parseInt(idx[2].substr(1), 10) - 1;
+  if (idx.length === 4) {
+    let qIdx = parseInt(idx[3].substr(1), 10) - 1;
     audioInfo = config.contents[cIdx].questions[qIdx];
   }
   else {
@@ -192,22 +193,22 @@ export function getAudioInfo(url) {
   let idx = url.split("/");
 
   //check the correct configuration file is loaded
-  if (config.bid !== idx[0]) {
-    throw new Error("Unexpected config file loaded; expecting %s but %s is loaded.", idx[0], config.bid);
+  if (config.bid !== idx[2]) {
+    throw new Error(`Unexpected config file loaded; expecting ${idx[2]} but ${config.bid} is loaded.`);
   }
 
   let audioInfo = {};
   let cIdx;
   let lookup = [];
 
-  switch(idx[0]) {
+  switch(idx[2]) {
     //no audio
     case "text":
     case "workbook":
     case "manual":
       break;
     default:
-      cIdx = parseInt(idx[1].substr(1), 10) - 1;
+      cIdx = parseInt(idx[3].substr(1), 10) - 1;
       audioInfo = _getAudioInfo(idx, cIdx);
       break;
   }
@@ -321,42 +322,43 @@ export function getPageInfo(pageKey, data = false) {
           let flat = [];
           let unit;
           let chapter;
+          let flat_store_id = `search.acim.${decodedKey.bookId}.flat`;
 
           switch(decodedKey.bookId) {
             case "preface":
               info.title = "Use of Terms";
-              info.url = "/preface/preface/";
+              info.url = "/acim/preface/preface/";
               break;
             case "manual":
               info.title = data.contents[decodedKey.uid - 1].title;
-              info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
+              info.url = `/acim/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
               break;
             case "workbook":
-              flat = store.get(`${decodedKey.bookId}-flat`);
+              flat = store.get(flat_store_id);
               if (!flat) {
                 flat = flatten(data);
-                store.set(`${decodedKey.bookId}-flat`, flat);
+                store.set(flat_store_id, flat);
               }
               unit = flat[decodedKey.uid - 1];
 
               info.title = `${unit.lesson?unit.lesson + ". ":""}${unit.title}`;
-              info.url = `/${decodedKey.bookId}/${unit.url}`;
+              info.url = `/acim/${decodedKey.bookId}/${unit.url}`;
               break;
             case "text":
-              flat = store.get(`${decodedKey.bookId}-flat`);
+              flat = store.get(flat_store_id);
               if (!flat) {
                 flat = flatten(data);
-                store.set(`${decodedKey.bookId}-flat`, flat);
+                store.set(flat_store_id, flat);
               }
               unit = flat[decodedKey.uid - 1];
               chapter = unit.url.substr(4,2);
 
               info.title = `${unit.title}`;
-              info.url = `/${decodedKey.bookId}/${chapter}/${unit.url}`;
+              info.url = `/acim/${decodedKey.bookId}/${chapter}/${unit.url}`;
               break;
             default:
               info.title = data.contents[decodedKey.uid].title;
-              info.url = `/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
+              info.url = `/acim/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
               break;
           }
 

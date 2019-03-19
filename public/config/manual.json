@@ -1,7 +1,7 @@
 {
   "bid": "manual",
-  "base": "/manual",
-  "image": "/public/img/acim/manual-toc.jpg",
+  "base": "/t/acim/manual",
+  "image": "/t/acim/public/img/acim/manual-toc.jpg",
   "title": "Manual for Teachers",
   "contents": [
     {
