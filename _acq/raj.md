@@ -5,7 +5,7 @@ title: "The Raj Material Cross Reference"
 <div class="disable-paragraph-marker ui items">
   <div class="item">
     <a href="#" data-book="raj" class="toc-modal-open combined ui small image" data-tooltip="Cross reference to The Raj Material ACIM Study Group TOC">
-      <img src="/acim/public/img/acim/raj-toc.jpg">
+      <img src="/t/acim/public/img/acim/raj-toc.jpg">
     </a>
     <div class="content">
       <a class="header">Cross Reference to The Raj Material</a>

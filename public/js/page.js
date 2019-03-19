@@ -12729,7 +12729,7 @@ module.exports = charenc;
 
 
 
-//add bookmark topics to bookmark selected text to support 
+//add bookmark topics to bookmark selected text to support
 //selective display of highlight based on topic
 function addTopicsAsClasses(bookmark) {
   if (bookmark.topicList && bookmark.topicList.length > 0) {

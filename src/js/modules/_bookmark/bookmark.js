@@ -8,17 +8,17 @@ import {initNavigator} from "./navigator";
 import list from "./list";
 //const topicsEndPoint = "https://s3.amazonaws.com/assets.christmind.info/wom/topics.json";
 import topics from "./topics";
-import { 
-  markSelection, 
-  getSelection, 
-  deleteNewSelection, 
-  deleteSelection, 
+import {
+  markSelection,
+  getSelection,
+  deleteNewSelection,
+  deleteSelection,
   initialize as selectInit,
   updateHighlightColor,
   updateSelectionTopicList
 } from "./selection";
 
-//add bookmark topics to bookmark selected text to support 
+//add bookmark topics to bookmark selected text to support
 //selective display of highlight based on topic
 function addTopicsAsClasses(bookmark) {
   if (bookmark.topicList && bookmark.topicList.length > 0) {
