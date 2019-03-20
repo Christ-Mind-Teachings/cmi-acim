@@ -1,0 +1,9 @@
+# Netlify url rewrite file
+
+/                       https://acim.christmind.info/moved/
+/acq/*                  https://www.christmind.info/t/acim/acq/:splat
+/manual/*               https://www.christmind.info/t/acim/manual/:splat
+/preface/               https://www.christmind.info/t/acim/preface/
+/text/*                 https://www.christmind.info/t/acim/text/:splat
+/workbook/*             https://www.christmind.info/t/acim/workbook/:splat
+
