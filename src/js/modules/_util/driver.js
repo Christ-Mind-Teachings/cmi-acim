@@ -90,6 +90,16 @@ const pageMenuSearchItem = {
   }
 };
 
+
+const pageMenuQuickLinkItem = {
+  element: "#quick-links-dropdown-menu",
+  popover: {
+    title: "Navigate to Another Teaching",
+    description: "Quickly jump to one of the other teachings in the Library.",
+    position: "bottom"
+  }
+};
+
 const pageMenuHelpItem = {
   element: "#help-menu",
   popover: {
@@ -263,6 +273,7 @@ export function pageNavigationDriver() {
     pageMenu,
     pageMenuBookmarkItem,
     pageMenuSearchItem,
+    pageMenuQuickLinkItem,
     pageMenuHelpItem,
     pageMenuLoginItem,
     pageMenuTextContents
@@ -298,6 +309,7 @@ export function transcriptDriver() {
     transcriptDriverSteps.push(transcriptMenuNextPageItem);
   }
 
+  transcriptDriverSteps.push(pageMenuQuickLinkItem);
   transcriptDriverSteps.push(transcriptMenuHelpItem);
   transcriptDriverSteps.push(transcriptMenuLoginItem);
 
