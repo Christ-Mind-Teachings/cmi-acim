@@ -450,19 +450,9 @@ function addToTopicList(newTopics) {
     let aValue, bValue;
 
     //objects have value and topic keys, sort them by topic
-    if (typeof a === "object") {
-      aValue = a.topic.toLowerCase();
-    }
-    else {
-      aValue = a.toLowerCase();
-    }
-
-    if (typeof b === "object") {
-      bValue = b.topic.toLowerCase();
-    }
-    else {
-      bValue = b.toLowerCase();
-    }
+    // Note: all topics are now objects
+    aValue = a.topic.toLowerCase();
+    bValue = b.topic.toLowerCase();
 
     if (aValue < bValue) {
       return -1;
@@ -489,10 +479,10 @@ function addToTopicList(newTopics) {
     console.log("newTopics: %o", newTopics);
     axios.post(`${topicsEndPoint}/user/topics`, postBody)
       .then((response) => {
-        console.log("addToTopicList: %o", response.data);
+        //console.log("addToTopicList: %o", response.data);
       })
       .catch((err) => {
-        console.error("addToTopicList error: %o", err);
+        //console.error("addToTopicList error: %o", err);
       });
   }
 
