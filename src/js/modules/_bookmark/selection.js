@@ -281,6 +281,13 @@ export function initialize() {
   $("div.transcript.ui").on("mouseup", function(e) {
     e.preventDefault();
 
+    //ignore text selection when disabled by user or when annotation is 
+    //being created
+    if ($(this).hasClass("disable-selection")) {
+      console.log("selection prevented by selection guard");
+      return;
+    }
+
     if (document.getSelection().isCollapsed) {
       return;
     }

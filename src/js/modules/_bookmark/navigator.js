@@ -464,7 +464,7 @@ function bookmarkManager(actualPid) {
       });
   }
   else {
-    console.log(`bmList_${sourceId}`);
+    console.log(bm_list_store);
   }
 }
 
@@ -483,10 +483,22 @@ function updateNavigator(pid, update) {
 }
 
 function clearSelectedAnnotation() {
-  $(".selected-annotation-wrapper > .header").remove();
-  $(".selected-annotation").unwrap();
-  $(".selected-annotation").removeClass("selected-annotation");
-  $(".bookmark-selected-text.show").removeClass("show");
+  let selected = $(".selected-annotation");
+
+  //remove dialog
+  if (selected.length > 0) {
+    $(".selected-annotation-wrapper > .header").remove();
+    selected.unwrap().removeClass("selected-annotation");
+    $(".bookmark-selected-text.show").removeClass("show");
+
+    //clear text selection guard applied whey bookmark is edited
+    // if .user exists then guard is user initiated and we don't clear it
+    let guard = $("div.transcript.ui.disable-selection:not(.user)");
+    if (guard.length > 0) {
+      console.log("removing selection guard");
+      guard.removeClass("disable-selection");
+    }
+  }
 }
 
 function scrollComplete(message, type) {
