@@ -26,6 +26,7 @@ const keyLength = 7;
 
 //Source Id, this must be a unique two digit number
 const sourceId = 12;
+const sid = "acim";
 
 //list the books, these correspond to collection names defined in _config.yml
 // * order according to how search results and bookmarks should appear
@@ -376,6 +377,30 @@ function getBooks() {
   return books;
 }
 
+/*
+  Describe key in terms of source:book:unit:p
+*/
+function describeKey(key) {
+  let decodedKey = decodeKey(key, false);
+
+  if (decodedKey.error) {
+    return {key: key, error: true, source: sid};
+  }
+
+  let info = {
+    key: key,
+    source: sid,
+    book: decodedKey.bookId,
+    unit: contents[decodedKey.bookId][decodedKey.uid]
+  };
+
+  if (decodedKey.pid > -1) {
+    info.pid = `p${decodedKey.pid}`;
+  }
+
+  return info;
+}
+
 module.exports = {
   getNumberOfUnits: getNumberOfUnits,
   getBooks: getBooks,
@@ -385,6 +410,7 @@ module.exports = {
   genPageKey: genPageKey,
   genParagraphKey: genParagraphKey,
   decodeKey: decodeKey,
-  getUrl: getUrl
+  getUrl: getUrl,
+  describeKey: describeKey
 };
 
