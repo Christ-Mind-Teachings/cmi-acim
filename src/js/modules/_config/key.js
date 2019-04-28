@@ -27,6 +27,8 @@ const keyLength = 7;
 //Source Id, this must be a unique two digit number
 const sourceId = 12;
 const sid = "acim";
+const prefix = "/t/acim";
+
 
 //list the books, these correspond to collection names defined in _config.yml
 // * order according to how search results and bookmarks should appear
@@ -319,7 +321,7 @@ function decodeKey(key) {
 /*
  * Convert page key to url
  */
-function getUrl(key) {
+function getUrl(key, withPrefix = false) {
   let decodedKey = decodeKey(key);
   let unit = "invalid";
 
@@ -334,6 +336,10 @@ function getUrl(key) {
       let chapter = unit.substr(4,2);
       unit = `${chapter}/${unit}`;
     }
+  }
+
+  if (withPrefix) {
+    return `${prefix}/${decodedKey.bookId}/${unit}/`;
   }
 
   return `/${decodedKey.bookId}/${unit}/`;

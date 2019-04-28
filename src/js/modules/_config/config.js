@@ -9,6 +9,7 @@ const transcript = require("./key");
 //change these values to reflect transcript info
 const AWS_BUCKET = "assets.christmind.info";
 const SOURCE_ID = "acim";
+const SOURCE = "A Course In Miracles";
 
 //mp3 and audio timing base directories
 const audioBase = `https://s3.amazonaws.com/${AWS_BUCKET}/${SOURCE_ID}/audio`;
@@ -22,7 +23,7 @@ const configStore = "config.acim.";
 let config;
 
 /*
-  The status constains the save date for each config file. We compare that to the saveDate
+  The status contains the save date for each config file. We compare that to the saveDate
   in the locally stored config file. If it's different or doesn't exist we need to get
   a new version.
 
@@ -206,6 +207,7 @@ export function getAudioInfo(url) {
     case "text":
     case "workbook":
     case "manual":
+    case "acq":
       break;
     default:
       cIdx = parseInt(idx[3].substr(1), 10) - 1;
@@ -271,7 +273,7 @@ function flatten(data) {
 */
 export function getPageInfo(pageKey, data = false) {
   let decodedKey = transcript.decodeKey(pageKey);
-  let info = {pageKey: pageKey, bookId: decodedKey.bookId};
+  let info = {pageKey: pageKey, source: SOURCE, bookId: decodedKey.bookId};
 
   if (data) {
     info.data = data;
