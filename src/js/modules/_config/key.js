@@ -153,9 +153,13 @@ function getNumberOfUnits(bid) {
 function splitUrl(url) {
   let u = url;
 
-  //remove leading and trailing "/"
+  //remove leading
   u = url.substr(1);
-  u = u.substr(0, u.length - 1);
+
+  //remove trailing '/' if it exists
+  if (u[u.length-1] === "/") {
+    u = u.substr(0, u.length - 1);
+  }
 
   return u.split("/");
 }
