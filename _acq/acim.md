@@ -56,7 +56,9 @@ A comparision of different versions can be found [here.](http://www.jcim.net/aci
 <hr/>
 <h2 class="ui header">ACIM Publishers</h2>
 
-Editing of the Course that resulted in the Foundation of Inner Peace edition and the the Foundations tight enforcement of copyright gave rise, after legal action, to other published versions of the Course.
+Editing of the Course that resulted in the Foundation of Inner Peace
+edition and the the Foundations tight enforcement of copyright gave
+rise, after legal action, to other published versions of the Course.
 
 <div class="ui items">
   <div class="item">
