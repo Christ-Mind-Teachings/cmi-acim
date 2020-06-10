@@ -6,7 +6,9 @@ const keyInfo = require("./modules/_config/key");
 import {getPageInfo} from "./modules/_config/config";
 
 export default {
-  sid: "ACIM",
+  sid: "acim",
+  env: "integration",                      //sa or prod, sa=standalone
+  lang: "en",
   getPageInfo: getPageInfo,              //list
   keyInfo: keyInfo,                      //list, bmnet
   bm_modal_key: "bm.acim.modal",         //list
