@@ -14,7 +14,7 @@ footer:
   donate: false
   id: "CMI-ACIM"
   source: "ACIM"
-  repohref: "https://github.com/rmercer33/cmi-acim"
+  repohref: "https://github.com/Christ-Mind-Teachings/cmi-acim"
 ---
 
 ## Welcome to the ACIM Sparkly Edition!
