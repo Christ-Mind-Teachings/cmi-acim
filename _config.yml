@@ -65,6 +65,7 @@ defaults:
       image-height: 792
       audio: false
       bid: "acq"
+      pnumToggle: false
   - scope:
       path: ""
       type: text
