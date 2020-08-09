@@ -76,10 +76,18 @@
   <script src="/public/vendor/jquery/jquery.min.js"></script>
   <script src="/public/vendor/semantic/semantic.min.js"></script>
 
-  <script src="/t/acim/public/js/vendors~page~transcript.js"></script>
-  <script src="/t/acim/public/js/vendors~transcript.js"></script>
-  <script src="/t/acim/public/js/page~transcript.js"></script>
-  <script src="/t/acim/public/js/transcript.js"></script>
-</body>
+  {% if jekyll.environment == "production" %}
+    <!-- ACIM transcript Webpack production -->
+    <script src="/t/acim/public/js/vendors~page~transcript.js"></script>
+    <script src="/t/acim/public/js/vendors~transcript.js"></script>
+    <script src="/t/acim/public/js/transcript.js"></script>
+  {% else %}
+    <!-- ACIM transcript Webpack development -->
+    <script src="/t/acim/public/js/vendors~page~transcript.js"></script>
+    <script src="/t/acim/public/js/vendors~transcript.js"></script>
+    <script src="/t/acim/public/js/page~transcript.js"></script>
+    <script src="/t/acim/public/js/transcript.js"></script>
+  {% endif %}
 
+</body>
 </html>

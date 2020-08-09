@@ -1,0 +1,20 @@
+{% comment %}
+Webpack generates different chunks when building for production. So
+jekyll.environment reflects the webpack mode used.
+{% endcomment %}
+<!-- JS for production (integration) -->
+<script src="/public/vendor/jquery/jquery.min.js"></script>
+<script src="/public/vendor/semantic/semantic.min.js"></script>
+
+{% if jekyll.environment == "production" %}
+  <!-- Webpack production -->
+  <script src="/t/pwom/public/js/vendors~page~transcript.js"></script>
+  <script src="/t/pwom/public/js/page.js"></script>
+{% else %}
+  <!-- Webpack development -->
+  <script src="/t/pwom/public/js/vendors~page~transcript.js"></script>
+  <script src="/t/pwom/public/js/page~transcript.js"></script>
+  <script src="/t/pwom/public/js/page.js"></script>
+{% endif %}
+
+

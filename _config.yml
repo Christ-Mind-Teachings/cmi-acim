@@ -31,9 +31,6 @@ encoding: utf-8
 
 # Build settings
 markdown: kramdown
-#plugins:
-#  - jekyll-feed
-#  - jekyll-sitemap
 
 # Collections for transcripts
 collections:

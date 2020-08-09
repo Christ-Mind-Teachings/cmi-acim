@@ -1,0 +1,28 @@
+{% comment %}
+Type "standalone" is used during development of a source, where the other sources
+are not part of the build. When the source is integrated with the other sources
+then the type is "integration".
+
+The idea of 'standalone' and 'integration' was first used with PWOM.
+
+Webpack generates different chunks when building for production. So
+jekyll.environment reflects the webpack mode used. This is valid only in
+'integration' since 'standalone' is always development.
+{% endcomment %}
+<!-- integration -->
+<script src="/public/vendor/jquery/jquery.min.js"></script>
+<script src="/public/vendor/semantic/semantic.min.js"></script>
+
+{% if jekyll.environment == "production" %}
+  <!-- Webpack production -->
+  <script src="/t/pwom/public/js/vendors~page~transcript.js"></script>
+  <script src="/t/pwom/public/js/vendors~transcript.js"></script>
+  <script src="/t/pwom/public/js/transcript.js"></script>
+{% else %}
+  <!-- Webpack development -->
+  <script src="/t/pwom/public/js/vendors~page~transcript.js"></script>
+  <script src="/t/pwom/public/js/vendors~transcript.js"></script>
+  <script src="/t/pwom/public/js/page~transcript.js"></script>
+  <script src="/t/pwom/public/js/transcript.js"></script>
+{% endif %}
+
