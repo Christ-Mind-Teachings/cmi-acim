@@ -1,4 +1,5 @@
 /* eslint no-console: off */
+import {storeInit} from "www/modules/_util/store";
 
 //common modules
 import auth from "www/modules/_user/netlify";
@@ -13,6 +14,7 @@ import {setLanguage} from "www/modules/_language/lang";
 import constants from "./constants";
 
 $(document).ready(() => {
+  storeInit(constants);
   initStickyMenu();
   setLanguage(constants);
 

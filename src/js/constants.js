@@ -9,12 +9,24 @@ export default {
   sid: "acim",
   env: "integration",                      //sa or prod, sa=standalone
   lang: "en",
+  url_prefix: "/t/acim",                  //navigator
   getPageInfo: getPageInfo,              //list
   keyInfo: keyInfo,                      //list, bmnet
-  bm_modal_key: "bm.acim.modal",         //list
-  bm_creation_state: "bm.acim.creation", //bookmark
-  bm_list_store: "bm.acim.list",         //bmnet
-  bm_topic_list: "bm.acim.topics",       //bmnet
-  bm_modal_store: "bm.acim.modal",       //navigator
-  url_prefix: "/t/acim"                  //navigator
+  store: {
+    bmList: "bm.list",
+    bmCreation: "bm.creation",
+    bmTopics: "bm.topics",
+    bmModal: "bm.modal",
+    srchResults: "srch.results",
+    srchtextflat: "srch.text.flat",
+    srchworkbookflat: "srch.workbook.flat",
+    srchmanualflat: "srch.manual.flat",
+    srchprefaceflat: "srch.preface.flat",
+    pnDisplay: "pn.display",
+    cfgacq: "cfg.acq",
+    cfgtext: "cfg.text",
+    cfgworkbook: "cfg.workbook",
+    cfgmanual: "cfg.manual",
+    cfgpreface: "cfg.preface"
+  }
 };

@@ -1,4 +1,5 @@
 /* eslint no-console: off */
+import {storeInit} from "www/modules/_util/store";
 
 //common modules
 import {showParagraph} from "www/modules/_util/url";
@@ -17,31 +18,46 @@ import {setLanguage} from "www/modules/_language/lang";
 import constants from "./constants";
 
 $(document).ready(() => {
-
+  storeInit(constants);
   setLanguage(constants);
-  initTranscriptPage();
+  initTranscriptPage("pnDisplay");
   auth.initialize();
   fb.initialize();
   about.initialize();
 
   //load config file and do initializations that depend on a loaded config file
-  loadConfig(getBookId())
-    .then((result) => {
-      search.initialize();
+  loadConfig(getBookId()).then((result) => {
+    search.initialize();
 
-      /*
-        result of 0 indicates no contents config found
-        - toc, and audio depend on config file
-      */
-      if (result !== 0) {
-        toc.initialize("transcript");
-        audio.initialize();
+    //no contents when result is false
+    if (result) {
+      toc.initialize("transcript");
+      audio.initialize();
+    }
+    showParagraph();
+    bookmarkStart("transcript");
+
+    //The workbook lessons contain links to review pages that are broken, There
+    //are many of these so we intercept a click here and correct the href.
+    $(".transcript.workbook a.hide-review").on("click", function(e) {
+      e.preventDefault();
+
+      let href = $(this).attr("href");
+      if (!href.startsWith("/t/acim")) {
+        location.href = `/t/acim${href}`;
       }
-      showParagraph();
-      bookmarkStart("transcript");
-    })
-    .catch((error) => {
-      //report error to the user - somehow
-      console.error(error);
     });
+
+    $(".transcript.workbook > p.cmiTranPara > a").on("click", function(e) {
+      e.preventDefault();
+
+      let href = $(this).attr("href");
+      if (!href.startsWith("/t/acim")) {
+        location.href = `/t/acim${href}`;
+      }
+    });
+
+  }).catch((error) => {
+    console.error(error);
+  });
 });
