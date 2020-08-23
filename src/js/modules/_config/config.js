@@ -209,7 +209,6 @@ export function getPageInfo(pageKey, data = false) {
   }
 
   return new Promise((resolve, reject) => {
-
     //get configuration data specific to the bookId
     getConfig(decodedKey.bookId, false)
       .then((data) => {
@@ -222,8 +221,6 @@ export function getPageInfo(pageKey, data = false) {
         if (info.data) {
           for (let prop in info.data) {
             if (info.data.hasOwnProperty(prop)) {
-              //console.log("info.data prop: %s", prop);
-              //console.log(info.data[prop][0].selectedText);
               if (info.data[prop].length > 0) {
                 //not all bookmarks have selectedText
                 if (info.data[prop][0].selectedText) {
@@ -288,8 +285,8 @@ export function getPageInfo(pageKey, data = false) {
               info.url = `/acim/${decodedKey.bookId}/${chapter}/${unit.url}`;
               break;
             default:
-              info.title = data.contents[decodedKey.uid].title;
-              info.url = `/acim/${decodedKey.bookId}${data.contents[decodedKey.uid].url}`;
+              info.title = data.contents[decodedKey.uid - 1].title;
+              info.url = `/acim/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
               break;
           }
 

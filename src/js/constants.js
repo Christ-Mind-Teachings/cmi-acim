@@ -10,6 +10,7 @@ export default {
   env: "integration",                      //sa or prod, sa=standalone
   lang: "en",
   url_prefix: "/t/acim",                  //navigator
+  sourceId: 12,
   getPageInfo: getPageInfo,              //list
   keyInfo: keyInfo,                      //list, bmnet
   store: {
@@ -24,6 +25,7 @@ export default {
     srchprefaceflat: "srch.preface.flat",
     pnDisplay: "pn.display",
     cfgacq: "cfg.acq",
+    cfgraj: "cfg.raj",
     cfgtext: "cfg.text",
     cfgworkbook: "cfg.workbook",
     cfgmanual: "cfg.manual",
