@@ -1,5 +1,6 @@
 import {storeSet, storeGet} from "www/modules/_util/store";
-import {fetchConfiguration} from "www/modules/_util/cmi";
+//import {fetchConfiguration} from "www/modules/_util/cmi";
+import {fetchConfiguration} from "www/modules/_ajax/config";
 import axios from "axios";
 import indexOf from "lodash/indexOf";
 import {status} from "./status";

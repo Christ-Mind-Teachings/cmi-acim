@@ -11,18 +11,10 @@ module.exports = {
 
   resolve: {
     alias: {
-      //"jquery": "jquery/src/jquery",
-      "semantic": "../vendor/semantic",
+      /*
+      Needed for sources that contain audio
       "me-plugin": path.resolve(__dirname, "../cmi-audio/dist"),
-      "acim": path.resolve(__dirname, "../cmi-acim/src/js"),
-      "oe": path.resolve(__dirname, "../cmi-oe/src/js"),
-      "acol": path.resolve(__dirname, "../cmi-acol/src/js"),
-      "col": path.resolve(__dirname, "../cmi-col/src/js"),
-      "ftcm": path.resolve(__dirname, "../cmi-ftcm/src/js"),
-      "jsb": path.resolve(__dirname, "../cmi-jsb/src/js"),
-      "raj": path.resolve(__dirname, "../cmi-raj/src/js"),
-      "wom": path.resolve(__dirname, "../cmi-wom/src/js"),
-      "pwom": path.resolve(__dirname, "../cmi-pwom/src/js"),
+     */
       "www": path.resolve(__dirname, "../cmi-www/src/js")
     }
   },

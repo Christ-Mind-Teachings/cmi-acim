@@ -12,7 +12,7 @@ import {loadConfig} from "./modules/_config/config";
 import {bookmarkStart} from "./modules/_bookmark/start";
 import { searchInit } from "./modules/_search/search";
 import toc, {getBookId} from "./modules/_contents/toc";
-import audio from "./modules/_audio/audio";
+//import audio from "./modules/_audio/audio";
 import about from "./modules/_about/about";
 
 import {setLanguage} from "www/modules/_language/lang";
@@ -35,7 +35,7 @@ $(document).ready(() => {
     //no contents when result is false
     if (result) {
       toc.initialize("transcript");
-      audio.initialize();
+      //audio.initialize();
     }
     showParagraph();
     bookmarkStart("transcript");
