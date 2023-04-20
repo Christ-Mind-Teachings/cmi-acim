@@ -1,4 +1,5 @@
 import scroll from "scroll-into-view";
+
 import {getConfig} from "../_config/config";
 
 const uiTocModal = ".toc.ui.modal";
@@ -7,11 +8,11 @@ const uiModalOpacity = 0.5;
 
 //generate html for questions
 function renderQuestions(questions) {
-  return `
+  return (`
     <div class="list">
       ${questions.map(q => `<a class="item" href="${q.url}">${q.title}</a>`).join("")}
     </div>
-  `;
+  `);
 }
 
 /*

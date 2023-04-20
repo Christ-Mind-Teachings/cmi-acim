@@ -1,7 +1,5 @@
 const webpack = require("webpack");
 const path = require("path");
-//const etp = require("extract-text-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   devtool: "source-map",
@@ -11,11 +9,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      /*
-      Needed for sources that contain audio
-      "me-plugin": path.resolve(__dirname, "../cmi-audio/dist"),
-     */
-      "www": path.resolve(__dirname, "../cmi-www/src/js")
+      "common": path.resolve(__dirname, "../cmi-common/src/js")
     }
   },
 
@@ -44,22 +38,9 @@ module.exports = {
         loader: "babel-loader",
         exclude: /node_modules/,
         query: {cacheDirectory: true}
-      },
-      {
-        test: /\.css$/,
-        use: [ "style-loader", MiniCssExtractPlugin.loader, "css-loader"]
       }
     ]
   },
-  plugins: [
-    new MiniCssExtractPlugin({filename: 'me-styles.css'})
-    /*
-    new MiniCssExtractPlugin({filename: 'me-styles.css'}),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    })
-    */
-  ]
+  plugins: [ ]
 };
 

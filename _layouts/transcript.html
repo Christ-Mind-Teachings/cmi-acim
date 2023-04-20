@@ -8,13 +8,12 @@
   <meta name="description" content="{{description}}">
 
   <!-- Site Properties -->
-  <title>ACIM:{{page.title}}</title>
+  <title>{{site.title}}:{{page.title}}</title>
 
   {% include common/load-open-graph.html %}
 
   <link rel="stylesheet" href="/public/css/{{site.semantic}}/semantic.css">
-  <link rel="stylesheet" href="/t/acim/public/js/vendors~transcript.me-styles.css">
-  <link rel="stylesheet" href="/t/acim/public/js/me-styles.css">
+
   <link rel="stylesheet" href="/public/css/toastr.css">
   <link rel="stylesheet" href="/public/css/cmi.css">
   <link rel="stylesheet" href="/public/css/transcript.css">
@@ -56,12 +55,6 @@
     {% include components/search-desc-modal.html %}
     {% include components/search-navigator.html %}
   {% endif %}
-  {% if page.audio != false %}
-    <!-- include audio support -->
-    {% include components/audio-player.html %}
-    {% include components/timecapture-modal.html %}
-    {% include components/time-edit-modal.html %}
-  {% endif %}
   {% if page.bookmark != false %}
     <!-- include bookmark support -->
     {% include components/bookmark-modal.html %}
@@ -74,17 +67,15 @@
 
   {% include common/javascript.html %}
 
+  <script src="/public/vendor/jquery/jquery.min.js"></script>
+  <script src="/public/vendor/{{site.semantic}}/semantic.min.js"></script>
   {% if jekyll.environment == "production" %}
     <!-- ACIM transcript Webpack production  ({{site.semantic}}) -->
-    <script src="/public/vendor/jquery/jquery.min.js"></script>
-    <script src="/public/vendor/{{site.semantic}}/semantic.min.js"></script>
     <script src="/t/acim/public/js/vendors~page~transcript.js"></script>
     <script src="/t/acim/public/js/vendors~transcript.js"></script>
     <script src="/t/acim/public/js/transcript.js"></script>
   {% else %}
     <!-- ACIM transcript Webpack development  ({{site.semantic}}) -->
-    <script src="/public/vendor/jquery/jquery.js"></script>
-    <script src="/public/vendor/{{site.semantic}}/semantic.js"></script>
     <script src="/t/acim/public/js/vendors~page~transcript.js"></script>
     <script src="/t/acim/public/js/vendors~transcript.js"></script>
     <script src="/t/acim/public/js/page~transcript.js"></script>

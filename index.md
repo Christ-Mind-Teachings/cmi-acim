@@ -25,6 +25,7 @@ footer:
 The *Sparkly Edition* of the Course is included here because that is the version from which [Raj](/t/raj/) reads in the *ACIM Study Group* which is also included in the Library.
 
 <div id="page-contents">
+<!--
   <div class="ui three cards">
     <div class="card">
       <a href="#" data-book="acq" class="toc-modal-open image" data-tooltip="Click to view the Getting Acquainted table of contents." data-position="top center">
@@ -37,6 +38,50 @@ The *Sparkly Edition* of the Course is included here because that is the version
       </div>
     </div>
   </div>
+-->
+  <!-- start -->
+  <div class="ui equal width grid source-acq-section">
+    <div class="five wide column">
+      <div class="ui card">
+        <a id="book-acq" href="#" data-book="acq" animate class="toc-modal-open image" data-tooltip="Click to view the Getting Acquainted table of contents." data-position="top center">
+          <img src="/t/acim/public/img/acim/acq-big.jpg">
+        </a>
+        <div class="content">
+          <div class="description">
+            Learn about the history and versions of <em>A Course In Miracles.</em>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column source-features">
+      <div class="ui top attached tabular menu">
+        <a id="news-tab" class="item" data-tab="first">News</a>
+        <a id="quote-tab" class="active item" data-tab="second">Quotes</a>
+      </div>
+      <div id="news-tab-content" class="ui bottom attached tab segment" data-tab="first">
+        <div class="box">
+          <p><i class="bullhorn red icon"></i>
+            Welcome!
+          </p>
+        </div>
+      </div>
+      <div id="quote-tab-content" class="ui bottom attached active tab segment" data-tab="second">
+        <div class="ui form">
+          <div class="fields">
+            <div class="field">
+              <label>Get Inspired</label>
+              <button id="show-quote-button" class="ui primary button">
+                <i class="quote left icon"></i>
+                Read A Quote
+              </button>
+            </div>
+            <div id="user-quote-select" class="field"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end -->
   <div class="ui three cards">
     <div class="card">
       <a data-book="preface" href="preface/preface/" class="image" data-tooltip="Open the Preface to the ACIM Sparkly edition." data-position="top center">

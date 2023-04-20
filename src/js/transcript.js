@@ -1,44 +1,37 @@
 /* eslint no-console: off */
-import {SourceStore, storeInit} from "www/modules/_util/store";
-import search from "www/modules/_search/search";
 
-//common modules
-import {showParagraph} from "www/modules/_util/url";
-import auth from "www/modules/_user/netlify";
-import fb from "www/modules/_util/facebook";
-import {initTranscriptPage} from "www/modules/_page/startup";
+import {SourceStore, storeInit} from "common/modules/_util/store";
+import search from "common/modules/_search/search";
+import {showParagraph} from "common/modules/_util/url";
+import auth from "common/modules/_user/netlify";
+import fb from "common/modules/_util/facebook";
+import {initTranscriptPage} from "common/modules/_page/startup";
 
-import {loadConfig} from "./modules/_config/config";
+import {setEnv, loadConfig} from "./modules/_config/config";
 import {bookmarkStart} from "./modules/_bookmark/start";
 import { searchInit } from "./modules/_search/search";
 import toc, {getBookId} from "./modules/_contents/toc";
-//import audio from "./modules/_audio/audio";
 import about from "./modules/_about/about";
 
-import {setLanguage} from "www/modules/_language/lang";
 import constants from "./constants";
 
 $(document).ready(() => {
   const store = new SourceStore(constants);
   storeInit(constants);
-  setLanguage(constants);
-
   auth.initialize();
+
   initTranscriptPage("pnDisplay");
   fb.initialize();
   about.initialize();
 
+  setEnv(store);
+
   //load config file and do initializations that depend on a loaded config file
   loadConfig(getBookId()).then((result) => {
     search.initialize(searchInit(store));
-
-    //no contents when result is false
-    if (result) {
-      toc.initialize("transcript");
-      //audio.initialize();
-    }
+    toc.initialize("transcript");
     showParagraph();
-    bookmarkStart("transcript");
+    bookmarkStart("transcript", store);
 
     //The workbook lessons contain links to review pages that are broken, There
     //are many of these so we intercept a click here and correct the href.
