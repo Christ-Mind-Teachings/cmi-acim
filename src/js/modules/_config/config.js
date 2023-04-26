@@ -1,6 +1,5 @@
 import indexOf from "lodash/indexOf";
 
-import {storeSet, storeGet} from "common/modules/_util/store";
 import {fetchConfiguration} from "common/modules/_ajax/config";
 
 import {status} from "./status";
@@ -157,41 +156,45 @@ export function getPageInfo(pageKey, data = false) {
           let chapter;
           let flat_store_id = `srch${decodedKey.bookId}flat`;
 
+          /*
+           * Big Question here: 4/24/23, why do url's below omitt "/t"?
+           * - I'm going to change it and see if there are problems.
+           */
           switch(decodedKey.bookId) {
             case "preface":
               info.title = "Use of Terms";
-              info.url = "/acim/preface/preface/";
+              info.url = "/t/acim/preface/preface/";
               break;
             case "manual":
               info.title = data.contents[decodedKey.uid - 1].title;
-              info.url = `/acim/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
+              info.url = `/t/acim/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
               break;
             case "workbook":
-              flat = storeGet(flat_store_id);
+              flat = g_sourceInfo.getValue(flat_store_id);
               if (!flat) {
                 flat = flatten(data);
-                storeSet(flat_store_id, flat);
+                g_sourceInfo.setValue(flat_store_id, flat);
               }
               unit = flat[decodedKey.uid - 1];
 
               info.title = `${unit.lesson?unit.lesson + ". ":""}${unit.title}`;
-              info.url = `/acim/${decodedKey.bookId}/${unit.url}`;
+              info.url = `/t/acim/${decodedKey.bookId}/${unit.url}`;
               break;
             case "text":
-              flat = storeGet(flat_store_id);
+              flat = g_sourceInfo.getValue(flat_store_id);
               if (!flat) {
                 flat = flatten(data);
-                storeSet(flat_store_id, flat);
+                g_sourceInfo.setValue(flat_store_id, flat);
               }
               unit = flat[decodedKey.uid - 1];
               chapter = unit.url.substr(4,2);
 
               info.title = `${unit.title}`;
-              info.url = `/acim/${decodedKey.bookId}/${chapter}/${unit.url}`;
+              info.url = `/t/acim/${decodedKey.bookId}/${chapter}/${unit.url}`;
               break;
             default:
               info.title = data.contents[decodedKey.uid - 1].title;
-              info.url = `/acim/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
+              info.url = `/t/acim/${decodedKey.bookId}${data.contents[decodedKey.uid - 1].url}`;
               break;
           }
 

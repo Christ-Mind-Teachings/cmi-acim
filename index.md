@@ -25,20 +25,6 @@ footer:
 The *Sparkly Edition* of the Course is included here because that is the version from which [Raj](/t/raj/) reads in the *ACIM Study Group* which is also included in the Library.
 
 <div id="page-contents">
-<!--
-  <div class="ui three cards">
-    <div class="card">
-      <a href="#" data-book="acq" class="toc-modal-open image" data-tooltip="Click to view the Getting Acquainted table of contents." data-position="top center">
-        <img src="/t/acim/public/img/acim/acq-big.jpg">
-      </a>
-      <div class="content">
-        <div class="description">
-          Learn about the history and versions of <em>A Course In Miracles.</em>
-        </div>
-      </div>
-    </div>
-  </div>
--->
   <!-- start -->
   <div class="ui equal width grid source-acq-section">
     <div class="five wide column">
@@ -84,7 +70,7 @@ The *Sparkly Edition* of the Course is included here because that is the version
   <!-- end -->
   <div class="ui three cards">
     <div class="card">
-      <a data-book="preface" href="preface/preface/" class="image" data-tooltip="Open the Preface to the ACIM Sparkly edition." data-position="top center">
+      <a data-book="preface" href="preface/preface/" animate class="image" data-tooltip="Open the Preface to the ACIM Sparkly edition." data-position="top center">
         <img src="/t/acim/public/img/acim/preface.jpg">
       </a>
       <div class="content">
@@ -94,7 +80,7 @@ The *Sparkly Edition* of the Course is included here because that is the version
       </div>
     </div>
     <div class="card">
-      <a href="#" data-book="text" class="toc-modal-open image" data-tooltip="Click to view the ACIM Text table of contents." data-position="top center">
+      <a href="#" data-book="text" animate class="toc-modal-open image" data-tooltip="Click to view the ACIM Text table of contents." data-position="top center">
         <img src="/t/acim/public/img/acim/text.jpg">
       </a>
       <div class="content">
@@ -104,7 +90,7 @@ The *Sparkly Edition* of the Course is included here because that is the version
       </div>
     </div>
     <div class="card">
-      <a href="#" data-book="workbook" class="toc-modal-open image" data-tooltip="Click to view the ACIM Workbook table of contents." data-position="top center">
+      <a href="#" data-book="workbook" animate class="toc-modal-open image" data-tooltip="Click to view the ACIM Workbook table of contents." data-position="top center">
         <img src="/t/acim/public/img/acim/workbook.jpg">
       </a>
       <div class="content">
@@ -114,7 +100,7 @@ The *Sparkly Edition* of the Course is included here because that is the version
       </div>
     </div>
     <div class="card">
-      <a href="#" data-book="manual" class="toc-modal-open image" data-tooltip="Click to view the Manual for Teachers table of contents." data-position="top center">
+      <a href="#" data-book="manual" animate class="toc-modal-open image" data-tooltip="Click to view the Manual for Teachers table of contents." data-position="top center">
         <img src="/t/acim/public/img/acim/manual.jpg">
       </a>
       <div class="content">

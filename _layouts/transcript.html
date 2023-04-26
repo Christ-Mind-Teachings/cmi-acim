@@ -72,12 +72,11 @@
   {% if jekyll.environment == "production" %}
     <!-- ACIM transcript Webpack production  ({{site.semantic}}) -->
     <script src="/t/acim/public/js/vendors~page~transcript.js"></script>
-    <script src="/t/acim/public/js/vendors~transcript.js"></script>
+    <script src="/t/acim/public/js/page~transcript.js"></script>
     <script src="/t/acim/public/js/transcript.js"></script>
   {% else %}
     <!-- ACIM transcript Webpack development  ({{site.semantic}}) -->
     <script src="/t/acim/public/js/vendors~page~transcript.js"></script>
-    <script src="/t/acim/public/js/vendors~transcript.js"></script>
     <script src="/t/acim/public/js/page~transcript.js"></script>
     <script src="/t/acim/public/js/transcript.js"></script>
   {% endif %}

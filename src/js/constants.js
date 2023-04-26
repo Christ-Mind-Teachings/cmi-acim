@@ -15,6 +15,7 @@ export default {
   sid: sid,
   env: env,
   lang: lang,
+  title: title,
   url_prefix: HOME_URI,
   configUrl: `${HOME_URI}/public/config`,
   sourceId: 12,
